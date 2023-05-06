@@ -16,10 +16,7 @@ repositories {
         name 'Xander Maven'
         url 'https://maven.isxander.dev/releases'
     }
-//    maven {
-//        name 'TerraformersMC Maven'
-//        url 'https://maven.terraformersmc.com/'
-//    }
+    maven { url "https://maven.terraformersmc.com/" }
 }
 
 dependencies {
@@ -32,11 +29,9 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation 'dev.isxander:yet-another-config-lib:2.2.0-for-1.19.2'
 
-//    modApi("com.terraformersmc:modmenu:${project.modmenu_version}") {
-//        //exclude group: 'net.fabricmc.fabric-api', module: 'fabric-api'
-//        exclude group: "net.fabricmc", module: "fabric-loader"
-//        //exclude group: 'dev.isxander', module: 'yet-another-config-lib'
-//    }
+    modImplementation ("com.terraformersmc:modmenu:${project.modmenu_version}") {
+        exclude module: "fabric-api"
+    }
 
 }
 
