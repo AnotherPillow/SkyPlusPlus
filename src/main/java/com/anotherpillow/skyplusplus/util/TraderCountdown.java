@@ -20,10 +20,16 @@ public class TraderCountdown {
         //get minutes to the next hour
         int minutes = 60 - now.atZone(ZoneId.of("UTC")).getMinute();
 
+        String minutesString = Integer.toString(minutes);
+        //add leading zero if needed
+        if (minutesString.length() == 1) minutesString = "0" + minutesString;
+
+        if (minutesString.equals("60")) return "1:00";
+
         //convert to H:MM
 
 
-        return "0:" + minutes;
+        return "0:" + minutesString;
     }
 
     public static void TraderCountdown(MatrixStack matrixStack) {
