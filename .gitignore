@@ -1,0 +1,6 @@
+run/
+build/
+remappedSrc/
+.gradle/
+bin/
+.idea/

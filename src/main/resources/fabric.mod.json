@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "skyplusplus",
+  "version": "${version}",
+  "name": "SkyPlusPlus",
+  "description": "Yet another skyblock.net mod",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/AnotherPillow/SkyPlusPlus"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/skyplusplus/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.anotherpillow.skyplusplus.client.SkyPlusPlusClient"
+    ],
+    "main": [
+      "com.anotherpillow.skyplusplus.SkyPlusPlus"
+    ],
+    "modmenu": [
+      "com.anotherpillow.skyplusplus.api.ModMenuAPI"
+    ]
+  },
+  "mixins": [
+    "skyplusplus.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "dependencies": {
+    "yet_another_config_lib": "^2.2.0"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/jEGF5fb"
+      },
+      "badges": [],
+      "parent": {
+        "id": "skyplusplus",
+        "name": "Sky++",
+        "description": "Yet Another Skyblock.net mod",
+        "icon": "assets/example-api-module-v1/parent_icon.png",
+        "badges": []
+      },
+      "update_checker": false
+    }
+  }
+}
