@@ -10,17 +10,21 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.client.render.GameRenderer;
 
+import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
+
 public class TraderImage {
     public static void draw(MatrixStack matrixStack) {
         Matrix4f positionMatrix = matrixStack.peek().getPositionMatrix();
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
 
+        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
+
         buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
-        buffer.vertex(positionMatrix, 16, 16, 0).color(1f, 1f, 1f, 1f).texture(0f, 0f).next();
-        buffer.vertex(positionMatrix, 16, 48, 0).color(1f, 1f, 1f, 1f).texture(0f, 1f).next();
-        buffer.vertex(positionMatrix, 48, 48, 0).color(1f, 1f, 1f, 1f).texture(1f, 1f).next();
-        buffer.vertex(positionMatrix, 48, 16, 0).color(1f, 1f, 1f, 1f).texture(1f, 0f).next();
+        buffer.vertex(positionMatrix, config.traderX, config.traderY, 0).color(1f, 1f, 1f, 1f).texture(0f, 0f).next();
+        buffer.vertex(positionMatrix, config.traderX, config.traderY + 32, 0).color(1f, 1f, 1f, 1f).texture(0f, 1f).next();
+        buffer.vertex(positionMatrix, config.traderX + 32, config.traderY + 32, 0).color(1f, 1f, 1f, 1f).texture(1f, 1f).next();
+        buffer.vertex(positionMatrix, config.traderX + 32, config.traderY, 0).color(1f, 1f, 1f, 1f).texture(1f, 0f).next();
 
 
         //set net.minecraft.client.render.GameRenderer to a variable a

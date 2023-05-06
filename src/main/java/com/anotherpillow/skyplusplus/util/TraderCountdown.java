@@ -8,10 +8,14 @@ import net.minecraft.client.util.math.MatrixStack;
 import java.time.Instant;
 import java.time.ZoneId;
 
+import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
+
 public class TraderCountdown {
     public static void draw(MatrixStack matrixStack, String txt, int textOffset) {
+        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
+
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-        DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, 48 + textOffset,32, 0xFFFFFF);
+        DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
     }
     public static String countdown() {
         //return minutes to the next UTC hour
