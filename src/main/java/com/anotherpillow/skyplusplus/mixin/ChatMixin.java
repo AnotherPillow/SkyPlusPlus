@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.util.StringChecker;
+import com.anotherpillow.skyplusplus.features.AutoResponder;
 
 @Mixin(ChatHud.class)
 public class ChatMixin {
@@ -55,6 +56,9 @@ public class ChatMixin {
             && StringChecker.raffleMessageCheck(message))
                 callback.cancel();
 
+        if (config.enableAutoResponder
+            && StringChecker.autoResponderCheck(message))
+                AutoResponder.respond();
 
 
     }

@@ -9,6 +9,7 @@ import dev.isxander.yacl.gui.controllers.TickBoxController;
 import dev.isxander.yacl.config.ConfigInstance;
 import dev.isxander.yacl.config.GsonConfigInstance;
 import dev.isxander.yacl.gui.controllers.slider.IntegerSliderController;
+import dev.isxander.yacl.gui.controllers.string.StringController;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.fabricmc.loader.api.FabricLoader;
@@ -29,6 +30,9 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean hideNewUserMessages = false;
     @ConfigEntry public boolean hideDeathsMessages = false;
     @ConfigEntry public boolean hideRaffleMessages = false;
+
+    @ConfigEntry public boolean enableAutoResponder = false;
+    @ConfigEntry public String autoResponderMessage = "I am currently AFK. Please message me on Discord instead at Username#0000.";
 
     public static Screen getConfigScreen(Screen parentScreen) {
         return YetAnotherConfigLib.create(configInstance, ((defaults, config, builder) -> builder
@@ -97,6 +101,21 @@ public class SkyPlusPlusConfig {
                                 .tooltip(Text.literal("Hide Raffle (lottery) messages"))
                                 .binding(defaults.hideRaffleMessages, () -> config.hideRaffleMessages, v -> config.hideRaffleMessages = v)
                                 .controller(TickBoxController::new)
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.literal("Auto Responder"))
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Enable"))
+                                .tooltip(Text.literal("Enable Auto Responder"))
+                                .binding(defaults.enableAutoResponder, () -> config.enableAutoResponder, v -> config.enableAutoResponder = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(String.class)
+                                .name(Text.literal("Message"))
+                                .tooltip(Text.literal("Message to respond with"))
+                                .binding(defaults.autoResponderMessage, () -> config.autoResponderMessage, v -> config.autoResponderMessage = v)
+                                .controller(StringController::new)
                                 .build())
                         .build())
         )).generateScreen(parentScreen);
