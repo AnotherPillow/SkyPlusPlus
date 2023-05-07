@@ -50,11 +50,13 @@ public class ChatMixin {
         if (config.hideDeathsMessages
             && StringChecker.deathMessageCheck(message))
                 callback.cancel();
-        }
 
+        if (config.hideRaffleMessages
+            && StringChecker.raffleMessageCheck(message))
+                callback.cancel();
 
 
 
     }
 
-    }
+}

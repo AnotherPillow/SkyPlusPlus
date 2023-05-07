@@ -9,6 +9,7 @@ public class StringChecker {
     public static Pattern AFKMessagePattern = Pattern.compile("^\\* \\[[A-Za-z]+] [A-Za-z0-9_]+ is no(w| longer) AFK\\.?$");
     public static Pattern newUserMessagePattern = Pattern.compile("^Welcome [A-Za-z0-9_] to Skyblock!$");
     public static Pattern deathMessagePattern = Pattern.compile("^\\[☠] \\d+ players have perished in the void today.$");
+    public static Pattern raffleMessagePattern = Pattern.compile("^\\[SBRaffle] \\[[A-Za-z]+] [A-Za-z0-9_]+ just bought \\d ticke.+!$");
     public static boolean welcomeIslandCheck(String input) {
         return welcomeIslandPattern.matcher(input).find() || visitingIslandPatten.matcher(input).find();
     }
@@ -27,5 +28,9 @@ public class StringChecker {
 
     public static boolean deathMessageCheck(String input) {
         return deathMessagePattern.matcher(input).find();
+    }
+
+    public static boolean raffleMessageCheck(String input) {
+        return raffleMessagePattern.matcher(input).find();
     }
 }
