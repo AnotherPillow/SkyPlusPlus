@@ -21,6 +21,13 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public int traderX = 16;
     @ConfigEntry public int traderY = 16;
     @ConfigEntry public boolean enableTraderFinder = true;
+
+    @ConfigEntry public boolean hideVisitingMessages = false;
+    @ConfigEntry public boolean hideSkyblockMessages = false;
+    @ConfigEntry public boolean hideUnscramblingMessages = false;
+    @ConfigEntry public boolean hideAFKMessages = false;
+    @ConfigEntry public boolean hideNewUserMessages = false;
+
     public static Screen getConfigScreen(Screen parentScreen) {
         return YetAnotherConfigLib.create(configInstance, ((defaults, config, builder) -> builder
                 .title(Text.literal("Sky++ Config"))
@@ -43,6 +50,39 @@ public class SkyPlusPlusConfig {
                                 .tooltip(Text.literal("Y"))
                                 .binding(defaults.traderY, () -> config.traderY, v -> config.traderY = v)
                                 .controller(opt -> new IntegerSliderController(opt, 0, 4000, 16))
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.literal("Filter Chat"))
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide Visiting Messages"))
+                                .tooltip(Text.literal("Hide messages when you visit other islands"))
+                                .binding(defaults.hideVisitingMessages, () -> config.hideVisitingMessages, v -> config.hideVisitingMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide Skyblock Messages"))
+                                .tooltip(Text.literal("Hide [Skyblock] messages"))
+                                .binding(defaults.hideSkyblockMessages, () -> config.hideSkyblockMessages, v -> config.hideSkyblockMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide Unscrambling Messages"))
+                                .tooltip(Text.literal("Hide Hover for word/letter unscrambling messages"))
+                                .binding(defaults.hideUnscramblingMessages, () -> config.hideUnscramblingMessages, v -> config.hideUnscramblingMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide AFK Messages"))
+                                .tooltip(Text.literal("Hide staff going AFK messages"))
+                                .binding(defaults.hideAFKMessages, () -> config.hideAFKMessages, v -> config.hideAFKMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide New User Messages"))
+                                .tooltip(Text.literal("Hide new user messages"))
+                                .binding(defaults.hideNewUserMessages, () -> config.hideNewUserMessages, v -> config.hideNewUserMessages = v)
+                                .controller(TickBoxController::new)
                                 .build())
                         .build())
         )).generateScreen(parentScreen);
