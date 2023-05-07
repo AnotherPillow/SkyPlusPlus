@@ -47,6 +47,11 @@ public class ChatMixin {
             && StringChecker.newUserMessageCheck(message))
                 callback.cancel();
 
+        if (config.hideDeathsMessages
+            && StringChecker.deathMessageCheck(message))
+                callback.cancel();
+        }
+
 
 
 

@@ -27,6 +27,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean hideUnscramblingMessages = false;
     @ConfigEntry public boolean hideAFKMessages = false;
     @ConfigEntry public boolean hideNewUserMessages = false;
+    @ConfigEntry public boolean hideDeathsMessages = false;
 
     public static Screen getConfigScreen(Screen parentScreen) {
         return YetAnotherConfigLib.create(configInstance, ((defaults, config, builder) -> builder
@@ -82,6 +83,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Hide New User Messages"))
                                 .tooltip(Text.literal("Hide new user messages"))
                                 .binding(defaults.hideNewUserMessages, () -> config.hideNewUserMessages, v -> config.hideNewUserMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide Death Count Messages"))
+                                .tooltip(Text.literal("Hide daily death count messages"))
+                                .binding(defaults.hideDeathsMessages, () -> config.hideDeathsMessages, v -> config.hideDeathsMessages = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())
