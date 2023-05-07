@@ -27,7 +27,7 @@ public class TraderFinder {
     //Trader XYZ to location name
     //X4063, Y174, Z2026 (Warp Grass)
     //X17, Y174, Z44 (Bank)
-    //X4032, Y170, Z2000 (Central)
+    //X4032, Y170, Z2000 (Daily Rewards)
     //X32, Y174, -13 (Warp Crates)
     //X4059, Y173, Z2017 (Warp Grass)
     //X4032, Y171, Z2014 (Campfire Walkway)
@@ -37,14 +37,36 @@ public class TraderFinder {
         traderXYZString = x + "," + y + "," + z;
     }
 
+    public static String convertXYZToLocationName(int x, int y, int z) {
+        String traderLocation;
+        if (x == 4063 && y == 174 && z == 2026) {
+            traderLocation = "Warp Grass";
+        } else if (x == 17 && y == 174 && z == 44) {
+            traderLocation = "the Bank";
+        } else if (x == 4032 && y == 170 && z == 2000) {
+            traderLocation = "Daily Rewards";
+        } else if (x == 32 && y == 174 && z == -13) {
+            traderLocation = "Warp Crates";
+        } else if (x == 4059 && y == 173 && z == 2017) {
+            traderLocation = "Warp Grass";
+        } else if (x == 4032 && y == 171 && z == 2014) {
+            traderLocation = "the Campfire Walkway";
+        } else {
+            traderLocation = x + "," + y + "," + z;
+        }
+
+        return traderLocation;
+    }
+
     public static void showTraderString(MatrixStack matrixStack) {
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
         String[] traderXYZ = traderXYZString.split(",");
         int traderX = Integer.parseInt(traderXYZ[0]);
         int traderY = Integer.parseInt(traderXYZ[1]);
         int traderZ = Integer.parseInt(traderXYZ[2]);
-        String txt = "Trader at: " + traderX + ", " + traderY + ", " + traderZ;
-        //calculate the width of the text
+        //String txt = "Trader at: " + traderX + ", " + traderY + ", " + traderZ;
+        String txt = "The Trader is at " + convertXYZToLocationName(traderX, traderY, traderZ);
+
         int textWidth = textRenderer.getWidth(txt);
         int textOffset = textWidth / 2;
         DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, 48 + textOffset,32, 0xFFFFFF);
