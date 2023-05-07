@@ -30,6 +30,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        SkyPlusPlusConfig.configInstance.load();
 
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
             SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();

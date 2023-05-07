@@ -16,7 +16,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import java.nio.file.Path;
 
 public class SkyPlusPlusConfig {
-    public static GsonConfigInstance<SkyPlusPlusConfig> configInstance = new GsonConfigInstance<>(SkyPlusPlusConfig.class, Path.of(FabricLoader.getInstance().getConfigDir().toString(), "skyplusplus.json"));
+    public static GsonConfigInstance<SkyPlusPlusConfig> configInstance = new GsonConfigInstance<>(SkyPlusPlusConfig.class, FabricLoader.getInstance().getConfigDir().resolve("skyplusplus.json"));
 
     @ConfigEntry public int traderX = 16;
     @ConfigEntry public int traderY = 16;
@@ -45,7 +45,6 @@ public class SkyPlusPlusConfig {
                                 .controller(opt -> new IntegerSliderController(opt, 0, 4000, 16))
                                 .build())
                         .build())
-
         )).generateScreen(parentScreen);
     }
 }
