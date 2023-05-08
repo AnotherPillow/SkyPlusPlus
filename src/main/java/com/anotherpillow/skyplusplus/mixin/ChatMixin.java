@@ -60,6 +60,10 @@ public class ChatMixin {
             && StringChecker.autoResponderCheck(message))
                 AutoResponder.respond();
 
+        if (config.hideAdvancementMessages
+            && StringChecker.advancementMessageCheck(message))
+                callback.cancel();
+
 
     }
 
