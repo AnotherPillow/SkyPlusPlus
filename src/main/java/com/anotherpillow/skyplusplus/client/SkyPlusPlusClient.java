@@ -1,7 +1,11 @@
 package com.anotherpillow.skyplusplus.client;
 
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -12,6 +16,7 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +26,7 @@ import com.anotherpillow.skyplusplus.util.TraderFinder;
 import com.anotherpillow.skyplusplus.screen.TraderImage;
 import com.anotherpillow.skyplusplus.util.TraderCountdown;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
+import com.anotherpillow.skyplusplus.commands.ConverterCommand;
 
 import java.util.Objects;
 
@@ -83,7 +89,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                     } //check if moved 200+ blocks from spawn
                     else if (pos.getManhattanDistance(new BlockPos(4000, 175, 2000)) > 200
                             || pos.getManhattanDistance(new BlockPos(0, 175, 0)) > 200 && inSpawn) {
-                        MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.of("Player teleported from " + lastPos + " to " + pos + " (Left Spawn)"));
+                        //MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.of("Player teleported from " + lastPos + " to " + pos + " (Left Spawn)"));
                         TraderFinder.traderXYZString = "";
                         inSpawn = false;
                     }
@@ -93,6 +99,12 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             lastPos = pos;
 
         });
+
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+            // Register the /sconvert command
+            ConverterCommand.register(dispatcher);
+        });
+
 
     }
 }
