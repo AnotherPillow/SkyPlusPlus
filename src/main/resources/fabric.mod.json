@@ -9,7 +9,7 @@
     "repo": "https://github.com/AnotherPillow/SkyPlusPlus"
   },
   "license": "GPL-3.0",
-  "icon": "assets/skyplusplus/icon.png",
+  "icon": "assets/skyplusplus/Logo128.png",
   "environment": "client",
   "entrypoints": {
     "client": [
