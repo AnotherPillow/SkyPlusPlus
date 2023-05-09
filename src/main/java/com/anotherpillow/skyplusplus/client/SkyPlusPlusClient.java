@@ -27,6 +27,7 @@ import com.anotherpillow.skyplusplus.screen.TraderImage;
 import com.anotherpillow.skyplusplus.util.TraderCountdown;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.commands.ConverterCommand;
+import com.anotherpillow.skyplusplus.commands.SmartTPCommand;
 
 import java.util.Objects;
 
@@ -103,6 +104,8 @@ public class SkyPlusPlusClient implements ClientModInitializer {
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             // Register the /sconvert command
             ConverterCommand.register(dispatcher);
+            SmartTPCommand.register(dispatcher);
+
         });
 
 

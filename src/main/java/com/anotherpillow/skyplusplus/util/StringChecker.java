@@ -15,6 +15,7 @@ public class StringChecker {
     public static Pattern raffleMessagePattern = Pattern.compile("^\\[SBRaffle] \\[[A-Za-z]+] [A-Za-z0-9_]+ just bought \\d ticke.+!$");
     public static Pattern autoResponderPattern = Pattern.compile("^\\[[A-Za-z0-9_]+ -> me] .+$");
     public static Pattern advancementMessagePatten = Pattern.compile("^[A-Za-z0-9_]+ has made the advancement \\[.+]");
+    public static Pattern TPAcceptMessagePattern = Pattern.compile("^.+ accepted your teleport request\\.$");
 
     public static boolean welcomeIslandCheck(String input) {
         return welcomeIslandPattern.matcher(input).find() || visitingIslandPatten.matcher(input).find();
@@ -48,11 +49,9 @@ public class StringChecker {
         return autoResponderPattern.matcher(input).find();
     }
 
-    public static boolean advancementMessageCheck(String input) {
-        return advancementMessagePatten.matcher(input).find();
-    }
+    public static boolean advancementMessageCheck(String input) { return advancementMessagePatten.matcher(input).find(); }
 
-    public static boolean broadcastMessageCheck(String input) {
-        return broadcastMessagePattern.matcher(input).find();
-    }
+    public static boolean broadcastMessageCheck(String input) { return broadcastMessagePattern.matcher(input).find(); }
+
+    public static boolean TPAcceptCheck(String input) { return TPAcceptMessagePattern.matcher(input).find(); }
 }

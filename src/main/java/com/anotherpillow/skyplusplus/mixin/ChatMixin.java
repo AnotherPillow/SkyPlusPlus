@@ -19,6 +19,7 @@ import java.io.IOException;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.util.StringChecker;
 import com.anotherpillow.skyplusplus.features.AutoResponder;
+import com.anotherpillow.skyplusplus.features.SmartTP;
 
 @Mixin(ChatHud.class)
 public class ChatMixin {
@@ -67,6 +68,14 @@ public class ChatMixin {
         if (config.hideBroadcastMessages
             && StringChecker.broadcastMessageCheck(message))
                 callback.cancel();
+
+        if (SmartTP.awaitingLock
+            && StringChecker.TPAcceptCheck(message))
+                SmartTP.lock();
+
+
+
+
 
 
     }
