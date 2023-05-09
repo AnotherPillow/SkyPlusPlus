@@ -64,6 +64,10 @@ public class ChatMixin {
             && StringChecker.advancementMessageCheck(message))
                 callback.cancel();
 
+        if (config.hideBroadcastMessages
+            && StringChecker.broadcastMessageCheck(message))
+                callback.cancel();
+
 
     }
 

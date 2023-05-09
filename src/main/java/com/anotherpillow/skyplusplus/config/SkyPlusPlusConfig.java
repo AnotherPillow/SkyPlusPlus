@@ -34,6 +34,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean enableAutoResponder = false;
     @ConfigEntry public String autoResponderMessage = "I am currently AFK. Please message me on Discord instead at Username#0000.";
     @ConfigEntry public boolean hideAdvancementMessages = true;
+    @ConfigEntry public boolean hideBroadcastMessages = true;
 
     public static Screen getConfigScreen(Screen parentScreen) {
         return YetAnotherConfigLib.create(configInstance, ((defaults, config, builder) -> builder
@@ -107,6 +108,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Hide Raffle Messages"))
                                 .tooltip(Text.literal("Hide Raffle (lottery) messages"))
                                 .binding(defaults.hideAdvancementMessages, () -> config.hideAdvancementMessages, v -> config.hideAdvancementMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide Broadcast Messages"))
+                                .tooltip(Text.literal("Hide Broadcast (votes, etc) messages"))
+                                .binding(defaults.hideBroadcastMessages, () -> config.hideBroadcastMessages, v -> config.hideBroadcastMessages = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())

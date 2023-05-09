@@ -8,6 +8,7 @@ public class StringChecker {
     public static Pattern welcomeIslandPattern = Pattern.compile("============ Welcome to [A-Za-z0-9_]+'s Island ============");
     public static Pattern visitingIslandPatten = Pattern.compile("Visiting [A-Za-z0-9_]+'s island");
     public static Pattern skyblockMessagePattern = Pattern.compile("^\\[Skyblock] .+$");
+    public static Pattern broadcastMessagePattern = Pattern.compile("^\\[Broadcast] .+$");
     public static Pattern AFKMessagePattern = Pattern.compile("^\\* \\[[A-Za-z]+] [A-Za-z0-9_]+ is no(w| longer) AFK\\.?$");
     public static Pattern newUserMessagePattern = Pattern.compile("^Welcome [A-Za-z0-9_]+ to Skyblock!$");
     public static Pattern deathMessagePattern = Pattern.compile("^\\[☠] \\d+ players have perished in the void today.$");
@@ -49,5 +50,9 @@ public class StringChecker {
 
     public static boolean advancementMessageCheck(String input) {
         return advancementMessagePatten.matcher(input).find();
+    }
+
+    public static boolean broadcastMessageCheck(String input) {
+        return broadcastMessagePattern.matcher(input).find();
     }
 }
