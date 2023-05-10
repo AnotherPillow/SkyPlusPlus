@@ -84,7 +84,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                 if (lastPos != null && lastPos.getManhattanDistance(pos) > 10) {
                     if (pos.getManhattanDistance(new BlockPos(4000, 175, 2000)) < 5
                             || pos.getManhattanDistance(new BlockPos(0, 175, 0)) < 5) {
-                        MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.of("Player teleported from " + lastPos + " to " + pos + " (Entered Spawn)"));
+                        //MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.of("Player teleported from " + lastPos + " to " + pos + " (Entered Spawn)"));
                         inSpawn = true;
 
                     } //check if moved 200+ blocks from spawn
