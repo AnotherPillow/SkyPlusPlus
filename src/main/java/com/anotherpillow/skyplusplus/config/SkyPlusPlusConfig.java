@@ -35,6 +35,9 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public String autoResponderMessage = "I am currently AFK. Please message me on Discord instead at Username#0000.";
     @ConfigEntry public boolean hideAdvancementMessages = true;
     @ConfigEntry public boolean hideBroadcastMessages = true;
+    @ConfigEntry public boolean hideExpandMessages = true;
+    @ConfigEntry public boolean hideLuckyCratesMessages = true;
+    @ConfigEntry public boolean hideMailMessages = true;
 
     @ConfigEntry public boolean chatPrefix = false;
     @ConfigEntry public String chatPrefixMessage = "&b";
@@ -121,6 +124,24 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Hide Broadcast Messages"))
                                 .tooltip(Text.literal("Hide Broadcast (votes, etc) messages"))
                                 .binding(defaults.hideBroadcastMessages, () -> config.hideBroadcastMessages, v -> config.hideBroadcastMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide Island Expansion Messages"))
+                                .tooltip(Text.literal("Hide \"You must expand your island to access this area ...\" messages"))
+                                .binding(defaults.hideExpandMessages, () -> config.hideExpandMessages, v -> config.hideExpandMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide Lucky Crates Messages"))
+                                .tooltip(Text.literal("Hide Lucky Crates messages"))
+                                .binding(defaults.hideLuckyCratesMessages, () -> config.hideLuckyCratesMessages, v -> config.hideLuckyCratesMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide Mail Messages"))
+                                .tooltip(Text.literal("Hide \"You have X messages! ...\" messages"))
+                                .binding(defaults.hideMailMessages, () -> config.hideMailMessages, v -> config.hideMailMessages = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())

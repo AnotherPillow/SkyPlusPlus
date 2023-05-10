@@ -73,6 +73,18 @@ public class ChatMixin {
             && StringChecker.TPAcceptCheck(message))
                 SmartTP.lock();
 
+        if (config.hideExpandMessages
+            && StringChecker.expandMessageCheck(message))
+                callback.cancel();
+
+        if (config.hideLuckyCratesMessages
+            && StringChecker.luckyCratesMessageCheck(message))
+                callback.cancel();
+
+        if (config.hideMailMessages
+            && StringChecker.mailMessageCheck(message))
+                callback.cancel();
+
 
 
 
