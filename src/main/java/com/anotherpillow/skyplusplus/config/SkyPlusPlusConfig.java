@@ -36,6 +36,13 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean hideAdvancementMessages = true;
     @ConfigEntry public boolean hideBroadcastMessages = true;
 
+    @ConfigEntry public boolean chatPrefix = false;
+    @ConfigEntry public String chatPrefixMessage = "&b";
+    @ConfigEntry public boolean chatSuffix = false;
+    @ConfigEntry public String chatSuffixMessage = "!";
+
+
+
     public static Screen getConfigScreen(Screen parentScreen) {
         return YetAnotherConfigLib.create(configInstance, ((defaults, config, builder) -> builder
                 .title(Text.literal("Sky++ Config"))
@@ -129,6 +136,33 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Message"))
                                 .tooltip(Text.literal("Message to respond with"))
                                 .binding(defaults.autoResponderMessage, () -> config.autoResponderMessage, v -> config.autoResponderMessage = v)
+                                .controller(StringController::new)
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.literal("Message Prefix/Suffix"))
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Enable Prefix"))
+                                .tooltip(Text.literal("Enable message prefixing"))
+                                .binding(defaults.chatPrefix, () -> config.chatPrefix, v -> config.chatPrefix = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Enable Suffix"))
+                                .tooltip(Text.literal("Message message suffixing"))
+                                .binding(defaults.chatSuffix, () -> config.chatSuffix, v -> config.chatSuffix = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(String.class)
+                                .name(Text.literal("Prefix"))
+                                .tooltip(Text.literal("Prefix to add to messages"))
+                                .binding(defaults.chatPrefixMessage, () -> config.chatPrefixMessage, v -> config.chatPrefixMessage = v)
+                                .controller(StringController::new)
+                                .build())
+                        .option(Option.createBuilder(String.class)
+                                .name(Text.literal("Suffix"))
+                                .tooltip(Text.literal("Suffix to add to messages"))
+                                .binding(defaults.chatSuffixMessage, () -> config.chatSuffixMessage, v -> config.chatSuffixMessage = v)
                                 .controller(StringController::new)
                                 .build())
                         .build())
