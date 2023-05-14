@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/water_bucket"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "skyplusplus:betterchangebiome": 0.4
+      },
+      "model": "skyplusplus:item/warmocean_icon"
+    },
+    {
+      "predicate": {
+        "skyplusplus:betterchangebiome": 0.7
+      },
+      "model": "skyplusplus:item/river_icon"
+    }
+  ]
+}

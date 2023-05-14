@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:block/dead_bush"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "skyplusplus:betterchangebiome": 0.6
+      },
+      "model": "skyplusplus:item/acacia_icon"
+    }
+  ]
+}

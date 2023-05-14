@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/dark_oak_log",
+  "overrides": [
+    {
+      "predicate": {
+        "skyplusplus:betterchangebiome": 0.6
+      },
+      "model": "skyplusplus:item/darkoak_icon"
+    }
+  ]
+}

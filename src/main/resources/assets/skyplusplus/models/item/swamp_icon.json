@@ -1,0 +1,6 @@
+{
+  "parent": "item/lily_pad",
+  "textures": {
+    "layer0": "skyplusplus:block/swamp_icon"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "parent": "skyplusplus:item/sand_override",
+  "overrides": [
+    {
+      "predicate": {
+        "skyplusplus:betterchangebiome": 0.6
+      },
+      "model": "skyplusplus:item/desert_icon"
+    }
+  ]
+}

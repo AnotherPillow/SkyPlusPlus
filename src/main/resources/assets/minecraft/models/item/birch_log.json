@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/birch_log",
+  "overrides": [
+    {
+      "predicate": {
+        "skyplusplus:betterchangebiome": 0.6
+      },
+      "model": "skyplusplus:item/birchforest_icon"
+    }
+  ]
+}

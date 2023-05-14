@@ -1,0 +1,6 @@
+{
+  "parent": "item/allium",
+  "textures": {
+    "layer0": "skyplusplus:block/flowerforest_icon"
+  }
+}

@@ -10,11 +10,17 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
@@ -28,7 +34,9 @@ import com.anotherpillow.skyplusplus.util.TraderCountdown;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.commands.ConverterCommand;
 import com.anotherpillow.skyplusplus.commands.SmartTPCommand;
+import com.anotherpillow.skyplusplus.features.BetterChangeBiome;
 
+import java.io.InputStream;
 import java.util.Objects;
 
 public class SkyPlusPlusClient implements ClientModInitializer {
@@ -38,6 +46,8 @@ public class SkyPlusPlusClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         SkyPlusPlusConfig.configInstance.load();
+        BetterChangeBiome.register();
+
 
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
             SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();

@@ -44,6 +44,8 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean chatSuffix = false;
     @ConfigEntry public String chatSuffixMessage = "!";
 
+    @ConfigEntry public boolean betterChangeBiomeEnabled = true;
+
 
 
     public static Screen getConfigScreen(Screen parentScreen) {
@@ -185,6 +187,15 @@ public class SkyPlusPlusConfig {
                                 .tooltip(Text.literal("Suffix to add to messages"))
                                 .binding(defaults.chatSuffixMessage, () -> config.chatSuffixMessage, v -> config.chatSuffixMessage = v)
                                 .controller(StringController::new)
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.literal("Better UIs"))
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Enable Better Changebiome UI"))
+                                .tooltip(Text.literal("Enable a better changebiome UI (may require a restart!)"))
+                                .binding(defaults.betterChangeBiomeEnabled, () -> config.betterChangeBiomeEnabled, v -> config.betterChangeBiomeEnabled = v)
+                                .controller(TickBoxController::new)
                                 .build())
                         .build())
         )).generateScreen(parentScreen);

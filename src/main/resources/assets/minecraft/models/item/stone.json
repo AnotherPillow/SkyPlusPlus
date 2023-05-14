@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/stone",
+  "overrides": [
+    {
+      "predicate": {
+        "skyplusplus:betterchangebiome": 0.6
+      },
+      "model": "skyplusplus:item/stoneshore_icon"
+    }
+  ]
+}

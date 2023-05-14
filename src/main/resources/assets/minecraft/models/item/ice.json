@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/ice",
+  "overrides": [
+    {
+      "predicate": {
+        "skyplusplus:betterchangebiome": 0.6
+      },
+      "model": "skyplusplus:item/frozenpeaks_icon"
+    }
+  ]
+}

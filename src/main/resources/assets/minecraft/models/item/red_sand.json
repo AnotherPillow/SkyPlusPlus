@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/red_sand",
+  "overrides": [
+    {
+      "predicate": {
+        "skyplusplus:betterchangebiome": 0.6
+      },
+      "model": "skyplusplus:item/mesa_icon"
+    }
+  ]
+}

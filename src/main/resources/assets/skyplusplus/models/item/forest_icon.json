@@ -1,0 +1,6 @@
+{
+  "parent": "item/oak_sapling",
+  "textures": {
+    "layer0": "skyplusplus:block/forest_icon"
+  }
+}

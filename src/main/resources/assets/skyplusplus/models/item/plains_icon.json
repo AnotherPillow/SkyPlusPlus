@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/oak_sapling",
+  "textures": {
+    "layer0": "skyplusplus:block/plains_icon"
+  }
+}
