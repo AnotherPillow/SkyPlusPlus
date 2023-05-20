@@ -15,13 +15,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.village.TradeOffer;
-import net.minecraft.village.TradeOfferList;
-import org.lwjgl.opengl.GL11;
 
-import java.nio.FloatBuffer;
+import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 
 public class TraderFinder {
     //Trader XYZ to location name
@@ -59,6 +54,9 @@ public class TraderFinder {
     }
 
     public static void showTraderString(MatrixStack matrixStack) {
+        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
+
+
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
         String[] traderXYZ = traderXYZString.split(",");
         int traderX = Integer.parseInt(traderXYZ[0]);
@@ -69,7 +67,7 @@ public class TraderFinder {
 
         int textWidth = textRenderer.getWidth(txt);
         int textOffset = textWidth / 2;
-        DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, 48 + textOffset,32, 0xFFFFFF);
+        DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
 
     }
 
