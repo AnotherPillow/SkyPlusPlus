@@ -2,6 +2,15 @@
 
 Yet another skyblock.net mod
 
+## Installation
+
+- Download latest release from [here](https://github.com/AnotherPillow/SkyPlusPlus/releases)
+- Download the following prerequisites:
+  - [Fabric Loader](https://fabricmc.net/use/)
+  - [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+  - [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu)
+- Put all the downloaded files in your `mods` folder
+
 ## Features
 
 | Feature | Description |
