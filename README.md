@@ -2,6 +2,9 @@
 
 Yet another skyblock.net mod
 
+![img](https://img.shields.io/github/release/anotherpillow/SkyPlusPlus.svg)
+![img](https://img.shields.io/github/downloads/anotherpillow/SkyPlusPlus/total.svg)
+
 ## Installation
 
 - Download latest release from [here](https://github.com/AnotherPillow/SkyPlusPlus/releases)
