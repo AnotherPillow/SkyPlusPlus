@@ -42,7 +42,7 @@ public class TraderFinder {
             traderLocation = "Daily Rewards";
         } else if (x == 32 && y == 174 && z == -13) {
             traderLocation = "Warp Crates";
-        } else if (x == 4059 && y == 173 && z == 2017) {
+        } else if (x == 4059 && y == 163 && z == 2017) {
             traderLocation = "Warp Grass";
         } else if (x == 4032 && y == 171 && z == 2014) {
             traderLocation = "the Campfire Walkway";
