@@ -83,7 +83,7 @@ public class ConverterCommand {
                     }
 
                     //respond to the command
-                    src.sendFeedback(Text.of(ChatLogo.logo + amount + " " + type + "s is " + wholes + " " + type +  " and " + remainder + " items"));
+                    src.sendFeedback(Text.of(ChatLogo.logo + amount + " items is " + wholes + " " + type +  " and " + remainder + " items"));
 
 
 
