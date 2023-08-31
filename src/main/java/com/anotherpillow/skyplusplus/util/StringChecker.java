@@ -59,7 +59,7 @@ public class StringChecker {
 
     public static boolean TPAcceptCheck(String input) { return TPAcceptMessagePattern.matcher(input).find(); }
 
-    public static boolean expandMessageCheck(String input) { return Objects.equals(input, "You must expand your island to access this area! http://shop.skyblock.net"); }
+    public static boolean expandMessageCheck(String input) { return Objects.equals(input, "You can not build in this area. An expansion pack is needed to access a larger Skyblock space. http://shop.skyblock.net/"); }
 
     public static boolean luckyCratesMessageCheck(String input) { return luckyCratesMessagePattern.matcher(input).find(); }
 
