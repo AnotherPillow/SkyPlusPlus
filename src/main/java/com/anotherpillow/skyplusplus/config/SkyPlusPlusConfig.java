@@ -47,6 +47,8 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean betterChangeBiomeEnabled = true;
     @ConfigEntry public boolean betterCrateKeysEnabled = true;
 
+    @ConfigEntry public boolean extraTabEnabled = true;
+
 
 
     public static Screen getConfigScreen(Screen parentScreen) {
@@ -204,7 +206,15 @@ public class SkyPlusPlusConfig {
                                 .binding(defaults.betterCrateKeysEnabled, () -> config.betterCrateKeysEnabled, v -> config.betterCrateKeysEnabled = v)
                                 .controller(TickBoxController::new)
                                 .build())
-
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.literal("Tweaks/Improvements"))
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("ExtraTab"))
+                                .tooltip(Text.literal("Allows for extra columns in tab."))
+                                .binding(defaults.extraTabEnabled, () -> config.extraTabEnabled, v -> config.extraTabEnabled = v)
+                                .controller(TickBoxController::new)
+                                .build())
                         .build())
         )).generateScreen(parentScreen);
     }
