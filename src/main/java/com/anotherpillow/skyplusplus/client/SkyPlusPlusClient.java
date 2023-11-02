@@ -35,6 +35,7 @@ import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.commands.ConverterCommand;
 import com.anotherpillow.skyplusplus.commands.SmartTPCommand;
 import com.anotherpillow.skyplusplus.features.BetterChangeBiome;
+import com.anotherpillow.skyplusplus.features.BetterCrateKeys;
 
 import java.io.InputStream;
 import java.util.Objects;
@@ -47,6 +48,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
     public void onInitializeClient() {
         SkyPlusPlusConfig.configInstance.load();
         BetterChangeBiome.register();
+        BetterCrateKeys.register();
 
 
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {

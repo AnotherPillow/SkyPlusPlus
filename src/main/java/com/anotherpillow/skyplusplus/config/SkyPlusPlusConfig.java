@@ -45,6 +45,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public String chatSuffixMessage = "!";
 
     @ConfigEntry public boolean betterChangeBiomeEnabled = true;
+    @ConfigEntry public boolean betterCrateKeysEnabled = true;
 
 
 
@@ -190,13 +191,20 @@ public class SkyPlusPlusConfig {
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
-                        .name(Text.literal("Better UIs"))
+                        .name(Text.literal("Better Items/UIs"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.literal("Enable Better Changebiome UI"))
                                 .tooltip(Text.literal("Enable a better changebiome UI (may require a restart!)"))
                                 .binding(defaults.betterChangeBiomeEnabled, () -> config.betterChangeBiomeEnabled, v -> config.betterChangeBiomeEnabled = v)
                                 .controller(TickBoxController::new)
                                 .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Enable Better Crate Keys"))
+                                .tooltip(Text.literal("Enable coloured crate keys (may require a restart!)"))
+                                .binding(defaults.betterCrateKeysEnabled, () -> config.betterCrateKeysEnabled, v -> config.betterCrateKeysEnabled = v)
+                                .controller(TickBoxController::new)
+                                .build())
+
                         .build())
         )).generateScreen(parentScreen);
     }

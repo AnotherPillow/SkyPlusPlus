@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:block/tripwire_hook"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "skyplusplus:bettercratekeys": 0.1
+      },
+      "model": "skyplusplus:item/voter_crate_key"
+    },
+    {
+      "predicate": {
+        "skyplusplus:bettercratekeys": 0.3
+      },
+      "model": "skyplusplus:item/common_crate_key"
+    },
+    {
+      "predicate": {
+        "skyplusplus:bettercratekeys": 0.5
+      },
+      "model": "skyplusplus:item/rare_crate_key"
+    },
+    {
+      "predicate": {
+        "skyplusplus:bettercratekeys": 0.7
+      },
+      "model": "skyplusplus:item/epic_crate_key"
+    },
+    {
+      "predicate": {
+        "skyplusplus:bettercratekeys": 0.9
+      },
+      "model": "skyplusplus:item/legendary_crate_key"
+    }
+  ]
+}
