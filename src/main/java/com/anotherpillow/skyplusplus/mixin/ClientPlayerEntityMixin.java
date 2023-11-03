@@ -29,7 +29,7 @@ public class ClientPlayerEntityMixin {
         if (itemStack.getItem() instanceof SkullItem) {
             System.out.println("Head was dropped");
             if (config.preventHeadDropping) {
-                System.out.println("Dropping canceleld");
+                System.out.println("Dropping cancelled");
                 client.inGameHud.getChatHud().addMessage(Text.of(ChatLogo.addLogo("Prevented dropping " + name)));
                 cb.setReturnValue(false);
             }
