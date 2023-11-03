@@ -38,7 +38,7 @@ public class ConverterCommand {
                         }
                     }
                     if (!valid) {
-                        src.sendFeedback(Text.of(ChatLogo.logo + "Invalid type! Valid types are: st, sc, sh, dc, stack, single, dub, double, shulk"));
+                        src.sendFeedback(Text.of(ChatLogo.addLogo("Invalid type! Valid types are: st, sc, sh, dc, stack, single, dub, double, shulk")));
                         return 0;
                     }
 
@@ -83,7 +83,7 @@ public class ConverterCommand {
                     }
 
                     //respond to the command
-                    src.sendFeedback(Text.of(ChatLogo.logo + amount + " items is " + wholes + " " + type +  " and " + remainder + " items"));
+                    src.sendFeedback(Text.of(ChatLogo.addLogo(amount + " items is " + wholes + " " + type +  " and " + remainder + " items")));
 
 
 

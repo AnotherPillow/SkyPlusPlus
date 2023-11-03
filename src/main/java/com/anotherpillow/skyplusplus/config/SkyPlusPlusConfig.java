@@ -48,6 +48,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean betterCrateKeysEnabled = true;
 
     @ConfigEntry public boolean extraTabEnabled = true;
+    @ConfigEntry public boolean preventHeadDropping = true;
 
 
 
@@ -213,6 +214,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("ExtraTab"))
                                 .tooltip(Text.literal("Allows for extra columns in tab."))
                                 .binding(defaults.extraTabEnabled, () -> config.extraTabEnabled, v -> config.extraTabEnabled = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Prevent Head Dropping"))
+                                .tooltip(Text.literal("Prevents you from dropping heads."))
+                                .binding(defaults.preventHeadDropping, () -> config.preventHeadDropping, v -> config.preventHeadDropping = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())

@@ -27,7 +27,7 @@ public class BetterChangeBiome {
             //client.inGameHud.getChatHud().addMessage(Text.of(itemStack.getItem().toString()));
 
             if (nbtCompound == null) return 0.0f;
-            client.inGameHud.getChatHud().addMessage(Text.of(nbtCompound.toString()));
+            // client.inGameHud.getChatHud().addMessage(Text.of(nbtCompound.toString()));
             if (itemStack.isOf(Items.WATER_BUCKET)) {//client.inGameHud.getChatHud().addMessage(Text.of("WATERBUCKET: " + nbtCompound.toString()));
                 if (!nbtCompound.contains("CHANGE_BIOME")) return 0.0f;
                 if (nbtCompound.getString("CHANGE_BIOME").equals("WARM_OCEAN")) return 0.4f;

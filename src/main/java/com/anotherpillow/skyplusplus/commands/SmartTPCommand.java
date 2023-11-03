@@ -21,7 +21,7 @@ public class SmartTPCommand {
 
 
 
-                            src.sendFeedback(Text.of(ChatLogo.logo + "Unlocking and teleporting " + username + "..."));
+                            src.sendFeedback(Text.of(ChatLogo.addLogo("Unlocking and teleporting " + username + "...")));
                             SmartTP.teleport(username);
 
 

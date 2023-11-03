@@ -27,7 +27,7 @@ public class SmartTP {
             @Override
             public void run() {
                 awaitingLock = false;
-                client.inGameHud.getChatHud().addMessage(Text.of(ChatLogo.logo + "Teleport request to " + username + " timed out."));
+                client.inGameHud.getChatHud().addMessage(Text.of(ChatLogo.addLogo("Teleport request to " + username + " timed out.")));
 
                 player.sendCommand("lock", Text.empty());
             }
