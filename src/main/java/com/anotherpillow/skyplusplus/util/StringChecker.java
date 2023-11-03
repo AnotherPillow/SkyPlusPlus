@@ -14,7 +14,7 @@ public class StringChecker {
     public static Pattern newUserMessagePattern = Pattern.compile("^Welcome [A-Za-z0-9_]+ to Skyblock!$");
     public static Pattern deathMessagePattern = Pattern.compile("^\\[☠] \\d+ players have perished in the void today.$");
     public static Pattern raffleMessagePattern = Pattern.compile("^\\[SBRaffle] \\[[A-Za-z]+] [A-Za-z0-9_]+ just bought \\d ticke.+!$");
-    public static Pattern autoResponderPattern = Pattern.compile("^\\[[A-Za-z0-9_]+ -> me] .+$");
+    public static Pattern autoResponderPattern = Pattern.compile("^\\[[A-Za-z0-9_]{2,16} -> me] .+$");
     public static Pattern advancementMessagePatten = Pattern.compile("^[A-Za-z0-9_]+ has made the advancement \\[.+]");
     public static Pattern TPAcceptMessagePattern = Pattern.compile("^.+ accepted your teleport request\\.$");
     public static Pattern luckyCratesMessagePattern = Pattern.compile("^Lucky Crates .+$");
