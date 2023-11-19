@@ -18,20 +18,14 @@ public class TraderCountdown {
         DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
     }
     public static String countdown() {
-        //return minutes to the next UTC hour
         Instant now = Instant.now();
 
-        //get minutes to the next hour
         int minutes = 60 - now.atZone(ZoneId.of("UTC")).getMinute();
 
         String minutesString = Integer.toString(minutes);
-        //add leading zero if needed
+
         if (minutesString.length() == 1) minutesString = "0" + minutesString;
-
         if (minutesString.equals("60")) return "1:00";
-
-        //convert to H:MM
-
 
         return "0:" + minutesString;
     }
@@ -42,5 +36,4 @@ public class TraderCountdown {
         int textOffset = textWidth / 2;
         draw(matrixStack, txt, textOffset);
     }
-
 }

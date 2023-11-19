@@ -71,60 +71,17 @@ public class TraderFinder {
 
     }
 
-
-
     public static void loopTraders(MatrixStack matrixStack) {
         MinecraftClient client = MinecraftClient.getInstance();
         Camera camera = MinecraftClient.getInstance().gameRenderer.getCamera();
 
-        //draw trader hitboxes to screen
         for (Entity entity : client.world.getEntities()) {
             if (entity.getType() == EntityType.WANDERING_TRADER) {
-//                System.out.println("Trader found at: " + entity.getX() + ", " + entity.getY() + ", " + entity.getZ());
-//
-//                //get the trader's onscreen position
-//                Vec3d pos = camera.getPos();
-//                Vec3d entityPos = entity.getPos();
-//                System.out.println("Entity position: " + entityPos.x + ", " + entityPos.y + ", " + entityPos.z);
-//                System.out.println("Camera position: " + pos.x + ", " + pos.y + ", " + pos.z);
-//
-//
-//
-//
-//                int screenWidth = MinecraftClient.getInstance().getWindow().getScaledWidth();
-//                int screenHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
-//
-//                int posX = (int) (screenWidth / 2 + x);
-//                int posY = (int) (screenHeight / 2 - y);
-//
-//                System.out.println("Test: " + posX + ", " + posY);
-//
-//                System.out.println("Trader onscreen at: " + x + ", " + y + ", " + z);
-
-                //Get NBT data from trader
                 WanderingTraderEntity trader = (WanderingTraderEntity) entity;
 
-                //System.out.println("Trader Trades: " + trader.getOffers());
-                //send coords to screen
                 int traderX = (int) entity.getX();
                 int traderY = (int) entity.getY();
                 int traderZ = (int) entity.getZ();
-
-
-
-                /*TradeOfferList tradeOffers = trader.getOffers();
-                for (TradeOffer tradeOffer : tradeOffers) {
-                    ItemStack firstBuyItem = tradeOffer.getOriginalFirstBuyItem();
-                    ItemStack secondBuyItem = tradeOffer.getSecondBuyItem();
-                    ItemStack sellItem = tradeOffer.getSellItem();
-
-                    System.out.println("First buy item: " + firstBuyItem);
-                    System.out.println("Second buy item: " + secondBuyItem);
-                    System.out.println("Sell item: " + sellItem);
-                }
-
-                NbtCompound entityData = trader.writeNbt(new NbtCompound());
-                System.out.println("Trader NBT: " + entityData);*/
 
                 setTraderXYZString(traderX, traderY, traderZ);
                 showTraderString(matrixStack);
@@ -133,19 +90,12 @@ public class TraderFinder {
 
     }
     public static void findTrader(MatrixStack matrixStack) {
-        // Get the player entity and current position
         MinecraftClient mc = MinecraftClient.getInstance();
         Entity player = mc.player;
-        //System.out.println("Finding trader1");
 
         if (player == null || mc.world == null) return;
 
-        //System.out.println("Finding trader");
-
-
         BlockPos playerPos = player.getBlockPos();
-
-
         loopTraders(matrixStack);
 
     }
