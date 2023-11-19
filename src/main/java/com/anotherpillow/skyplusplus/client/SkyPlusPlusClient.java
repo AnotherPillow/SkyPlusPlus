@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.client;
 
+import com.anotherpillow.skyplusplus.commands.BedrockBotCommand;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ClientModInitializer;
@@ -117,6 +118,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             // Register the /sconvert command
             ConverterCommand.register(dispatcher);
             SmartTPCommand.register(dispatcher);
+            BedrockBotCommand.register(dispatcher);
 
         });
 
