@@ -15,23 +15,22 @@ public class SmartTPCommand {
         MinecraftClient client = MinecraftClient.getInstance();
 
         dispatcher.register(ClientCommandManager.literal("smarttp")
-                .then(ClientCommandManager.argument("username", StringArgumentType.string()).executes(context -> {
-                            FabricClientCommandSource src = context.getSource();
-                            String username = StringArgumentType.getString(context, "username");
+            .then(ClientCommandManager.argument("username", StringArgumentType.string()).executes(context -> {
+                FabricClientCommandSource src = context.getSource();
+                String username = StringArgumentType.getString(context, "username");
 
 
 
-                            src.sendFeedback(Text.of(ChatLogo.addLogo("Unlocking and teleporting " + username + "...")));
-                            SmartTP.teleport(username);
+                src.sendFeedback(Text.of(ChatLogo.addLogo("Unlocking and teleporting " + username + "...")));
+                SmartTP.teleport(username);
 
 
 
-                            //src.sendFeedback(Text.of(ChatLogo.logo + "Converting " + amount + " " + type + "s..."));
+                //src.sendFeedback(Text.of(ChatLogo.logo + "Converting " + amount + " " + type + "s..."));
 
-                            return 1;
-                        })));
-
-
+                return 1;
+            }))
+        );
     }
 }
 

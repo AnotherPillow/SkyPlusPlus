@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.client;
 
+import com.anotherpillow.skyplusplus.commands.ConfigCommand;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ClientModInitializer;
@@ -17,6 +18,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.network.ServerInfo;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.resource.ResourceManager;
@@ -53,16 +55,9 @@ public class SkyPlusPlusClient implements ClientModInitializer {
 
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
             SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
-            //MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.of("isSpawn: " + inSpawn));
-            //if (MinecraftClient.getInstance().getCurrentServerEntry() == null) return;
-            //Server.isSkyblock(MinecraftClient.getInstance().getCurrentServerEntry().address)) {
+            ServerInfo server = MinecraftClient.getInstance().getCurrentServerEntry();
 
-
-            // Get the text renderer and draw the custom text on the screen
-            //TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-            //DrawableHelper.drawCenteredText(matrixStack, textRenderer, MinecraftClient.getInstance().getCurrentServerEntry().address, MinecraftClient.getInstance().getWindow().getScaledWidth() / 2, MinecraftClient.getInstance().getWindow().getScaledHeight() / 2 - 20, 0xFFFFFF);
-
-            if (config.enableTraderFinder) {
+            if (config.enableTraderFinder && Server.isSkyblock(server == null ? "" : server.address)) {
                 if (inSpawn) {
                     if (!Objects.equals(TraderFinder.traderXYZString, "")) TraderFinder.showTraderString(matrixStack);
                     else TraderFinder.findTrader(matrixStack);
@@ -79,19 +74,12 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             // Get the player entity and current position
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             if (player == null) return;
+
             BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
-
-            /*if (MinecraftClient.getInstance().getCurrentServerEntry() == null || !Server.isSkyblock(MinecraftClient.getInstance().getCurrentServerEntry().address)) {
-                lastPos = null;
-                return;
-            }*/
-
-            // Check if the player's position has changed
             if (pos.equals(lastPos)) return;
-                // check if lastPos is more than 10 blocks away from pos
-            //get config
+
             SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
-            //System.out.println(config.enableTraderFinder);
+
             if (config.enableTraderFinder) {
                 if (lastPos != null && lastPos.getManhattanDistance(pos) > 10) {
                     if (pos.getManhattanDistance(new BlockPos(4000, 175, 2000)) < 5
@@ -117,6 +105,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             // Register the /sconvert command
             ConverterCommand.register(dispatcher);
             SmartTPCommand.register(dispatcher);
+            ConfigCommand.register(dispatcher);
 
         });
 

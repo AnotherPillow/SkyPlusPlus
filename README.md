@@ -29,7 +29,9 @@ Yet another skyblock.net mod
 
 ## Commands
 
-| Command | Description |
-| --- | --- |
-| `/sconvert` | Converts an amount of items to single chests, double chests or stacks. |
-| `/smarttp` | A better `/tpahere`, automatically unlocks and relocks your island. |
+| Command        | Description                                                            |
+|----------------|------------------------------------------------------------------------|
+| `/sconvert`    | Converts an amount of items to single chests, double chests or stacks. |
+| `/smarttp`     | A better `/tpahere`, automatically unlocks and relocks your island.    |
+| `/skyplusplus` | Opens the config menu (same menu you can get through modmenu.          |
+
