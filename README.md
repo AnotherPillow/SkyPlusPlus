@@ -39,4 +39,4 @@ Yet another skyblock.net mod for 1.19.2
 ## Credits
 
 - [sbutils](https://github.com/hashalite/sbutils-public) for helping me figure out YACL.
-- [Meteor Client](https://github.com/MeteorDevelopment/meteor-client/blob/master/src/main/java/meteordevelopment/meteorclient/systems/modules/misc/DiscordPresence.java) and their [java-discord-rpc fork](https://github.com/MinnDevelopment/java-discord-rpc) for Discord RPC.
+- [Meteor Client](https://github.com/MeteorDevelopment/meteor-client/blob/master/src/main/java/meteordevelopment/meteorclient/systems/modules/misc/DiscordPresence.java) and their [discord-ipc library](https://github.com/MeteorDevelopment/discord-ipc) for Discord RPC.
