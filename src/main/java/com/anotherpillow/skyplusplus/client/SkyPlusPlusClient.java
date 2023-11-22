@@ -1,6 +1,7 @@
 package com.anotherpillow.skyplusplus.client;
 
 import com.anotherpillow.skyplusplus.commands.ConfigCommand;
+import com.anotherpillow.skyplusplus.features.DiscordRPC;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ClientModInitializer;
@@ -13,6 +14,8 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
@@ -38,6 +41,8 @@ import com.anotherpillow.skyplusplus.commands.ConverterCommand;
 import com.anotherpillow.skyplusplus.commands.SmartTPCommand;
 import com.anotherpillow.skyplusplus.features.BetterChangeBiome;
 import com.anotherpillow.skyplusplus.features.BetterCrateKeys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.util.Objects;
@@ -46,18 +51,33 @@ public class SkyPlusPlusClient implements ClientModInitializer {
     private BlockPos lastPos;
     private boolean inSpawn = false;
 
+    // Credit for some of this from https://github.com/MeteorDevelopment/meteor-client/blob/master/src/main/java/meteordevelopment/meteorclient/MeteorClient.java#L45
+    public static final String MOD_ID = "skyplusplus";
+    public static final ModMetadata MOD_META;
+    public static final String NAME;
+    public static final Logger LOG;
+    public static final String VERSION;
+
+    static {
+        MOD_META = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow().getMetadata();
+        NAME = MOD_META.getName();
+        LOG = LoggerFactory.getLogger(NAME);
+        VERSION = MOD_META.getVersion().getFriendlyString();
+    }
+
     @Override
     public void onInitializeClient() {
         SkyPlusPlusConfig.configInstance.load();
+        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
         BetterChangeBiome.register();
         BetterCrateKeys.register();
 
+        if (config.enableDiscordRPC)
+            DiscordRPC.start();
+
 
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
-            SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
-            ServerInfo server = MinecraftClient.getInstance().getCurrentServerEntry();
-
-            if (config.enableTraderFinder && Server.isSkyblock(server == null ? "" : server.address)) {
+            if (config.enableTraderFinder && Server.onSkyblock()) {
                 if (inSpawn) {
                     if (!Objects.equals(TraderFinder.traderXYZString, "")) TraderFinder.showTraderString(matrixStack);
                     else TraderFinder.findTrader(matrixStack);
@@ -71,14 +91,14 @@ public class SkyPlusPlusClient implements ClientModInitializer {
         });
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            // Get the player entity and current position
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             if (player == null) return;
 
+            if (config.enableDiscordRPC)
+                DiscordRPC.onTick();
+
             BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
             if (pos.equals(lastPos)) return;
-
-            SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
 
             if (config.enableTraderFinder) {
                 if (lastPos != null && lastPos.getManhattanDistance(pos) > 10) {
@@ -102,13 +122,10 @@ public class SkyPlusPlusClient implements ClientModInitializer {
         });
 
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-            // Register the /sconvert command
             ConverterCommand.register(dispatcher);
             SmartTPCommand.register(dispatcher);
             ConfigCommand.register(dispatcher);
-
         });
-
 
     }
 }

@@ -1,5 +1,8 @@
 package com.anotherpillow.skyplusplus.util;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ServerInfo;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,6 +47,10 @@ public class Server {
         );
 
         return skyblockDomains.contains(domain);
+    }
 
+    public static boolean onSkyblock() {
+        ServerInfo server = MinecraftClient.getInstance().getCurrentServerEntry();
+        return isSkyblock(server == null ? "" : server.address);
     }
 }

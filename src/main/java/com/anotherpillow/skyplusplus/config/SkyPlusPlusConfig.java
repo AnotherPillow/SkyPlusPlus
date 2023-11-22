@@ -50,6 +50,8 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean extraTabEnabled = true;
     @ConfigEntry public boolean preventHeadDropping = true;
 
+    @ConfigEntry public boolean enableDiscordRPC = true;
+
 
 
     public static Screen getConfigScreen(Screen parentScreen) {
@@ -220,6 +222,15 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Prevent Head Dropping"))
                                 .tooltip(Text.literal("Prevents you from dropping heads."))
                                 .binding(defaults.preventHeadDropping, () -> config.preventHeadDropping, v -> config.preventHeadDropping = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.literal("Discord RPC"))
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Enable Discord RPC"))
+                                .tooltip(Text.literal("Enables Sky++'s Discord RPC (requires restart after changing)."))
+                                .binding(defaults.enableDiscordRPC, () -> config.enableDiscordRPC, v -> config.enableDiscordRPC = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())

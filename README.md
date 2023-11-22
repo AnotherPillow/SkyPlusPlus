@@ -1,6 +1,6 @@
 # Sky++
 
-Yet another skyblock.net mod
+Yet another skyblock.net mod for 1.19.2
 
 [![img](https://img.shields.io/github/release/anotherpillow/SkyPlusPlus.svg)](https://github.com/AnotherPillow/SkyPlusPlus/releases/)
 [![img](https://img.shields.io/github/downloads/anotherpillow/SkyPlusPlus/total.svg)](https://github.com/AnotherPillow/SkyPlusPlus/releases/)
@@ -35,3 +35,8 @@ Yet another skyblock.net mod
 | `/smarttp`     | A better `/tpahere`, automatically unlocks and relocks your island.    |
 | `/skyplusplus` | Opens the config menu (same menu you can get through modmenu.          |
 
+
+## Credits
+
+- [sbutils](https://github.com/hashalite/sbutils-public) for helping me figure out YACL.
+- [Meteor Client](https://github.com/MeteorDevelopment/meteor-client/blob/master/src/main/java/meteordevelopment/meteorclient/systems/modules/misc/DiscordPresence.java) and their [java-discord-rpc fork](https://github.com/MinnDevelopment/java-discord-rpc) for Discord RPC.
