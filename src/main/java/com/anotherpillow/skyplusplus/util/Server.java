@@ -37,7 +37,10 @@ public class Server {
                 "skyblockgames.com",
                 "skyblockia.com",
                 "skyblockia.org",
-                "skyblockia.net"
+                "skyblockia.net",
+                "skyblock.in",
+                "skyblock.rocks",
+                "skyblock.one"
         );
 
         return skyblockDomains.contains(domain);
