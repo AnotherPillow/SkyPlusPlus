@@ -38,6 +38,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean hideExpandMessages = true;
     @ConfigEntry public boolean hideLuckyCratesMessages = true;
     @ConfigEntry public boolean hideMailMessages = true;
+    @ConfigEntry public boolean hideVoteMessages = false;
 
     @ConfigEntry public boolean chatPrefix = false;
     @ConfigEntry public String chatPrefixMessage = "&b";
@@ -150,6 +151,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Hide Mail Messages"))
                                 .tooltip(Text.literal("Hide \"You have X messages! ...\" messages"))
                                 .binding(defaults.hideMailMessages, () -> config.hideMailMessages, v -> config.hideMailMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Hide Vote Messages"))
+                                .tooltip(Text.literal("Hide messages notifying you of someone else's votes."))
+                                .binding(defaults.hideVoteMessages, () -> config.hideVoteMessages, v -> config.hideVoteMessages = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())

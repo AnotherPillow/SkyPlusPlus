@@ -18,8 +18,8 @@ public class StringChecker {
     public static Pattern advancementMessagePatten = Pattern.compile("^[A-Za-z0-9_]+ has made the advancement \\[.+]");
     public static Pattern TPAcceptMessagePattern = Pattern.compile("^.+ accepted your teleport request\\.$");
     public static Pattern luckyCratesMessagePattern = Pattern.compile("^Lucky Crates .+$");
-
     public static Pattern mailNotificationMessagePattern = Pattern.compile("^You have \\d+ messages! Type /mail read to view your mail\\.$");
+    public static Pattern voteMessagePattern = Pattern.compile("\\[Vote\\] [A-Za-z0-9_]+ voted at vote\\d?\\.skyblock\\.net for \\dx Grass Block and \\dx Voter Key! \\(/vote\\)");
 
     public static boolean welcomeIslandCheck(String input) {
         return welcomeIslandPattern.matcher(input).find() || visitingIslandPatten.matcher(input).find();
@@ -64,4 +64,6 @@ public class StringChecker {
     public static boolean luckyCratesMessageCheck(String input) { return luckyCratesMessagePattern.matcher(input).find(); }
 
     public static boolean mailMessageCheck(String input) { return mailNotificationMessagePattern.matcher(input).find(); }
+
+    public static boolean voteMessageCheck(String input) { return voteMessagePattern.matcher(input).find(); }
 }

@@ -85,6 +85,10 @@ public class ChatMixin {
             && StringChecker.mailMessageCheck(message))
                 callback.cancel();
 
+        if (config.hideVoteMessages
+            && StringChecker.voteMessageCheck(message))
+                callback.cancel();
+
 
 
 
