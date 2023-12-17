@@ -26,6 +26,8 @@ Yet another skyblock.net mod for 1.19.2
 | Better Crate Keys              | Makes crate keys colourful.                                                                                                                                                                                                                                                                                                                                       |
 | ExtraTab                       | Expands the tab menu, allowing much more columns.                                                                                                                                                                                                                                                                                                                 |
 | Prevent Head Dropper           | Prevents dropping of all heads. (Only through the drop button, not inventory)                                                                                                                                                                                                                                                                                     |
+| Discord RPC                    | Custom Discord Rich Presence                                                                                                                                                                                                                                                                                                                                      |
+  
 
 ## Commands
 
