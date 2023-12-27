@@ -22,6 +22,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public int traderX = 16;
     @ConfigEntry public int traderY = 16;
     @ConfigEntry public boolean enableTraderFinder = true;
+    @ConfigEntry public boolean enableTraderTitles = true;
 
     @ConfigEntry public boolean hideVisitingMessages = false;
     @ConfigEntry public boolean hideSkyblockMessages = false;
@@ -64,6 +65,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Enable"))
                                 .tooltip(Text.literal("Enable Wandering Trader Notifications"))
                                 .binding(defaults.enableTraderFinder, () -> config.enableTraderFinder, v -> config.enableTraderFinder = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Enable Title"))
+                                .tooltip(Text.literal("Shows a title when a trader is at spawn."))
+                                .binding(defaults.enableTraderTitles, () -> config.enableTraderTitles, v -> config.enableTraderTitles = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .option(Option.createBuilder(int.class)

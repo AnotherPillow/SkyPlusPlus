@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
 
-import com.anotherpillow.skyplusplus.util.ChatLogo;
+import com.anotherpillow.skyplusplus.util.Chat;
 import net.minecraft.text.Text;
 
 
@@ -38,7 +38,7 @@ public class ConverterCommand {
                         }
                     }
                     if (!valid) {
-                        src.sendFeedback(Text.of(ChatLogo.addLogo("Invalid type! Valid types are: st, sc, sh, dc, stack, single, dub, double, shulk")));
+                        src.sendFeedback(Text.of(Chat.addLogo("Invalid type! Valid types are: st, sc, sh, dc, stack, single, dub, double, shulk")));
                         return 0;
                     }
 
@@ -83,7 +83,7 @@ public class ConverterCommand {
                     }
 
                     //respond to the command
-                    src.sendFeedback(Text.of(ChatLogo.addLogo(amount + " items is " + wholes + " " + type +  " and " + remainder + " items")));
+                    src.sendFeedback(Text.of(Chat.addLogo(amount + " items is " + wholes + " " + type +  " and " + remainder + " items")));
 
 
 

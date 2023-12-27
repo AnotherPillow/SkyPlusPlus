@@ -17,15 +17,29 @@ public class TraderCountdown {
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
         DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
     }
-    public static String countdown() {
-        Instant now = Instant.now();
 
-        int minutes = 60 - now.atZone(ZoneId.of("UTC")).getMinute();
+    private static boolean hasShownTitleForThisMinute = false;
+    public static String countdown() {
+        // Instant now = Instant.parse("2023-12-27T16:00:00.00Z");
+        Instant now = Instant.now();
+        int mins = now.atZone(ZoneId.of("UTC")).getMinute();
+        int minutes = 60 - (mins == 0 ? 60 : mins);
 
         String minutesString = Integer.toString(minutes);
 
         if (minutesString.length() == 1) minutesString = "0" + minutesString;
         if (minutesString.equals("60")) return "1:00";
+
+        boolean validTime = (minutesString.equals("00") || minutesString.equals("60"));
+
+        if (validTime
+                && SkyPlusPlusConfig.configInstance.getConfig().enableTraderTitles && !hasShownTitleForThisMinute) {
+
+            Chat.sendTitle("A trader has appeared at spawn!");
+            hasShownTitleForThisMinute = true;
+        } else if (!validTime && hasShownTitleForThisMinute) {
+            hasShownTitleForThisMinute = false;
+        }
 
         return "0:" + minutesString;
     }

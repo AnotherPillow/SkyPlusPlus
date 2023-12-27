@@ -1,7 +1,6 @@
 package com.anotherpillow.skyplusplus.features;
 
-import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
-import com.anotherpillow.skyplusplus.util.ChatLogo;
+import com.anotherpillow.skyplusplus.util.Chat;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
@@ -27,7 +26,7 @@ public class SmartTP {
             @Override
             public void run() {
                 awaitingLock = false;
-                client.inGameHud.getChatHud().addMessage(Text.of(ChatLogo.addLogo("Teleport request to " + username + " timed out.")));
+                Chat.send(Chat.addLogo("Teleport request to " + username + " timed out."));
 
                 player.sendCommand("lock", Text.empty());
             }

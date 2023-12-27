@@ -2,7 +2,7 @@ package com.anotherpillow.skyplusplus.commands;
 
 import com.anotherpillow.skyplusplus.features.SmartTP;
 
-import com.anotherpillow.skyplusplus.util.ChatLogo;
+import com.anotherpillow.skyplusplus.util.Chat;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
@@ -21,7 +21,7 @@ public class SmartTPCommand {
 
 
 
-                src.sendFeedback(Text.of(ChatLogo.addLogo("Unlocking and teleporting " + username + "...")));
+                src.sendFeedback(Text.of(Chat.addLogo("Unlocking and teleporting " + username + "...")));
                 SmartTP.teleport(username);
 
 
