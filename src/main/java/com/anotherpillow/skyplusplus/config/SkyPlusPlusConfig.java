@@ -54,6 +54,8 @@ public class SkyPlusPlusConfig {
 
     @ConfigEntry public boolean enableDiscordRPC = true;
 
+    @ConfigEntry public boolean autoRaffleEnabled = false;
+
 
 
     public static Screen getConfigScreen(Screen parentScreen) {
@@ -236,6 +238,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Prevent Head Dropping"))
                                 .tooltip(Text.literal("Prevents you from dropping heads."))
                                 .binding(defaults.preventHeadDropping, () -> config.preventHeadDropping, v -> config.preventHeadDropping = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("AutoRaffle"))
+                                .tooltip(Text.literal("Automatically buys 5 raffle tickets each round."))
+                                .binding(defaults.autoRaffleEnabled, () -> config.autoRaffleEnabled, v -> config.autoRaffleEnabled = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())

@@ -20,6 +20,8 @@ public class StringChecker {
     public static Pattern luckyCratesMessagePattern = Pattern.compile("^Lucky Crates .+$");
     public static Pattern mailNotificationMessagePattern = Pattern.compile("^You have \\d+ messages! Type /mail read to view your mail\\.$");
     public static Pattern voteMessagePattern = Pattern.compile("\\[Vote\\] [A-Za-z0-9_]+ voted at vote\\d?\\.skyblock\\.net for \\dx Grass Block and \\dx Voter Key! \\(/vote\\)");
+    public static Pattern playersOnlineJoinPattern = Pattern.compile("Players online: \\(\\d+/\\d+\\) - World Time: \\d+:\\d+ [A-Z]M");
+    public static Pattern raffleWinPattern = Pattern.compile("\\[SBRaffle\\] Congratulations go to [A-Z0-9_]+ for winning [0-9\\.]+$ with \\d tickets");
 
     public static boolean welcomeIslandCheck(String input) {
         return welcomeIslandPattern.matcher(input).find() || visitingIslandPatten.matcher(input).find();
@@ -66,4 +68,6 @@ public class StringChecker {
     public static boolean mailMessageCheck(String input) { return mailNotificationMessagePattern.matcher(input).find(); }
 
     public static boolean voteMessageCheck(String input) { return voteMessagePattern.matcher(input).find(); }
+    public static boolean playersOnlineJoinCheck(String input) { return playersOnlineJoinPattern.matcher(input).find(); }
+    public static boolean raffleWinCheck(String input) { return raffleWinPattern.matcher(input).find(); }
 }
