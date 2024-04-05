@@ -9,7 +9,8 @@
     "ChatMixin",
     "ClientPlayNetworkHandlerMixin",
     "PlayerListHudMixin",
-    "ClientPlayerEntityMixin"
+    "ClientPlayerEntityMixin",
+    "ChatScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

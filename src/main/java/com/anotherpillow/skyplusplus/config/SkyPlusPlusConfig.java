@@ -51,10 +51,12 @@ public class SkyPlusPlusConfig {
 
     @ConfigEntry public boolean extraTabEnabled = true;
     @ConfigEntry public boolean preventHeadDropping = true;
+    @ConfigEntry public boolean autoRaffleEnabled = false;
+    @ConfigEntry public boolean lowerCommandsEnabled = true;
 
     @ConfigEntry public boolean enableDiscordRPC = true;
 
-    @ConfigEntry public boolean autoRaffleEnabled = false;
+
 
 
 
@@ -244,6 +246,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("AutoRaffle"))
                                 .tooltip(Text.literal("Automatically buys 5 raffle tickets each round."))
                                 .binding(defaults.autoRaffleEnabled, () -> config.autoRaffleEnabled, v -> config.autoRaffleEnabled = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Automatic Lowercase Commands"))
+                                .tooltip(Text.literal("Automatically converts commands to lowercase."))
+                                .binding(defaults.lowerCommandsEnabled, () -> config.lowerCommandsEnabled, v -> config.lowerCommandsEnabled = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())

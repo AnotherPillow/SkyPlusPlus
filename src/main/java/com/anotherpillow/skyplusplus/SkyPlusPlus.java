@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus;
 
+import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
@@ -15,6 +16,7 @@ public class SkyPlusPlus implements ModInitializer {
 
     public static final String MOD_ID = "skyplusplus";
     public static final String MOD_NAME = "SkyPlusPlus";
+    public static SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
 
     @Override
     public void onInitialize() {
