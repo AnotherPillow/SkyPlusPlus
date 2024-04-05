@@ -55,6 +55,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean enableDiscordRPC = true;
 
     @ConfigEntry public boolean autoRaffleEnabled = false;
+    @ConfigEntry public boolean antiGrassPlace = false;
 
 
 
@@ -238,6 +239,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Prevent Head Dropping"))
                                 .tooltip(Text.literal("Prevents you from dropping heads."))
                                 .binding(defaults.preventHeadDropping, () -> config.preventHeadDropping, v -> config.preventHeadDropping = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Prevent Grass Placing"))
+                                .tooltip(Text.literal("Prevents you from placing grass."))
+                                .binding(defaults.antiGrassPlace, () -> config.antiGrassPlace, v -> config.antiGrassPlace = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .option(Option.createBuilder(boolean.class)
