@@ -2,6 +2,7 @@ package com.anotherpillow.skyplusplus.client;
 
 import com.anotherpillow.skyplusplus.commands.ConfigCommand;
 import com.anotherpillow.skyplusplus.features.DiscordRPC;
+import com.anotherpillow.skyplusplus.features.ShowEmptyShops;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ClientModInitializer;
@@ -71,6 +72,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
         BetterChangeBiome.register();
         BetterCrateKeys.register();
+        ShowEmptyShops.register();
 
         if (config.enableDiscordRPC)
             DiscordRPC.start();

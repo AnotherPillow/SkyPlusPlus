@@ -48,6 +48,7 @@ public class SkyPlusPlusConfig {
 
     @ConfigEntry public boolean betterChangeBiomeEnabled = true;
     @ConfigEntry public boolean betterCrateKeysEnabled = true;
+    @ConfigEntry public boolean showEmptyShopsEnabled = true;
 
     @ConfigEntry public boolean extraTabEnabled = true;
     @ConfigEntry public boolean preventHeadDropping = true;
@@ -225,6 +226,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Enable Better Crate Keys"))
                                 .tooltip(Text.literal("Enable coloured crate keys (may require a restart!)"))
                                 .binding(defaults.betterCrateKeysEnabled, () -> config.betterCrateKeysEnabled, v -> config.betterCrateKeysEnabled = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Enable Show Empty Shops"))
+                                .tooltip(Text.literal("Enable showing barriers on the shops screen when they have no stock (may require a restart!)"))
+                                .binding(defaults.showEmptyShopsEnabled, () -> config.showEmptyShopsEnabled, v -> config.showEmptyShopsEnabled = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())
