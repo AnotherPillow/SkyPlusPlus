@@ -45,7 +45,8 @@ public class Server {
                 "skyblock.rocks",
                 "skyblock.one",
                 "sky-block.net",
-                "sky-block.org"
+                "sky-block.org",
+                "skyblock.foo"
         );
 
         return skyblockDomains.contains(domain);
