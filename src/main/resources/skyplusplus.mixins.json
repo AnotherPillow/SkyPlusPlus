@@ -10,6 +10,7 @@
     "ClientPlayNetworkHandlerMixin",
     "PlayerListHudMixin",
     "ClientPlayerEntityMixin",
+    "ClientPlayerInteractionManagerMixin",
     "ChatScreenMixin"
   ],
   "injectors": {
