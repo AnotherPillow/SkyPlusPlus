@@ -3,34 +3,16 @@ package com.anotherpillow.skyplusplus.client;
 import com.anotherpillow.skyplusplus.commands.ConfigCommand;
 import com.anotherpillow.skyplusplus.features.DiscordRPC;
 import com.anotherpillow.skyplusplus.features.ShowEmptyShops;
-import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.network.ServerInfo;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 import com.anotherpillow.skyplusplus.util.Server;
@@ -45,8 +27,9 @@ import com.anotherpillow.skyplusplus.features.BetterCrateKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.InputStream;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 public class SkyPlusPlusClient implements ClientModInitializer {
     private BlockPos lastPos;
@@ -58,6 +41,8 @@ public class SkyPlusPlusClient implements ClientModInitializer {
     public static final String NAME;
     public static final Logger LOG;
     public static final String VERSION;
+
+    public static CommandDispatcher<FabricClientCommandSource> commandDispatcher = null;
 
     static {
         MOD_META = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow().getMetadata();
@@ -88,6 +73,16 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                 }
 
                 TraderImage.draw(matrixStack);
+            }
+
+            try {
+                Server.getSkyblockMode(commandDispatcher);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (TimeoutException e) {
+                throw new RuntimeException(e);
             }
 
         });
@@ -127,6 +122,8 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             ConverterCommand.register(dispatcher);
             SmartTPCommand.register(dispatcher);
             ConfigCommand.register(dispatcher);
+
+            commandDispatcher = dispatcher;
         });
 
     }
