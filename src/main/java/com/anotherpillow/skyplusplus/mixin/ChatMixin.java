@@ -24,8 +24,8 @@ import com.anotherpillow.skyplusplus.features.SmartTP;
 
 @Mixin(ChatHud.class)
 public class ChatMixin {
-    private static MinecraftClient client = MinecraftClient.getInstance();
-    private static final String username = client.getSession().getUsername().toLowerCase();
+    private static MinecraftClient mc = MinecraftClient.getInstance();
+    private static final String username = mc.getSession().getUsername().toLowerCase();
     @Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V", at = @At("HEAD"), cancellable = true)
     private void skyplusplus$onChatReceived(Text text_message, MessageSignatureData signature, int ticks, MessageIndicator indicator, boolean refresh, CallbackInfo callback) throws IOException {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
@@ -94,7 +94,7 @@ public class ChatMixin {
         if (config.autoRaffleEnabled && (
                 StringChecker.playersOnlineJoinCheck(message) ||StringChecker.raffleWinCheck(message)
             ))
-            client.player.sendCommand("raffle buy 5");
+            mc.player.sendCommand("raffle buy 5");
 
 
 
