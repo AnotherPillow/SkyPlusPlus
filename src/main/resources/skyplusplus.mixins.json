@@ -11,6 +11,7 @@
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
     "ClientPlayNetworkHandlerMixin",
+    "HandledScreenMixin",
     "PlayerListHudMixin",
     "ScreenMixin"
   ],

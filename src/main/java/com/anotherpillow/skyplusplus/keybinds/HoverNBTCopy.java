@@ -2,15 +2,18 @@ package com.anotherpillow.skyplusplus.keybinds;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
 public class HoverNBTCopy {
 
     public static KeyBinding binding;
+    public static ItemStack hoveredItem = null;
 
     public static void register() {
         binding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -22,8 +25,7 @@ public class HoverNBTCopy {
     }
 
     public static void logic(MinecraftClient client) {
-
-        if (!(client.currentScreen instanceof InventoryScreen)) return;
-        client.player.sendMessage(Text.literal("Key was pressed!"), false);
+        if (!(client.currentScreen instanceof HandledScreen)) return;
+        client.player.sendMessage(Text.literal("Key was pressed! hovered item: " + hoveredItem.getItem().getName().toString()), false);
     }
 }
