@@ -42,9 +42,9 @@ Yet another skyblock.net mod for 1.19.2
 
 ## Keybinds
 
-| Keybind | Default bind | Description                           |
-|---------|--------------|---------------------------------------|
-| Copy Hovered NBT | `c` | Sends the hovered item's NBT to chat. |
+| Keybind          | Default bind | Description                           |
+|------------------|--------------|---------------------------------------|
+| Copy Hovered NBT | `c`          | Sends the hovered item's NBT to chat. |
  
 
 ## Credits
