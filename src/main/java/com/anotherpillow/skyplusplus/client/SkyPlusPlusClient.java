@@ -116,8 +116,6 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             ConverterCommand.register(dispatcher);
             SmartTPCommand.register(dispatcher);
             ConfigCommand.register(dispatcher);
-
-            commandDispatcher = dispatcher;
         });
 
     }
