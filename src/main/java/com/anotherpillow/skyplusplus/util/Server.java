@@ -70,28 +70,20 @@ public class Server {
 
     private static java.util.concurrent.CompletableFuture<com.mojang.brigadier.suggestion.Suggestions> suggestionsFuture = null;
 
-    public static Mode getSkyblockMode(CommandDispatcher<FabricClientCommandSource> dispatcher) throws ExecutionException, InterruptedException, TimeoutException {
+    public static Mode getSkyblockMode() {
         if (!onSkyblock()) return Mode.NONE;
         MinecraftClient client = MinecraftClient.getInstance();
 
-        if (client.player != null && suggestionsFuture != null && suggestionsFuture.isDone()) {
-            Chat.send(String.valueOf(suggestionsFuture.getNow(null).getList()));
-        } else if (suggestionsFuture == null && client.player != null) {
-            suggestionsFuture =
-                    dispatcher.getCompletionSuggestions(dispatcher.parse("auctionhouse",
-                            (FabricClientCommandSource) client.player.networkHandler.getCommandSource()));
-        }
+        if (client.world == null) return Mode.NONE;
+        int simulationDistance = client.world.getSimulationDistance();
 
-            /*suggestionsFuture.thenRun(() -> {
-                if (suggestionsFuture.isDone()) {
-                    try {
-                        Chat.send(String.valueOf(suggestionsFuture.get(5, TimeUnit.SECONDS)));
-                    } catch (ExecutionException e) {} catch (InterruptedException e) {} catch (TimeoutException e) {}
-
-                }
-            });*/
-
-        return Mode.UNKNOWN;
+        return switch (simulationDistance) {
+            case 5 -> Mode.SURVIVAL;
+            case 3 -> Mode.ECONOMY;
+            case 64 -> Mode.CLASSIC; // could technically be skywars too, that's a TODO
+            case 10 -> Mode.HUB;
+            default -> Mode.UNKNOWN;
+        };
 
     }
     public static boolean onSkyblock() {
