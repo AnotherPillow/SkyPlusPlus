@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.client;
 
+import com.anotherpillow.skyplusplus.commands.CheckSimulationDistanceCommand;
 import com.anotherpillow.skyplusplus.commands.ConfigCommand;
 import com.anotherpillow.skyplusplus.features.DiscordRPC;
 import com.anotherpillow.skyplusplus.features.ShowEmptyShops;
@@ -132,6 +133,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             ConverterCommand.register(dispatcher);
             SmartTPCommand.register(dispatcher);
             ConfigCommand.register(dispatcher);
+            CheckSimulationDistanceCommand.register(dispatcher);
         });
 
     }
