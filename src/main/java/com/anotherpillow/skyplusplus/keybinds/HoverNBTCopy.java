@@ -22,10 +22,10 @@ public class HoverNBTCopy {
 
     public static void register() {
         binding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.examplemod.spook", // The translation key of the keybinding's name
+                "Copy hovered NBT", // The translation key of the keybinding's name
                 InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
                 GLFW.GLFW_KEY_C, // The keycode of the key
-                "category.examplemod.test" // The translation key of the keybinding's category.
+                "Sky++" // The translation key of the keybinding's category.
         ));
     }
 

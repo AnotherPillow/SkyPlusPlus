@@ -40,6 +40,12 @@ Yet another skyblock.net mod for 1.19.2
 | `/smarttp`     | A better `/tpahere`, automatically unlocks and relocks your island.    |
 | `/skyplusplus` | Opens the config menu (same menu you can get through modmenu.          |
 
+## Keybinds
+
+| Keybind | Default bind | Description                           |
+|---------|--------------|---------------------------------------|
+| Copy Hovered NBT | `c` | Sends the hovered item's NBT to chat. |
+ 
 
 ## Credits
 
