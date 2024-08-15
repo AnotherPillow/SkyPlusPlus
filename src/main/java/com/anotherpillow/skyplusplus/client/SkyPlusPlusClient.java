@@ -3,6 +3,7 @@ package com.anotherpillow.skyplusplus.client;
 import com.anotherpillow.skyplusplus.commands.ConfigCommand;
 import com.anotherpillow.skyplusplus.features.DiscordRPC;
 import com.anotherpillow.skyplusplus.features.ShowEmptyShops;
+import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ClientModInitializer;
@@ -59,6 +60,8 @@ public class SkyPlusPlusClient implements ClientModInitializer {
     public static final Logger LOG;
     public static final String VERSION;
 
+    public static SkyPlusPlusConfig config;
+
     static {
         MOD_META = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow().getMetadata();
         NAME = MOD_META.getName();
@@ -69,13 +72,16 @@ public class SkyPlusPlusClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         SkyPlusPlusConfig.configInstance.load();
-        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
+        config = SkyPlusPlusConfig.configInstance.getConfig();
         BetterChangeBiome.register();
         BetterCrateKeys.register();
         ShowEmptyShops.register();
+        HoverNBTCopy.register();
 
         if (config.enableDiscordRPC)
             DiscordRPC.start();
+
+
 
 
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
@@ -120,7 +126,6 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             }
 
             lastPos = pos;
-
         });
 
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
