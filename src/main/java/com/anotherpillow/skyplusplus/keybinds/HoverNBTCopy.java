@@ -2,6 +2,7 @@ package com.anotherpillow.skyplusplus.keybinds;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
@@ -10,8 +11,6 @@ import org.lwjgl.glfw.GLFW;
 public class HoverNBTCopy {
 
     public static KeyBinding binding;
-    public static int boundKeyCode = GLFW.GLFW_KEY_C;
-    public static int boundScanCode = GLFW.GLFW_KEY_C;
 
     public static void register() {
         binding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -23,6 +22,8 @@ public class HoverNBTCopy {
     }
 
     public static void logic(MinecraftClient client) {
+
+        if (!(client.currentScreen instanceof InventoryScreen)) return;
         client.player.sendMessage(Text.literal("Key was pressed!"), false);
     }
 }
