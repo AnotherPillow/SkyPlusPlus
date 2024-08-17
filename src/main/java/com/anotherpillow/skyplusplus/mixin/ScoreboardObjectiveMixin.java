@@ -14,8 +14,8 @@ public class ScoreboardObjectiveMixin {
     @Shadow private Text displayName;
 
     /**
-     * @author
-     * @reason
+     * @author AnotherPillow
+     * @reason Change scoreboard  display name
      */
     @Overwrite
     public Text getDisplayName() {
