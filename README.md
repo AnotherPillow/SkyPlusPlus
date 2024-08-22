@@ -35,11 +35,12 @@ Yet another skyblock.net mod for 1.19.2
 
 ## Commands
 
-| Command        | Description                                                            |
-|----------------|------------------------------------------------------------------------|
-| `/sconvert`    | Converts an amount of items to single chests, double chests or stacks. |
-| `/smarttp`     | A better `/tpahere`, automatically unlocks and relocks your island.    |
-| `/skyplusplus` | Opens the config menu (same menu you can get through modmenu.          |
+| Command        | Description                                                                    |
+|----------------|--------------------------------------------------------------------------------|
+| `/sconvert`    | Converts an amount of items to single chests, double chests or stacks.         |
+| `/smarttp`     | A better `/tpahere`, automatically unlocks and relocks your island.            |
+| `/skyplusplus` | Opens the config menu (same menu you can get through modmenu.                  |
+| `/runafter`    | Runs/sends text after specified (ms) timeout. Example: `/runafter 1000 /spawn` |
 
 ## Keybinds
 

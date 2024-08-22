@@ -1,7 +1,6 @@
 package com.anotherpillow.skyplusplus.client;
 
-import com.anotherpillow.skyplusplus.commands.CheckSimulationDistanceCommand;
-import com.anotherpillow.skyplusplus.commands.ConfigCommand;
+import com.anotherpillow.skyplusplus.commands.*;
 import com.anotherpillow.skyplusplus.features.DiscordRPC;
 import com.anotherpillow.skyplusplus.features.ShowEmptyShops;
 import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
@@ -23,8 +22,6 @@ import com.anotherpillow.skyplusplus.util.TraderFinder;
 import com.anotherpillow.skyplusplus.screen.TraderImage;
 import com.anotherpillow.skyplusplus.util.TraderCountdown;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
-import com.anotherpillow.skyplusplus.commands.ConverterCommand;
-import com.anotherpillow.skyplusplus.commands.SmartTPCommand;
 import com.anotherpillow.skyplusplus.features.BetterChangeBiome;
 import com.anotherpillow.skyplusplus.features.BetterCrateKeys;
 import org.slf4j.Logger;
@@ -118,6 +115,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             SmartTPCommand.register(dispatcher);
             ConfigCommand.register(dispatcher);
             CheckSimulationDistanceCommand.register(dispatcher);
+            RunAfterCommand.register(dispatcher);
         });
 
     }
