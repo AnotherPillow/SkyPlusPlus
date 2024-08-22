@@ -4,6 +4,7 @@
   "package": "com.anotherpillow.skyplusplus.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "NbtTagSizeTrackerMixin",
     "ScoreboardObjectiveMixin"
   ],
   "client": [

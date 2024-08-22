@@ -53,6 +53,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean extraTabEnabled = true;
     @ConfigEntry public boolean preventHeadDropping = true;
     @ConfigEntry public boolean autoRaffleEnabled = false;
+    @ConfigEntry public boolean antiPCEnabled = false;
     @ConfigEntry public boolean antiGrassPlace = false;
     @ConfigEntry public boolean lowerCommandsEnabled = true;
 
@@ -257,6 +258,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("AutoRaffle"))
                                 .tooltip(Text.literal("Automatically buys 5 raffle tickets each round."))
                                 .binding(defaults.autoRaffleEnabled, () -> config.autoRaffleEnabled, v -> config.autoRaffleEnabled = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("AntiPC"))
+                                .tooltip(Text.literal("Also known as AntiBookBan. Prevents large items from kicking or banning you (CLIENT ONLY)"))
+                                .binding(defaults.antiPCEnabled, () -> config.antiPCEnabled, v -> config.antiPCEnabled = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .option(Option.createBuilder(boolean.class)
