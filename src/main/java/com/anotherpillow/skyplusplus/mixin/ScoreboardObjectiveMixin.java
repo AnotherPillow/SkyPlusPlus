@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.mixin;
 
+import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.util.Server;
 import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.text.Text;
@@ -10,7 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(ScoreboardObjective.class)
 public class ScoreboardObjectiveMixin {
-
+    SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
     @Shadow private Text displayName;
 
     /**
@@ -19,6 +20,8 @@ public class ScoreboardObjectiveMixin {
      */
     @Overwrite
     public Text getDisplayName() {
+        if (!config.dynamicScoreboardTitle) return this.displayName;
+
         return switch (Server.getSkyblockMode()) {
             case ECONOMY -> Text.empty()
                     .append(Text.of("Skyblock ").copy().formatted(Formatting.BOLD).formatted(Formatting.GREEN))

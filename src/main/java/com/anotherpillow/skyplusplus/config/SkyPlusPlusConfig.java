@@ -49,6 +49,8 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean betterChangeBiomeEnabled = true;
     @ConfigEntry public boolean betterCrateKeysEnabled = true;
     @ConfigEntry public boolean showEmptyShopsEnabled = true;
+    @ConfigEntry public boolean dynamicScoreboardTitle = true;
+
 
     @ConfigEntry public boolean extraTabEnabled = true;
     @ConfigEntry public boolean preventHeadDropping = true;
@@ -231,6 +233,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Enable Show Empty Shops"))
                                 .tooltip(Text.literal("Enable showing barriers on the shops screen when they have no stock (may require a restart!)"))
                                 .binding(defaults.showEmptyShopsEnabled, () -> config.showEmptyShopsEnabled, v -> config.showEmptyShopsEnabled = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Dynamic Scoreboard Title"))
+                                .tooltip(Text.literal("Change scoreboard title based on connected subserver."))
+                                .binding(defaults.dynamicScoreboardTitle, () -> config.dynamicScoreboardTitle, v -> config.dynamicScoreboardTitle = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())
