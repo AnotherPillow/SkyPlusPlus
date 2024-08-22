@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.mixin;
 
+import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import net.minecraft.block.GrassBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.SkullItem;
@@ -24,8 +25,9 @@ public class ClientPlayerInteractionManagerMixin {
                                  CallbackInfoReturnable<ActionResult> cb) {
 
         ItemStack stack = player.getStackInHand(hand);
+        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
 
-        if (stack.getItem().getTranslationKey().equals("block.minecraft.grass_block")) {
+        if (stack.getItem().getTranslationKey().equals("block.minecraft.grass_block") && config.antiGrassPlace) {
             cb.setReturnValue(ActionResult.FAIL);
             cb.cancel();
         }
