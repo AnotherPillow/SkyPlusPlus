@@ -46,7 +46,7 @@ public class BetterCrateKeys {
 
 
             return switch (lore) {
-                case "Click the Voting Crate to use this key" -> 0.1f;
+                case "Click the Voting Crate to use this key", "Click the Voter Crate to use this key" -> 0.1f;
                 case "Click the Common Crate to use this key" -> 0.3f;
                 case "Click the Rare Crate to use this key" -> 0.5f;
                 case "Click the Epic Crate to use this key" -> 0.7f;
