@@ -80,6 +80,8 @@ public class SkyPlusPlusClient implements ClientModInitializer {
 
         });
 
+
+
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             if (player == null) return;

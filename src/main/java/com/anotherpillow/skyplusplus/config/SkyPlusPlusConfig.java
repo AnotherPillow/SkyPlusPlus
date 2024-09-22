@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.config;
 
+import com.anotherpillow.skyplusplus.util.TimeConsts;
 import dev.isxander.yacl.api.ConfigCategory;
 import dev.isxander.yacl.api.Option;
 import dev.isxander.yacl.api.OptionGroup;
@@ -40,6 +41,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean hideLuckyCratesMessages = true;
     @ConfigEntry public boolean hideMailMessages = true;
     @ConfigEntry public boolean hideVoteMessages = false;
+    @ConfigEntry public boolean removeChatRanks = false;
 
     @ConfigEntry public boolean chatPrefix = false;
     @ConfigEntry public String chatPrefixMessage = "&b";
@@ -60,6 +62,13 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean lowerCommandsEnabled = true;
 
     @ConfigEntry public boolean enableDiscordRPC = true;
+
+    @ConfigEntry public boolean enableEconomyAdverts = false;
+    @ConfigEntry public boolean enableSurvivalAdverts = false;
+    @ConfigEntry public int economyAdInterval = TimeConsts.Minute * 10;
+    @ConfigEntry public int survivalAdInterval = TimeConsts.Minute * 5;
+    @ConfigEntry public String economyAdMessage = "Come visit my very cool economy island!";
+    @ConfigEntry public String survivalAdMessage = "Come visit my very cool skyblock island!";
 
 
     public static Screen getConfigScreen(Screen parentScreen) {
@@ -170,6 +179,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.literal("Hide Vote Messages"))
                                 .tooltip(Text.literal("Hide messages notifying you of someone else's votes."))
                                 .binding(defaults.hideVoteMessages, () -> config.hideVoteMessages, v -> config.hideVoteMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Remove chat ranks"))
+                                .tooltip(Text.literal("Remove the [Rank Prefix] from chat messages."))
+                                .binding(defaults.removeChatRanks, () -> config.removeChatRanks, v -> config.removeChatRanks = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())
@@ -288,6 +303,45 @@ public class SkyPlusPlusConfig {
                                 .tooltip(Text.literal("Enables Sky++'s Discord RPC (requires restart after changing)."))
                                 .binding(defaults.enableDiscordRPC, () -> config.enableDiscordRPC, v -> config.enableDiscordRPC = v)
                                 .controller(TickBoxController::new)
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.literal("Auto Advertisement"))
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Enable Skyblock Economy Adverts"))
+                                .tooltip(Text.literal("Enables auto adverts on the /economy server."))
+                                .binding(defaults.enableEconomyAdverts, () -> config.enableEconomyAdverts, v -> config.enableEconomyAdverts = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.literal("Enable Skyblock Survival Adverts"))
+                                .tooltip(Text.literal("Enables auto adverts on the /skyblock server."))
+                                .binding(defaults.enableSurvivalAdverts, () -> config.enableSurvivalAdverts, v -> config.enableSurvivalAdverts = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(String.class)
+                                .name(Text.literal("Economy Advertisement"))
+                                .tooltip(Text.literal("Message to send on economy."))
+                                .binding(defaults.economyAdMessage, () -> config.economyAdMessage, v -> config.economyAdMessage = v)
+                                .controller(StringController::new)
+                                .build())
+                        .option(Option.createBuilder(String.class)
+                                .name(Text.literal("Survival Advertisement"))
+                                .tooltip(Text.literal("Message to send on survival."))
+                                .binding(defaults.survivalAdMessage, () -> config.survivalAdMessage, v -> config.survivalAdMessage = v)
+                                .controller(StringController::new)
+                                .build())
+                        .option(Option.createBuilder(int.class)
+                                .name(Text.literal("Economy Ad Interval (Seconds)"))
+                                .tooltip(Text.literal("Time between ads on /economy in seconds."))
+                                .binding(defaults.economyAdInterval, () -> config.economyAdInterval, v -> config.economyAdInterval = v)
+                                .controller(opt -> new IntegerSliderController(opt, TimeConsts.MINIMUM_ECONOMY / TimeConsts.Second, TimeConsts.Day / TimeConsts.Second, TimeConsts.Minute / TimeConsts.Second))
+                                .build())
+                        .option(Option.createBuilder(int.class)
+                                .name(Text.literal("Survival Ad Interval (Seconds)"))
+                                .tooltip(Text.literal("Time between ads on /skyblock in seconds."))
+                                .binding(defaults.survivalAdInterval, () -> config.survivalAdInterval, v -> config.survivalAdInterval = v)
+                                .controller(opt -> new IntegerSliderController(opt, TimeConsts.MINIMUM_SKYBLOCK / TimeConsts.Second, TimeConsts.Day / TimeConsts.Second, TimeConsts.Minute / TimeConsts.Second))
                                 .build())
                         .build())
         )).generateScreen(parentScreen);
