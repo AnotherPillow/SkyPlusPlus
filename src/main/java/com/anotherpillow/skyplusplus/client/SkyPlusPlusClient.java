@@ -43,6 +43,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
     public static final String VERSION;
 
     public static SkyPlusPlusConfig config;
+    public static MinecraftClient client;
 
     static {
         MOD_META = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow().getMetadata();
@@ -55,6 +56,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
     public void onInitializeClient() {
         SkyPlusPlusConfig.configInstance.load();
         config = SkyPlusPlusConfig.configInstance.getConfig();
+        client = MinecraftClient.getInstance();
         BetterChangeBiome.register();
         BetterCrateKeys.register();
         ShowEmptyShops.register();
@@ -62,8 +64,6 @@ public class SkyPlusPlusClient implements ClientModInitializer {
 
         if (config.enableDiscordRPC)
             DiscordRPC.start();
-
-
 
 
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {

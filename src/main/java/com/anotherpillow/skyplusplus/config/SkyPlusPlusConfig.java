@@ -60,6 +60,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean antiPCEnabled = false;
     @ConfigEntry public boolean antiGrassPlace = false;
     @ConfigEntry public boolean lowerCommandsEnabled = true;
+    @ConfigEntry public String joinCommandsList = "";
 
     @ConfigEntry public boolean enableDiscordRPC = true;
 
@@ -295,6 +296,12 @@ public class SkyPlusPlusConfig {
                                 .binding(defaults.lowerCommandsEnabled, () -> config.lowerCommandsEnabled, v -> config.lowerCommandsEnabled = v)
                                 .controller(TickBoxController::new)
                                 .build())
+                        .option(Option.createBuilder(String.class)
+                                .name(Text.literal("Join Commands"))
+                                .tooltip(Text.literal("Commands to run upon joining the server. Separate with ,. Leave empty for none."))
+                                .binding(defaults.joinCommandsList, () -> config.joinCommandsList, v -> config.joinCommandsList = v)
+                                .controller(StringController::new)
+                                .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.literal("Discord RPC"))
@@ -309,13 +316,13 @@ public class SkyPlusPlusConfig {
                         .name(Text.literal("Auto Advertisement"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.literal("Enable Skyblock Economy Adverts"))
-                                .tooltip(Text.literal("Enables auto adverts on the /economy server."))
+                                .tooltip(Text.literal("Enables auto adverts on the /economy server (requires relog)."))
                                 .binding(defaults.enableEconomyAdverts, () -> config.enableEconomyAdverts, v -> config.enableEconomyAdverts = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.literal("Enable Skyblock Survival Adverts"))
-                                .tooltip(Text.literal("Enables auto adverts on the /skyblock server."))
+                                .tooltip(Text.literal("Enables auto adverts on the /skyblock server (requires relog)."))
                                 .binding(defaults.enableSurvivalAdverts, () -> config.enableSurvivalAdverts, v -> config.enableSurvivalAdverts = v)
                                 .controller(TickBoxController::new)
                                 .build())

@@ -1,8 +1,7 @@
 package com.anotherpillow.skyplusplus.mixin;
 
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
-import com.anotherpillow.skyplusplus.features.AutoAdvertisement;
-import com.anotherpillow.skyplusplus.features.RemoveChatRanks;
+import com.anotherpillow.skyplusplus.features.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.MessageIndicator;
@@ -24,8 +23,6 @@ import java.io.IOException;
 
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.util.StringChecker;
-import com.anotherpillow.skyplusplus.features.AutoResponder;
-import com.anotherpillow.skyplusplus.features.SmartTP;
 
 @Mixin(ChatHud.class)
 public abstract class ChatMixin {
@@ -103,8 +100,10 @@ public abstract class ChatMixin {
             ))
             mc.player.sendCommand("raffle buy 5");
 
-        if (message.startsWith("You last logged in "))
+        if (message.startsWith("You last logged in ")) {
             AutoAdvertisement.onServerJoin();
+            JoinCommands.onServerJoin();
+        }
 
 
 

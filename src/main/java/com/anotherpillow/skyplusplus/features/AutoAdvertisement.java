@@ -28,15 +28,13 @@ public class AutoAdvertisement {
     private static ScheduledFuture<?> scheduledFuture;
 
     public static void startTask(long interval, TimeUnit timeUnit) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        ClientPlayerEntity player = client.player;
+        ClientPlayerEntity player = SkyPlusPlusClient.client.player;
 
         Runnable task = () -> {
             Server.Mode mode = Server.getSkyblockMode();
-            System.out.println("Task executed at: " + System.currentTimeMillis() + " (" + LocalTime.now() + ") on " + mode.toString() + " entity name: " + player.getEntityName());
 
-            if (mode == Server.Mode.ECONOMY) player.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage, Text.empty());
-            if (mode == Server.Mode.SURVIVAL) player.sendChatMessage(SkyPlusPlusClient.config.survivalAdMessage, Text.empty());
+            if (mode == Server.Mode.ECONOMY) player.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING, Text.empty());
+            if (mode == Server.Mode.SURVIVAL) player.sendChatMessage(SkyPlusPlusClient.config.survivalAdMessage + MARKER_STRING, Text.empty());
         };
 
         scheduledFuture = scheduler.scheduleAtFixedRate(task, 0, interval, timeUnit);
