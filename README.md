@@ -10,8 +10,8 @@ Yet another skyblock.net mod for 1.19.2
 - Download latest release from [here](https://github.com/AnotherPillow/SkyPlusPlus/releases)
 - Download the following prerequisites:
   - [Fabric Loader](https://fabricmc.net/use/)
-  - [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-  - [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu)
+  - [Fabric API](https://modrinth.com/mod/fabric-api)
+  - [Mod Menu](https://modrinth.com/mod/modmenu)
 - Put all the downloaded files in your `mods` folder
 
 ## Features
@@ -33,6 +33,9 @@ Yet another skyblock.net mod for 1.19.2
 | Prevent Grass Placing          | Prevents you from placing grass blocks.                                                                                                                                                                                                                                                                                                                           |
 | Anti PC                        | Known more commonly as AntiBookBan. Prevents large items from kicking you from the server. This is often used to troll. Exists only because of PC                                                                                                                                                                                                                 |
 | Dynamic Scoreboard Title       | Makes the scoreboard title change depending on connected subserver.                                                                                                                                                                                                                                                                                               |
+| Auto Advertisements            | Sends a message in chat every specified delay. Will not allow you to break server advertisement delay rules. Messages sent using this have a hidden colour code added at the end for future advertising blocks.                                                                                                                                                   |
+| Join Commands                  | Automatically send commands/chat messages when you join the server.                                                                                                                                                                                                                                                                                               |
+| Chat Rank Removal              | Hides the [Rank] part of global chat messages                                                                                                                                                                                                                                                                                                                     |
 
 ## Commands
 
