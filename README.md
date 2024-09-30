@@ -7,7 +7,7 @@ Yet another skyblock.net mod for 1.19.2
 
 ## Installation
 
-- Download latest release from [here](https://github.com/AnotherPillow/SkyPlusPlus/releases)
+- Download latest release from [here](https://modrinth.com/mod/sky++/versions)
 - Download the following prerequisites:
   - [Fabric Loader](https://fabricmc.net/use/)
   - [Fabric API](https://modrinth.com/mod/fabric-api)
