@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
+import net.minecraft.text.Text;
 
 public class TraderCountdown {
     public static void draw(MatrixStack matrixStack, String txt, int textOffset) {
@@ -35,7 +36,7 @@ public class TraderCountdown {
         if (validTime
                 && SkyPlusPlusConfig.configInstance.getConfig().enableTraderTitles && !hasShownTitleForThisMinute) {
 
-            Chat.sendTitle("A trader has appeared at spawn!");
+            Chat.sendTitle(Text.translatable("skyplusplus.trader.countdown.appeared"));
             hasShownTitleForThisMinute = true;
         } else if (!validTime && hasShownTitleForThisMinute) {
             hasShownTitleForThisMinute = false;
@@ -45,7 +46,7 @@ public class TraderCountdown {
     }
 
     public static void TraderCountdown(MatrixStack matrixStack) {
-        String txt = "Next trader in: " + countdown();
+        String txt = String.valueOf(Text.translatable("skyplusplus.trader.countdown.timer", countdown()));
         int textWidth = MinecraftClient.getInstance().textRenderer.getWidth(txt);
         int textOffset = textWidth / 2;
         draw(matrixStack, txt, textOffset);

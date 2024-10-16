@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.features;
 
+import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -24,7 +25,7 @@ import java.util.Objects;
 
 public class BetterCrateKeys {
     public static void generatePredicateProvider(Item item) {
-        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
+        SkyPlusPlusConfig config = SkyPlusPlusClient.config;
         ModelPredicateProviderRegistry.register(item, new Identifier("skyplusplus:bettercratekeys"), (itemStack, clientWorld, livingEntity, randomSeed) -> {
             if (!config.betterCrateKeysEnabled) return 0.0f;
             NbtCompound nbtCompound = itemStack.getNbt();

@@ -14,7 +14,7 @@ public class JoinCommands {
             SkyPlusPlus.log(Level.INFO, "Player is null, cannot send join message(s).");
             return;
         }
-        Chat.send(Chat.addLogo("Sending join messages."));
+        Chat.send(Chat.addLogo(Text.translatable("skyplusplus.joincommands.sending-join-messages")));
         for (String command : commands) {
             if (command.trim().startsWith("/")) {
                 SkyPlusPlus.log(Level.INFO, "Sending command: " + command.trim());

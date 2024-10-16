@@ -13,6 +13,7 @@ import net.minecraft.entity.passive.WanderingTraderEntity;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.BlockPos;
 
@@ -33,24 +34,24 @@ public class TraderFinder {
     }
 
     public static String convertXYZToLocationName(int x, int y, int z) {
-        String traderLocation;
+        Text traderLocation;
         if (x == 4063 && y == 174 && z == 2026) {
-            traderLocation = "Warp Grass";
+            traderLocation = Text.translatable("skyplusplus.trader.location.warpgrass");
         } else if (x == 17 && y == 174 && z == 44) {
-            traderLocation = "the Bank";
+            traderLocation = Text.translatable("skyplusplus.trader.location.bank");
         } else if (x == 4032 && y == 170 && z == 2000) {
-            traderLocation = "Daily Rewards";
+            traderLocation = Text.translatable("skyplusplus.trader.location.dailyrewards");
         } else if (x == 32 && y == 174 && z == -13) {
-            traderLocation = "Warp Crates";
+            traderLocation = Text.translatable("skyplusplus.trader.location.warpcrates");
         } else if (x == 4059 && y == 163 && z == 2017) {
-            traderLocation = "Warp Grass";
+            traderLocation = Text.translatable("skyplusplus.trader.location.warpgrass-2");
         } else if (x == 4032 && y == 171 && z == 2014) {
-            traderLocation = "the Campfire Walkway";
+            traderLocation = Text.translatable("skyplusplus.trader.location.campfire-walkway");
         } else {
-            traderLocation = x + "," + y + "," + z;
+          traderLocation = Text.of(String.valueOf(Text.translatable("skyplusplus.trader.location.unknown", x, y, z)));
         }
 
-        return traderLocation;
+        return traderLocation.getString();
     }
 
     public static void showTraderString(MatrixStack matrixStack) {
@@ -63,7 +64,7 @@ public class TraderFinder {
         int traderY = Integer.parseInt(traderXYZ[1]);
         int traderZ = Integer.parseInt(traderXYZ[2]);
         //String txt = "Trader at: " + traderX + ", " + traderY + ", " + traderZ;
-        String txt = "The Trader is at " + convertXYZToLocationName(traderX, traderY, traderZ);
+        String txt = String.valueOf(Text.translatable("skyplusplus.trader.location-reveal", convertXYZToLocationName(traderX, traderY, traderZ)));
 
         int textWidth = textRenderer.getWidth(txt);
         int textOffset = textWidth / 2;

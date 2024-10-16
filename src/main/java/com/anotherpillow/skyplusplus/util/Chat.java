@@ -28,5 +28,12 @@ public class Chat {
         client.inGameHud.setTitleTicks(fadein, stay, fadeout);
         client.inGameHud.setTitle(Text.of(text));
     }
+    public static void sendTitle(Text text) {
+        _sendTitle(text, 5, 300, 5);
+    }
+    public static void _sendTitle(Text text, int fadein, int stay, int fadeout) {
+        client.inGameHud.setTitleTicks(fadein, stay, fadeout);
+        client.inGameHud.setTitle(text);
+    }
 
 }

@@ -25,13 +25,13 @@ public class ScoreboardObjectiveMixin {
         return switch (Server.getSkyblockMode()) {
             case ECONOMY -> Text.empty()
                     .append(Text.of("Skyblock ").copy().formatted(Formatting.BOLD).formatted(Formatting.GREEN))
-                    .append(Text.of("Economy").copy().formatted(Formatting.BOLD).formatted(Formatting.DARK_PURPLE));
+                    .append(Text.translatable("skyplusplus.server.economy").copy().formatted(Formatting.BOLD).formatted(Formatting.DARK_PURPLE));
             case SURVIVAL -> Text.empty()
                     .append(Text.of("Skyblock ").copy().formatted(Formatting.BOLD).formatted(Formatting.GREEN))
-                    .append(Text.of("Survival").copy().formatted(Formatting.BOLD).formatted(Formatting.DARK_GREEN));
+                    .append(Text.translatable("skyplusplus.server.skyblock").copy().formatted(Formatting.BOLD).formatted(Formatting.DARK_GREEN));
             case HUB -> Text.empty()
                     .append(Text.of("Skyblock ").copy().formatted(Formatting.BOLD).formatted(Formatting.GREEN))
-                    .append(Text.of("Hub").copy().formatted(Formatting.BOLD).formatted(Formatting.BLUE));
+                    .append(Text.translatable("skyplusplus.server.hub").copy().formatted(Formatting.BOLD).formatted(Formatting.BLUE));
             default -> this.displayName;
         };
     }

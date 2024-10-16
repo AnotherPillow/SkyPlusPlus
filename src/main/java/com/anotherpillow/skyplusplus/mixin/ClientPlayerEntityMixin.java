@@ -23,12 +23,9 @@ public class ClientPlayerEntityMixin {
 
         String name = itemStack.getName().getString();
 
-        System.out.println("item: " + itemStack.getName());
         if (itemStack.getItem() instanceof SkullItem) {
-            System.out.println("Head was dropped");
             if (config.preventHeadDropping) {
-                System.out.println("Dropping cancelled");
-                client.inGameHud.getChatHud().addMessage(Text.of(Chat.addLogo("Prevented dropping " + name)));
+                client.inGameHud.getChatHud().addMessage(Text.of(String.valueOf(Chat.addLogo(Text.translatable("skyplusplus.preventheaddropping.prevented-drop", name)))));
                 cb.setReturnValue(false);
             }
         }

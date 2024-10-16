@@ -26,7 +26,7 @@ public class SmartTP {
             @Override
             public void run() {
                 awaitingLock = false;
-                Chat.send(Chat.addLogo("Teleport request to " + username + " timed out."));
+                Chat.send(Chat.addLogo(Text.translatable("skyplusplus.smarttp.timed-out", username)));
 
                 player.sendCommand("lock", Text.empty());
             }

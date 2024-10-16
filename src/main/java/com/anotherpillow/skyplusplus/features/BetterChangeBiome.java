@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.features;
 
+import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -18,7 +19,7 @@ import java.util.Objects;
 
 public class BetterChangeBiome {
     public static void generatePredicateProvider(Item item) {
-        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
+        SkyPlusPlusConfig config = SkyPlusPlusClient.config;
         ModelPredicateProviderRegistry.register(item, new Identifier("skyplusplus:betterchangebiome"), (itemStack, clientWorld, livingEntity, randomSeed) -> {
             if (!config.betterChangeBiomeEnabled) return 0.0f;
             NbtCompound nbtCompound = itemStack.getNbt();
