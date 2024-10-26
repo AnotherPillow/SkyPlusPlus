@@ -32,9 +32,13 @@ public class TraderCountdown {
         if (minutesString.equals("60")) return "1:00";
 
         boolean validTime = (minutesString.equals("00") || minutesString.equals("60"));
+        Server.Mode mode = Server.getSkyblockMode();
 
         if (validTime
-                && SkyPlusPlusConfig.configInstance.getConfig().enableTraderTitles && !hasShownTitleForThisMinute) {
+                && SkyPlusPlusConfig.configInstance.getConfig().enableTraderTitles
+                && !hasShownTitleForThisMinute
+                && (mode == Server.Mode.ECONOMY || mode == Server.Mode.SURVIVAL)
+        ) {
 
             Chat.sendTitle(Text.translatable("skyplusplus.trader.countdown.appeared"));
             hasShownTitleForThisMinute = true;
