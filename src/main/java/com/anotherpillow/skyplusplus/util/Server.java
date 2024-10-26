@@ -83,6 +83,7 @@ public class Server {
             case 3 -> Mode.ECONOMY;
             case 64 -> Mode.CLASSIC; // could technically be skywars too, that's a TODO
             case 10 -> Mode.HUB;
+            case 8 -> Mode.EVENT;
             default -> Mode.UNKNOWN;
         };
 
