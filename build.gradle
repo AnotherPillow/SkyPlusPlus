@@ -45,6 +45,7 @@ dependencies {
     }
 
     implementation "meteordevelopment:discord-ipc:${project.discordipc_version}"
+    include "meteordevelopment:discord-ipc:${project.discordipc_version}"
 
 }
 
