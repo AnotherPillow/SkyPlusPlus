@@ -28,15 +28,12 @@ public class Server {
                 "skyblock.net",
                 "skyblock.org",
                 "skyblock.com",
-                "mc.skyblock.net",
                 "skyblock.in",
                 "skyblock.ninja",
                 "skyblock.info",
-                "c.skyblock.net",
                 "skyblock.rocks",
                 "skyblock.one",
                 "skyblock.biz",
-                "server.skyblock.net",
                 "playskyblocknetwork.com",
                 "skyblock-hub.com",
                 "skyblock.city",
@@ -57,16 +54,15 @@ public class Server {
                 "skyblockia.com",
                 "skyblockia.org",
                 "skyblockia.net",
-                "skyblock.in",
-                "skyblock.rocks",
-                "skyblock.one",
                 "sky-block.net",
                 "sky-block.org",
                 "skyblock.foo",
-                "148.113.154.207"
+                "148.113.154.207",
+                "skyblock.day",
+                "skyblock.dad"
         );
 
-        return skyblockDomains.contains(domain);
+        return skyblockDomains.contains(domain) || skyblockDomains.stream().anyMatch(domain::endsWith);
     }
 
     private static java.util.concurrent.CompletableFuture<com.mojang.brigadier.suggestion.Suggestions> suggestionsFuture = null;
