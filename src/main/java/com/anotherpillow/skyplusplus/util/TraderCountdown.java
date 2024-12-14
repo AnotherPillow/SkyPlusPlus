@@ -49,8 +49,8 @@ public class TraderCountdown {
         return "0:" + minutesString;
     }
 
-    public static void TraderCountdown(MatrixStack matrixStack) {
-        String txt = String.valueOf(Text.translatable("skyplusplus.trader.countdown.timer", countdown()));
+    public static void DrawCountdown(MatrixStack matrixStack) {
+        String txt = Text.translatable("skyplusplus.trader.countdown.timer").getString() + countdown();
         int textWidth = MinecraftClient.getInstance().textRenderer.getWidth(txt);
         int textOffset = textWidth / 2;
         draw(matrixStack, txt, textOffset);

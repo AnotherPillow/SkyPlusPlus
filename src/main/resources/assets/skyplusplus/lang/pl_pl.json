@@ -8,7 +8,7 @@
   "skyplusplus.trader.location.campfire-walkway": "Przejścia koło ogniska",
   "skyplusplus.trader.location.unknown": "%d, %d, %d",
   "skyplusplus.trader.countdown.appeared": "Handlarz przybył do spawnu!",
-  "skyplusplus.trader.countdown.timer": "Następny handlarz przybędzie w ciągu %s",
+  "skyplusplus.trader.countdown.timer": "Następny handlarz przybędzie w ciągu ",
 
   "skyplusplus.server.economy": "Economy",
   "skyplusplus.server.skyblock": "Survival",

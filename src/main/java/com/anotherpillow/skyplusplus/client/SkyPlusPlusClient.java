@@ -4,11 +4,8 @@ import com.anotherpillow.skyplusplus.commands.*;
 import com.anotherpillow.skyplusplus.features.DiscordRPC;
 import com.anotherpillow.skyplusplus.features.ShowEmptyShops;
 import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
-import com.mojang.brigadier.Command;
-import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.loader.api.FabricLoader;
@@ -28,8 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 public class SkyPlusPlusClient implements ClientModInitializer {
     private BlockPos lastPos;
@@ -72,7 +67,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                     if (!Objects.equals(TraderFinder.traderXYZString, "")) TraderFinder.showTraderString(matrixStack);
                     else TraderFinder.findTrader(matrixStack);
                 } else {
-                    TraderCountdown.TraderCountdown(matrixStack);
+                    TraderCountdown.DrawCountdown(matrixStack);
                 }
 
                 TraderImage.draw(matrixStack);

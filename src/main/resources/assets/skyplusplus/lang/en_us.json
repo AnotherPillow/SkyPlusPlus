@@ -8,7 +8,7 @@
   "skyplusplus.trader.location.campfire-walkway": "the Campfire Walkway",
   "skyplusplus.trader.location.unknown": "%d, %d, %d",
   "skyplusplus.trader.countdown.appeared": "A trader has appeared at spawn!",
-  "skyplusplus.trader.countdown.timer": "Next trader in: %s",
+  "skyplusplus.trader.countdown.timer": "Next trader in: ",
 
   "skyplusplus.server.economy": "Economy",
   "skyplusplus.server.skyblock": "Survival",
