@@ -37,6 +37,8 @@
   "skyplusplus.config.chatfilter.title": "Filter Chat",
   "skyplusplus.config.chatfilter.hidevisitmsgs": "Hide Visiting Messages",
   "skyplusplus.config.chatfilter.hidevisitmsgs-desc": "Hides messages when you visit other islands",
+  "skyplusplus.config.chatfilter.hidevisittitles": "Hide Visiting Titles",
+  "skyplusplus.config.chatfilter.hidevisittitles-desc": "Hides titles when you visit other islands",
   "skyplusplus.config.chatfilter.hidesbmsgs": "Hide Skyblock Messages",
   "skyplusplus.config.chatfilter.hidesbmsgs-desc": "Hides [Skyblock] messages",
   "skyplusplus.config.chatfilter.hideunscramble": "Hide Unscrambling Messages",

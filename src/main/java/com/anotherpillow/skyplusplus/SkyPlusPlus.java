@@ -16,7 +16,6 @@ public class SkyPlusPlus implements ModInitializer {
 
     public static final String MOD_ID = "skyplusplus";
     public static final String MOD_NAME = "SkyPlusPlus";
-    public static SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
 
     @Override
     public void onInitialize() {

@@ -26,6 +26,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean enableTraderTitles = true;
 
     @ConfigEntry public boolean hideVisitingMessages = false;
+    @ConfigEntry public boolean hideVisitingTitle = false;
     @ConfigEntry public boolean hideSkyblockMessages = false;
     @ConfigEntry public boolean hideUnscramblingMessages = false;
     @ConfigEntry public boolean hideAFKMessages = false;
@@ -108,6 +109,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hidevisitmsgs"))
                                 .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidevisitmsgs-desc"))
                                 .binding(defaults.hideVisitingMessages, () -> config.hideVisitingMessages, v -> config.hideVisitingMessages = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.translatable("skyplusplus.config.chatfilter.hidevisittitles"))
+                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidevisittitles-desc"))
+                                .binding(defaults.hideVisitingTitle, () -> config.hideVisitingTitle, v -> config.hideVisitingTitle = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .option(Option.createBuilder(boolean.class)
