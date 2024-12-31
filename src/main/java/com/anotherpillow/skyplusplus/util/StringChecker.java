@@ -25,6 +25,9 @@ public class StringChecker {
     public static Pattern raffleWinPattern = Pattern.compile("\\[SBRaffle\\] Congratulations go to [A-Z0-9_]+ for winning [0-9\\.]+$ with \\d tickets");
     public static Pattern visitingTitlePattern = Pattern.compile("§6\\-=§e[A-Za-z0-9_]{1,16}'s Island§6=\\-"); // even names ending with "s" still have "'s"
 
+    public static String COLOUR_CODE_STRING = "[&§][0-9a-fkrl-o]";
+    public static Pattern COLOUR_CODE = Pattern.compile(COLOUR_CODE_STRING);
+
     public static boolean welcomeIslandCheck(String input) {
         return welcomeIslandPattern.matcher(input).find() || visitingIslandPatten.matcher(input).find();
     }
@@ -76,5 +79,7 @@ public class StringChecker {
     public static boolean raffleWinCheck(String input) { return raffleWinPattern.matcher(input).find(); }
 
     public static boolean visitingTitleCheck(String input) { return visitingTitlePattern.matcher(input).find(); }
+
+    public static boolean colourCodeCheck(String input) { return COLOUR_CODE.matcher(input).find(); }
 
 }

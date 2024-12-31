@@ -34,8 +34,6 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean hideDeathsMessages = false;
     @ConfigEntry public boolean hideRaffleMessages = false;
 
-    @ConfigEntry public boolean enableAutoResponder = false;
-    @ConfigEntry public String autoResponderMessage = "I am currently AFK. Please message me on Discord instead at Username#0000.";
     @ConfigEntry public boolean hideAdvancementMessages = true;
     @ConfigEntry public boolean hideBroadcastMessages = true;
     @ConfigEntry public boolean hideExpandMessages = true;
@@ -43,6 +41,10 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean hideMailMessages = true;
     @ConfigEntry public boolean hideVoteMessages = false;
     @ConfigEntry public boolean removeChatRanks = false;
+    @ConfigEntry public boolean allWhiteChat = false;
+
+    @ConfigEntry public boolean enableAutoResponder = false;
+    @ConfigEntry public String autoResponderMessage = "I am currently AFK. Please message me on Discord instead at Username#0000.";
 
     @ConfigEntry public boolean chatPrefix = false;
     @ConfigEntry public String chatPrefixMessage = "&b";
@@ -193,6 +195,12 @@ public class SkyPlusPlusConfig {
                                 .name(Text.translatable("skyplusplus.config.chatfilter.removechatranks"))
                                 .tooltip(Text.translatable("skyplusplus.config.chatfilter.removechatranks-desc"))
                                 .binding(defaults.removeChatRanks, () -> config.removeChatRanks, v -> config.removeChatRanks = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.translatable("skyplusplus.config.chatfilter.allwhitechat"))
+                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.allwhitechat-desc"))
+                                .binding(defaults.allWhiteChat, () -> config.allWhiteChat, v -> config.allWhiteChat = v)
                                 .controller(TickBoxController::new)
                                 .build())
                         .build())

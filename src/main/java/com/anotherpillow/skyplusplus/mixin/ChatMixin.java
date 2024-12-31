@@ -2,6 +2,7 @@ package com.anotherpillow.skyplusplus.mixin;
 
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.features.*;
+import com.anotherpillow.skyplusplus.util.Chat;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.MessageIndicator;
@@ -29,7 +30,11 @@ public abstract class ChatMixin {
     @Shadow protected abstract void addMessage(Text message, @Nullable MessageSignatureData signature, int ticks, @Nullable MessageIndicator indicator, boolean refresh);
     private static MinecraftClient mc = MinecraftClient.getInstance(); // Why did I need to rename this? I genuinely have no idea. Apparently there's a non-static client field in the original class but that wasn't always an issue, so I have no idea.
     private static final String username = mc.getSession().getUsername().toLowerCase();
-    @Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void skyplusplus$onChatReceived(Text text_message, MessageSignatureData signature, int ticks, MessageIndicator indicator, boolean refresh, CallbackInfo callback) throws IOException {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
 //        System.out.println(Text.Serializer.toJson(text_message));
@@ -100,17 +105,16 @@ public abstract class ChatMixin {
             ))
             mc.player.sendCommand("raffle buy 5");
 
+        System.out.println(message);
+        if (config.allWhiteChat && StringChecker.colourCodeCheck(message)) {
+            Chat.send(message.replaceAll(StringChecker.COLOUR_CODE_STRING, ""));
+            callback.cancel();
+        }
+
         if (message.startsWith("You last logged in ")) {
             AutoAdvertisement.onServerJoin();
             JoinCommands.onServerJoin();
         }
-
-
-
-
-
-
-
     }
 
     @Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V", at = @At("HEAD"), cancellable = true)
