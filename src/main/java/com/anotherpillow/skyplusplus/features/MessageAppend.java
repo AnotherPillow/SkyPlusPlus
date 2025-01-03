@@ -5,19 +5,20 @@ import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 
 public class MessageAppend {
-    public static ChatMessageC2SPacket process(ChatMessageC2SPacket packet) {
+    public static String process(String message) {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
-        if (!config.chatPrefix && !config.chatSuffix) return packet;
+        if (!config.chatPrefix && !config.chatSuffix) return message;
 
-        String message = packet.chatMessage();
+        if (config.chatPrefix && !message.startsWith("/")) {
+            /* prepend it to the message. if the prefix starts with a / and the message doesn't start with a space, add one appropriately.*/
+            message = (config.chatPrefixMessage.startsWith("/") && !message.startsWith(" ") ? config.chatPrefixMessage + " " : config.chatPrefixMessage) + message;
+        }
 
-        if (config.chatPrefix)
-            message = config.chatPrefixMessage + message;
 
         if (config.chatSuffix)
             message = message + config.chatSuffixMessage;
 
 
-        return new ChatMessageC2SPacket(message, packet.timestamp(), packet.salt(), packet.signature(), packet.signedPreview(), packet.acknowledgment());
+        return message;
     }
 }

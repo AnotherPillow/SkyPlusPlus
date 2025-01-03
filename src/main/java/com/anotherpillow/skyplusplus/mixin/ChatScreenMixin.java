@@ -1,6 +1,7 @@
 package com.anotherpillow.skyplusplus.mixin;
 
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
+import com.anotherpillow.skyplusplus.features.MessageAppend;
 import net.minecraft.client.gui.screen.ChatScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,6 +17,6 @@ public class ChatScreenMixin {
             String command = text.split(" ")[0];
             text = text.replace(command, command.toLowerCase());
         }
-        return text;
+        return MessageAppend.process(text);
     }
 }
