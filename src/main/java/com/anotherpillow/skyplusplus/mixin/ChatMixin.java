@@ -105,12 +105,6 @@ public abstract class ChatMixin {
             ))
             mc.player.sendCommand("raffle buy 5");
 
-        System.out.println(message);
-        if (config.allWhiteChat && StringChecker.colourCodeCheck(message)) {
-            Chat.send(message.replaceAll(StringChecker.COLOUR_CODE_STRING, ""));
-            callback.cancel();
-        }
-
         if (message.startsWith("You last logged in ")) {
             AutoAdvertisement.onServerJoin();
             JoinCommands.onServerJoin();

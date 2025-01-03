@@ -65,8 +65,6 @@
   "skyplusplus.config.chatfilter.hidevotemsgs-desc": "Hides messages notifying you of someone else's votes.",
   "skyplusplus.config.chatfilter.removechatranks": "Remove Chat Ranks",
   "skyplusplus.config.chatfilter.removechatranks-desc": "Removes the [Rank Prefix] from chat messages.",
-  "skyplusplus.config.chatfilter.allwhitechat": "All White Chat",
-  "skyplusplus.config.chatfilter.allwhitechat-desc": "Remove all colours from chat, leaving it white. (only works for players' chat)",
 
   "skyplusplus.config.autoresponder.title": "Auto Responder",
   "skyplusplus.config.autoresponder.enable": "Enable",
