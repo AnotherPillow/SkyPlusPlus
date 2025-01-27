@@ -4,8 +4,13 @@ import com.anotherpillow.skyplusplus.commands.*;
 import com.anotherpillow.skyplusplus.features.DiscordRPC;
 import com.anotherpillow.skyplusplus.features.ShowEmptyShops;
 import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
+import com.anotherpillow.skyplusplus.screen.WanderingTraderScreen;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.datafixers.optics.Wander;
+import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
+import io.github.cottonmc.cotton.gui.client.CottonHud;
+import io.github.cottonmc.cotton.gui.widget.WSprite;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -14,6 +19,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 import com.anotherpillow.skyplusplus.util.Server;
@@ -73,8 +79,14 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                 }
 
                 TraderImage.draw(matrixStack);
+                if (WanderingTraderScreen.shouldRender) {
+//                    CottonClientScreen trader = new CottonClientScreen(new WanderingTraderScreen());
+//                    trader.render(matrixStack, 500, 500, tickDelta);
+                    CottonHud.add(WanderingTraderScreen.generateRoot(), 128, 128);
+                }
+//                CottonHud.add(new WSprite(new Identifier("minecraft:textures/item/redstone.png")), 64, 64, 32, 32);
+//                CottonHud.add(WanderingTraderScreen.generateRoot(), 128, 128);
             }
-
         });
 
 
@@ -115,7 +127,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             ConfigCommand.register(dispatcher);
             CheckSimulationDistanceCommand.register(dispatcher);
             RunAfterCommand.register(dispatcher);
-            BedrockBotCommand.register(dispatcher);
+            WanderingTraderViewCommand.register(dispatcher);
 
         });
 

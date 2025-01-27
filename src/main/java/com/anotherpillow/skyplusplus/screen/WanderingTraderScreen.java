@@ -1,23 +1,30 @@
 package com.anotherpillow.skyplusplus.screen;
 
 
-import com.anotherpillow.skyplusplus.util.ChatLogo;
-import io.github.cottonmc.cotton.gui.GuiDescription;
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
+import com.anotherpillow.skyplusplus.util.Chat;
+import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class BedrockBotsScreen extends LightweightGuiDescription {
-    public BedrockBotsScreen() {
+public class WanderingTraderScreen extends LightweightGuiDescription {
+    public static boolean shouldRender = false;
+    public static WGridPanel generateRoot() {
         WGridPanel root = new WGridPanel();
-        setRootPanel(root);
 //        root.setSize(18/*px*/ * 16, 18/*px*/ * 12);
         root.setSize(256, 240);
         root.setInsets(Insets.ROOT_PANEL);
+
+        root.setBackgroundPainter(new BackgroundPainter() {
+            @Override
+            public void paintBackground(MatrixStack matrices, int left, int top, WWidget panel) {
+                BackgroundPainter.VANILLA.paintBackground(matrices, left, top, panel);
+            }
+        });
 
         WSprite icon = new WSprite(new Identifier("minecraft:textures/item/redstone.png"));
         root.add(icon, 1, 2, 1, 1);
@@ -36,10 +43,16 @@ public class BedrockBotsScreen extends LightweightGuiDescription {
             MinecraftClient.getInstance().setScreen(null);
         });
         createButton.setOnClick(() -> {
-            MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.of(ChatLogo.addLogo("You clicked the cool button!")));
+            MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.of(Chat.addLogo("You clicked the cool button!")));
             MinecraftClient.getInstance().setScreen(null);
         });
 
+        return root;
+    }
+
+    public WanderingTraderScreen() {
+        WGridPanel root = generateRoot();
+        setRootPanel(root);
         root.validate(this);
     }
 }
