@@ -3,6 +3,7 @@ package com.anotherpillow.skyplusplus.commands;
 import com.anotherpillow.skyplusplus.screen.WanderingTraderScreen;
 import com.anotherpillow.skyplusplus.screen.CottonScreenSubclass;
 import com.mojang.brigadier.CommandDispatcher;
+import io.github.cottonmc.cotton.gui.client.CottonHud;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
@@ -18,7 +19,7 @@ public class WanderingTraderViewCommand {
 
             client.send(() -> {
 //                client.setScreen(new CottonScreenSubclass(new WanderingTraderScreen()));
-                WanderingTraderScreen.shouldRender = !WanderingTraderScreen.shouldRender;
+                CottonHud.add(WanderingTraderScreen.generateRoot(), 128, 128);
             });
             return 1;
         }));

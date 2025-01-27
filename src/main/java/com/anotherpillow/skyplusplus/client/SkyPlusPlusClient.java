@@ -79,13 +79,6 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                 }
 
                 TraderImage.draw(matrixStack);
-                if (WanderingTraderScreen.shouldRender) {
-//                    CottonClientScreen trader = new CottonClientScreen(new WanderingTraderScreen());
-//                    trader.render(matrixStack, 500, 500, tickDelta);
-                    CottonHud.add(WanderingTraderScreen.generateRoot(), 128, 128);
-                }
-//                CottonHud.add(new WSprite(new Identifier("minecraft:textures/item/redstone.png")), 64, 64, 32, 32);
-//                CottonHud.add(WanderingTraderScreen.generateRoot(), 128, 128);
             }
         });
 

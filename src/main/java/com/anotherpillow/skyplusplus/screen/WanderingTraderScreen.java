@@ -14,7 +14,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class WanderingTraderScreen extends LightweightGuiDescription {
-    public static boolean shouldRender = false;
     public static WGridPanel generateRoot() {
         WGridPanel root = new WGridPanel();
 //        root.setSize(18/*px*/ * 16, 18/*px*/ * 12);
