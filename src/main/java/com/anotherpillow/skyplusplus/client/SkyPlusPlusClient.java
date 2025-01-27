@@ -4,6 +4,8 @@ import com.anotherpillow.skyplusplus.commands.*;
 import com.anotherpillow.skyplusplus.features.DiscordRPC;
 import com.anotherpillow.skyplusplus.features.ShowEmptyShops;
 import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -113,6 +115,8 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             ConfigCommand.register(dispatcher);
             CheckSimulationDistanceCommand.register(dispatcher);
             RunAfterCommand.register(dispatcher);
+            BedrockBotCommand.register(dispatcher);
+
         });
 
     }

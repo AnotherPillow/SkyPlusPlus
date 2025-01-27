@@ -24,6 +24,11 @@ repositories {
         name = "meteor-maven"
         url = "https://maven.meteordev.org/releases"
     }
+
+    maven {
+        name = "CottonMC"
+        url = "https://server.bbkr.space/artifactory/libs-release"
+    }
 }
 
 dependencies {
@@ -37,6 +42,8 @@ dependencies {
     include (
             modImplementation 'dev.isxander:yet-another-config-lib:2.2.0-for-1.19.2'
     )
+
+    modImplementation include('io.github.cottonmc:LibGui:6.4.0+1.19')
 
     include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.0")))
 
