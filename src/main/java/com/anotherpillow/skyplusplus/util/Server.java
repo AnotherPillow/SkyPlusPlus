@@ -59,7 +59,11 @@ public class Server {
                 "skyblock.foo",
                 "148.113.154.207",
                 "skyblock.day",
-                "skyblock.dad"
+                "skyblock.dad",
+                "hypixel-skyblock.com",
+                "hypixel-skyblock.net",
+                "originalskyblock.com",
+                "skyblock-hypixel.com"
         );
 
         return skyblockDomains.contains(domain) || skyblockDomains.stream().anyMatch(domain::endsWith);
