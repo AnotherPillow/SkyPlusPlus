@@ -48,7 +48,7 @@ public class TraderFinder {
         } else if (x == 4032 && y == 171 && z == 2014) {
             traderLocation = Text.translatable("skyplusplus.trader.location.campfire-walkway");
         } else {
-          traderLocation = Text.of(String.valueOf(Text.translatable("skyplusplus.trader.location.unknown", x, y, z)));
+          traderLocation = Text.translatable("skyplusplus.trader.location.unknown", x, y, z);
         }
 
         return traderLocation.getString();

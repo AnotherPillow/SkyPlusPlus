@@ -20,7 +20,7 @@ public class InGameHudMixin {
             cancellable = true
     )
     private void setTitle(Text title, CallbackInfo ci) {
-        SkyPlusPlusConfig config =SkyPlusPlusConfig.configInstance.getConfig();
+        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
         if (StringChecker.visitingTitleCheck(title.getString()) && config.hideVisitingTitle) ci.cancel();
     }
 }

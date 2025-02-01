@@ -1,17 +1,22 @@
 package com.anotherpillow.skyplusplus.client;
 
 import com.anotherpillow.skyplusplus.commands.*;
-import com.anotherpillow.skyplusplus.features.DiscordRPC;
-import com.anotherpillow.skyplusplus.features.ShowEmptyShops;
+import com.anotherpillow.skyplusplus.features.*;
 import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 
 import com.anotherpillow.skyplusplus.util.Server;
@@ -19,8 +24,8 @@ import com.anotherpillow.skyplusplus.util.TraderFinder;
 import com.anotherpillow.skyplusplus.screen.TraderImage;
 import com.anotherpillow.skyplusplus.util.TraderCountdown;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
-import com.anotherpillow.skyplusplus.features.BetterChangeBiome;
-import com.anotherpillow.skyplusplus.features.BetterCrateKeys;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,8 +80,6 @@ public class SkyPlusPlusClient implements ClientModInitializer {
 
         });
 
-
-
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             if (player == null) return;
@@ -115,5 +118,14 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             RunAfterCommand.register(dispatcher);
         });
 
+        AttackBlockCallback.EVENT.register((PlayerEntity player, World world, Hand hand, BlockPos pos, Direction direction) -> {
+            if (!config.enableToolSaver) return ActionResult.PASS;
+            return ToolSaver.checkHand(player, world, hand);
+        });
+
+        UseBlockCallback.EVENT.register((PlayerEntity player, World world, Hand hand, BlockHitResult hitResult) -> {
+            if (!config.enableToolSaver) return ActionResult.PASS;
+            return ToolSaver.checkHand(player, world, hand);
+        });
     }
 }

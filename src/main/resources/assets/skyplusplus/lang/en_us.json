@@ -124,5 +124,11 @@
   "skyplusplus.config.auto-advertisements.economy-interval": "Economy Ad Interval (Seconds)",
   "skyplusplus.config.auto-advertisements.economy-interval-desc": "Time between ads on /economy in seconds.",
   "skyplusplus.config.auto-advertisements.survival-interval": "Survival Ad Interval (Seconds)",
-  "skyplusplus.config.auto-advertisements.survival-interval-desc": "Time between ads on /skyblock in seconds."
+  "skyplusplus.config.auto-advertisements.survival-interval-desc": "Time between ads on /skyblock in seconds.",
+
+  "skyplusplus.config.tool-saver.title": "Tool Saver",
+  "skyplusplus.config.tool-saver.enable": "Enable Tool Saver",
+  "skyplusplus.config.tool-saver.enable-desc": "Save your tools from breaking at a specified durability",
+  "skyplusplus.config.tool-saver.durability-limit": "Durability Limit",
+  "skyplusplus.config.tool-saver.durability-limit-desc": "Minimum durability before you will be prevented from using the tool."
 }

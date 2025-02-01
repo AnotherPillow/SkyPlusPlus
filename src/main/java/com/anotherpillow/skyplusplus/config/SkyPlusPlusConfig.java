@@ -74,6 +74,9 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public String economyAdMessage = "Come visit my very cool economy island!";
     @ConfigEntry public String survivalAdMessage = "Come visit my very cool skyblock island!";
 
+    @ConfigEntry public boolean enableToolSaver = false;
+    @ConfigEntry public int toolSaverDurabilityLimit = 5;
+
 
     public static Screen getConfigScreen(Screen parentScreen) {
         return YetAnotherConfigLib.create(configInstance, ((defaults, config, builder) -> builder
@@ -358,6 +361,21 @@ public class SkyPlusPlusConfig {
                                 .tooltip(Text.translatable("skyplusplus.config.auto-advertisements.survival-interval-desc"))
                                 .binding(defaults.survivalAdInterval, () -> config.survivalAdInterval, v -> config.survivalAdInterval = v)
                                 .controller(opt -> new IntegerSliderController(opt, TimeConsts.MINIMUM_SKYBLOCK / TimeConsts.Second, TimeConsts.Day / TimeConsts.Second, TimeConsts.Minute / TimeConsts.Second))
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("skyplusplus.config.tool-saver.title"))
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.translatable("skyplusplus.config.tool-saver.enable"))
+                                .tooltip(Text.translatable("skyplusplus.config.tool-saver.enable-desc"))
+                                .binding(defaults.enableToolSaver, () -> config.enableToolSaver, v -> config.enableToolSaver = v)
+                                .controller(TickBoxController::new)
+                                .build())
+                        .option(Option.createBuilder(int.class)
+                                .name(Text.translatable("skyplusplus.config.tool-saver.durability-limit"))
+                                .tooltip(Text.translatable("skyplusplus.config.tool-saver.durability-limit-desc"))
+                                .binding(defaults.toolSaverDurabilityLimit, () -> config.toolSaverDurabilityLimit, v -> config.toolSaverDurabilityLimit = v)
+                                .controller(opt -> new IntegerSliderController(opt, 0, 200, 1))
                                 .build())
                         .build())
         )).generateScreen(parentScreen);
