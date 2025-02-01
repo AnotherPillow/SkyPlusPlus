@@ -116,6 +116,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             ConfigCommand.register(dispatcher);
             CheckSimulationDistanceCommand.register(dispatcher);
             RunAfterCommand.register(dispatcher);
+            GetHeadTextureCommand.register(dispatcher);
         });
 
         AttackBlockCallback.EVENT.register((PlayerEntity player, World world, Hand hand, BlockPos pos, Direction direction) -> {
