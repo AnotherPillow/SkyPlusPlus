@@ -63,7 +63,8 @@ public class Server {
                 "hypixel-skyblock.com",
                 "hypixel-skyblock.net",
                 "originalskyblock.com",
-                "skyblock-hypixel.com"
+                "skyblock-hypixel.com",
+                "hypixelsb.com"
         );
 
         return skyblockDomains.contains(domain) || skyblockDomains.stream().anyMatch(domain::endsWith);

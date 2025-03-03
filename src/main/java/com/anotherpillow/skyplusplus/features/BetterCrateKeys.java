@@ -35,7 +35,7 @@ public class BetterCrateKeys {
 
             if (nbtCompound == null) return 0.0f;
             // client.inGameHud.getChatHud().addMessage(Text.of(nbtCompound.toString()));
-            NbtList loreList =nbtCompound .getCompound("display").getList("Lore", NbtElement.STRING_TYPE);
+            NbtList loreList = nbtCompound .getCompound("display").getList("Lore", NbtElement.STRING_TYPE);
 
             if (loreList.isEmpty()) return 0.0f;
 
