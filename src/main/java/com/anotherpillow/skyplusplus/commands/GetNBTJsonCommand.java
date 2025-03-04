@@ -43,8 +43,11 @@ public class GetNBTJsonCommand {
                 }
 
                 NbtCompound nbt = mainHand.getNbt();
+                String jsonNBT = NbtOps.INSTANCE.convertTo(JsonOps.INSTANCE, nbt).toString();
+                MutableText txt = Text.literal(jsonNBT)
+                        .setStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, jsonNBT)).withUnderline(true));
 
-                Chat.send(Chat.addLogo(NbtOps.INSTANCE.convertTo(JsonOps.INSTANCE, nbt).toString()));
+                Chat.send(Chat.addLogo(txt));
             });
             return 1;
         }));
