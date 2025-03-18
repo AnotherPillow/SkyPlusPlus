@@ -70,8 +70,6 @@ public class Server {
         return skyblockDomains.contains(domain) || skyblockDomains.stream().anyMatch(domain::endsWith);
     }
 
-    private static java.util.concurrent.CompletableFuture<com.mojang.brigadier.suggestion.Suggestions> suggestionsFuture = null;
-
     public static Mode getSkyblockMode() {
         if (!onSkyblock()) return Mode.NONE;
         MinecraftClient client = MinecraftClient.getInstance();
