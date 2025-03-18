@@ -37,6 +37,8 @@ public class TraderFinder {
         Text traderLocation;
         if (x == 4063 && y == 174 && z == 2026) {
             traderLocation = Text.translatable("skyplusplus.trader.location.warpgrass");
+        } else if (x == 4054 && y == 173 && z == 2017) {
+            traderLocation = Text.translatable("skyplusplus.trader.location.warpgrass");
         } else if (x == 17 && y == 174 && z == 44) {
             traderLocation = Text.translatable("skyplusplus.trader.location.bank");
         } else if (x == 4032 && y == 170 && z == 2000) {
