@@ -77,6 +77,9 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean enableToolSaver = false;
     @ConfigEntry public int toolSaverDurabilityLimit = 5;
 
+    @ConfigEntry public String shareApiBaseUrl = "https://skyblock.onl";
+    @ConfigEntry public boolean enableShareButton = true;
+
 
     public static Screen getConfigScreen(Screen parentScreen) {
         return YetAnotherConfigLib.create(configInstance, ((defaults, config, builder) -> builder
@@ -376,6 +379,21 @@ public class SkyPlusPlusConfig {
                                 .tooltip(Text.translatable("skyplusplus.config.tool-saver.durability-limit-desc"))
                                 .binding(defaults.toolSaverDurabilityLimit, () -> config.toolSaverDurabilityLimit, v -> config.toolSaverDurabilityLimit = v)
                                 .controller(opt -> new IntegerSliderController(opt, 0, 200, 1))
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("skyplusplus.config.share.title"))
+                        .option(Option.createBuilder(String.class)
+                                .name(Text.translatable("skyplusplus.config.share.api-base-url"))
+                                .tooltip(Text.translatable("skyplusplus.config.share.api-base-url-desc"))
+                                .binding(defaults.shareApiBaseUrl , () -> config.shareApiBaseUrl , v -> config.shareApiBaseUrl  = v)
+                                .controller(StringController::new)
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.translatable("skyplusplus.config.share.button"))
+                                .tooltip(Text.translatable("skyplusplus.config.share.button-desc"))
+                                .binding(defaults.enableShareButton , () -> config.enableShareButton , v -> config.enableShareButton  = v)
+                                .controller(TickBoxController::new)
                                 .build())
                         .build())
         )).generateScreen(parentScreen);

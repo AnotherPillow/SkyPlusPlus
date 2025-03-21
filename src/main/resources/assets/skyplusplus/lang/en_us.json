@@ -130,5 +130,11 @@
   "skyplusplus.config.tool-saver.enable": "Enable Tool Saver",
   "skyplusplus.config.tool-saver.enable-desc": "Save your tools from breaking at a specified durability",
   "skyplusplus.config.tool-saver.durability-limit": "Durability Limit",
-  "skyplusplus.config.tool-saver.durability-limit-desc": "Minimum durability before you will be prevented from using the tool."
+  "skyplusplus.config.tool-saver.durability-limit-desc": "Minimum durability before you will be prevented from using the tool.",
+
+  "skyplusplus.config.share.title": "Item/Container Share",
+  "skyplusplus.config.share.api-base-url": "API Base Url",
+  "skyplusplus.config.share.api-base-url-desc": "Base URL for the api to share items with. Protocol required. Default https://skyblock.onl",
+  "skyplusplus.config.share.button": "Enable share button",
+  "skyplusplus.config.share.button-desc": "Whether to have the share button in chests and shulkers."
 }

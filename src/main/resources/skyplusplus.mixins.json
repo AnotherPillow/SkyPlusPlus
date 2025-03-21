@@ -8,6 +8,7 @@
     "ScoreboardObjectiveMixin"
   ],
   "client": [
+    "NbtTagSizeTrackerMixin",
     "ChatMixin",
     "ChatScreenMixin",
     "ClientPlayerEntityMixin",

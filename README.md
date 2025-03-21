@@ -37,6 +37,8 @@ Yet another skyblock.net mod for 1.19.2
 | Join Commands                  | Automatically send commands/chat messages when you join the server.                                                                                                                                                                                                                                                                                                                                         |
 | Chat Rank Removal              | Hides the [Rank] part of global chat messages                                                                                                                                                                                                                                                                                                                                                               |
 | Tool Saver                     | Saves your tools when they run low on durability                                                                                                                                                                                                                                                                                                                                                            |
+| Share Button                   | Adds a button to chests/shulkers to share them to https://skyblock.onl/item quickly.                                                                                                                                                                                                                                                                                                                        |
+
 ## Commands
 
 | Command           | Description                                                                    |
@@ -46,6 +48,8 @@ Yet another skyblock.net mod for 1.19.2
 | `/skyplusplus`    | Opens the config menu (same menu you can get through modmenu.                  |
 | `/runafter`       | Runs/sends text after specified (ms) timeout. Example: `/runafter 1000 /spawn` |
 | `/getheadtexture` | Gets the texture of the head held in your hand                                 |
+| `/getnbtjson`     | Gets the NBT represented as JSON from the current held item.                   |
+| `/share`          | Shares the current held item to https://skyblock.onl/item                      |
 
 ## Keybinds
 
