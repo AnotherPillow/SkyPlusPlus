@@ -21,6 +21,7 @@ public class Server {
         CLASSIC,
         SKYWARS,
         EVENT,
+        MOBARENA,
 
     }
     public static boolean isSkyblock(String domain) {
@@ -28,23 +29,18 @@ public class Server {
                 "skyblock.net",
                 "skyblock.org",
                 "skyblock.com",
-                "skyblock.in",
                 "skyblock.ninja",
-                "skyblock.info",
                 "skyblock.rocks",
                 "skyblock.one",
                 "skyblock.biz",
                 "playskyblocknetwork.com",
                 "skyblock-hub.com",
                 "skyblock.city",
-                "skyblock.click",
                 "skyblock.cloud",
-                "skyblock.cool",
                 "skyblock.date",
                 "skyblock.fun",
                 "skyblock.info",
                 "skyblock.men",
-                "skyblock.sbs",
                 "skyblock.today",
                 "skyblock.trade",
                 "skyblock.work",
@@ -64,7 +60,9 @@ public class Server {
                 "hypixel-skyblock.net",
                 "originalskyblock.com",
                 "skyblock-hypixel.com",
-                "hypixelsb.com"
+                "hypixelsb.com",
+                "groundblock.org",
+                "skyblock.onl"
         );
 
         return skyblockDomains.contains(domain) || skyblockDomains.stream().anyMatch(domain::endsWith);
@@ -81,7 +79,7 @@ public class Server {
             case 5 -> Mode.SURVIVAL;
             case 3 -> Mode.ECONOMY;
             case 64 -> Mode.CLASSIC; // could technically be skywars too, that's a TODO
-            case 10 -> Mode.HUB;
+            case 10 -> Mode.HUB; // is also mob arena
             case 8 -> Mode.EVENT;
             default -> Mode.UNKNOWN;
         };
