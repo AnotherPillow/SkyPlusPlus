@@ -3,6 +3,7 @@ package com.anotherpillow.skyplusplus.util;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ServerInfo;
 
 import java.util.Arrays;
@@ -71,6 +72,7 @@ public class Server {
     public static Mode getSkyblockMode() {
         if (!onSkyblock()) return Mode.NONE;
         MinecraftClient client = MinecraftClient.getInstance();
+        ClientPlayerEntity player = client.player;
 
         if (client.world == null) return Mode.NONE;
         int simulationDistance = client.world.getSimulationDistance();
@@ -79,7 +81,8 @@ public class Server {
             case 5 -> Mode.SURVIVAL;
             case 3 -> Mode.ECONOMY;
             case 64 -> Mode.CLASSIC; // could technically be skywars too, that's a TODO
-            case 10 -> Mode.HUB; // is also mob arena
+            case 10 -> player == null ? Mode.UNKNOWN :
+                (Math.abs(player.getY()) > 11000 ? Mode.MOBARENA : Mode.HUB); // mobarena is around -12k,-12k but hub is at 0,0)
             case 8 -> Mode.EVENT;
             default -> Mode.UNKNOWN;
         };

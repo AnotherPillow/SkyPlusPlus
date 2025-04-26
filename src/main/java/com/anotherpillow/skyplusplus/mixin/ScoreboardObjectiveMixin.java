@@ -23,6 +23,10 @@ public class ScoreboardObjectiveMixin {
         if (!config.dynamicScoreboardTitle) return this.displayName;
 
         return switch (Server.getSkyblockMode()) {
+            case MOBARENA ->
+                Text.empty()
+                        .append(Text.of("Skyblock ").copy().formatted(Formatting.BOLD).formatted(Formatting.GREEN))
+                        .append(Text.translatable("skyplusplus.server.mobarena").copy().formatted(Formatting.BOLD).formatted(Formatting.DARK_PURPLE));
             case ECONOMY -> Text.empty()
                     .append(Text.of("Skyblock ").copy().formatted(Formatting.BOLD).formatted(Formatting.GREEN))
                     .append(Text.translatable("skyplusplus.server.economy").copy().formatted(Formatting.BOLD).formatted(Formatting.DARK_PURPLE));

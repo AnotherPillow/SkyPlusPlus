@@ -39,7 +39,8 @@ public class DiscordRPC {
     }
 
     public static void onTick() {
-        if (Server.onSkyblock()) rpc.setState("Playing Skyblock");
+        if (Server.getSkyblockMode() == Server.Mode.MOBARENA) rpc.setState("Playing in the Mob Arena");
+        else if (Server.onSkyblock()) rpc.setState("Playing Skyblock");
         else if (client.currentScreen instanceof TitleScreen) rpc.setState("On the title screen");
         else if (client.currentScreen instanceof LevelLoadingScreen) rpc.setState("Loading...");
         else if (client.currentScreen instanceof YACLScreen) rpc.setState("Configuring");
