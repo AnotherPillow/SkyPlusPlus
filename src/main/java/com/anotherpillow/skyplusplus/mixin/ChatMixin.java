@@ -101,13 +101,14 @@ public abstract class ChatMixin {
                 callback.cancel();
 
         if (config.autoRaffleEnabled && (
-                StringChecker.playersOnlineJoinCheck(message) ||StringChecker.raffleWinCheck(message)
+                StringChecker.playersOnlineJoinCheck(message) || StringChecker.raffleWinCheck(message)
             ))
             mc.player.sendCommand("raffle buy 5");
 
         if (message.startsWith("You last logged in ")) {
             AutoAdvertisement.onServerJoin();
             JoinCommands.onServerJoin();
+            UpdateChecker.onServerJoin();
         }
     }
 
