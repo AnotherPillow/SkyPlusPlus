@@ -18,6 +18,6 @@ public class PlayerListHudMixin {
     @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(II)I", ordinal = 0), index = 1)
     private int modifyCount(int count) {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
-        return config.extraTabEnabled ? 999 : 80; /* 80 is default */
+        return config.extraTabEnabled ? 999 : count; /* return count so other mods (e.g. meteor) work */
     }
 }
