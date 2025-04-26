@@ -82,7 +82,7 @@ public class Server {
             case 3 -> Mode.ECONOMY;
             case 64 -> Mode.CLASSIC; // could technically be skywars too, that's a TODO
             case 10 -> player == null ? Mode.UNKNOWN :
-                (Math.abs(player.getY()) > 11000 ? Mode.MOBARENA : Mode.HUB); // mobarena is around -12k,-12k but hub is at 0,0)
+                (Math.abs(player.getZ()) > 11000 ? Mode.MOBARENA : Mode.HUB); // mobarena is around -12k,-12k but hub is at 0,0)
             case 8 -> Mode.EVENT;
             default -> Mode.UNKNOWN;
         };
