@@ -3,6 +3,7 @@ package com.anotherpillow.skyplusplus.features;
 import com.anotherpillow.skyplusplus.SkyPlusPlus;
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.util.Chat;
+import com.anotherpillow.skyplusplus.util.Server;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.Level;
 
@@ -14,6 +15,13 @@ public class JoinCommands {
             SkyPlusPlus.log(Level.INFO, "Player is null, cannot send join message(s).");
             return;
         }
+
+        if (Server.getSkyblockMode() != Server.Mode.ECONOMY &&
+            Server.getSkyblockMode() != Server.Mode.CLASSIC &&
+            Server.getSkyblockMode() != Server.Mode.SURVIVAL)
+            return;
+        if (!Server.onSkyblock()) return;
+
         Chat.send(Chat.addLogo(Text.translatable("skyplusplus.joincommands.sending-join-messages")));
         for (String command : commands) {
             if (command.trim().startsWith("/")) {
