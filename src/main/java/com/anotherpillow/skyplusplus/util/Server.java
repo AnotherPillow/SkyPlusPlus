@@ -57,11 +57,7 @@ public class Server {
                 "148.113.154.207",
                 "skyblock.day",
                 "skyblock.dad",
-                "hypixel-skyblock.com",
-                "hypixel-skyblock.net",
                 "originalskyblock.com",
-                "skyblock-hypixel.com",
-                "hypixelsb.com",
                 "groundblock.org",
                 "skyblock.onl"
         );
