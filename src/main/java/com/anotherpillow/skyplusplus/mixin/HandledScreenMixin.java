@@ -7,11 +7,13 @@ import com.anotherpillow.skyplusplus.util.Chat;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
+import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -26,6 +28,7 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -52,7 +55,6 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
 
     @Shadow
     public abstract T getScreenHandler();
-
     // WILL BE IGNORED. DO NOT USE
     protected HandledScreenMixin(Text title) {
         super(title);
@@ -60,6 +62,17 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
 
     @Invoker("isPointOverSlot")
     protected abstract boolean invokeIsPointOverSlot(Slot slot, double pointX, double pointY);
+
+    @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawSlot(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/screen/slot/Slot;)V", at = @At("TAIL"))
+    public void drawSlot(MatrixStack matrices, Slot slot, CallbackInfo ci) {
+//        HandledScreen.drawSprite(matrices, slot.x, slot.y, 20, 16, 16, );
+        Pair<Identifier, Identifier> bg = slot.getBackgroundSprite();
+        if (bg == null) return;
+        Chat.send("x: " + slot.x + "y: " + slot.y);
+        Chat.send("\\-> " + bg.getFirst().toString() + ", " + bg.getSecond().toString());
+
+
+    }
 
     @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V", at = @At("HEAD"))
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
@@ -90,6 +103,7 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
         int midX = sw / 2;
         int midY = sh / 2;
 
+        /* draw share button */
         if (ShareButton.isApplicable(handler) && config.enableShareButton) {
             addDrawableChild(
                     // public ButtonWidget(int x, int y, int width, int height, Text message, PressAction onPress) {
