@@ -78,17 +78,15 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
         if (bg == null) return;
         Chat.send("x: " + slot.x + "y: " + slot.y);
         Chat.send("\\-> " + bg.getFirst().toString() + ", " + bg.getSecond().toString());
-
-
     }
 
     //? if >=1.20.1 {
     /*@Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;render(Lnet/minecraft/client/gui/DrawContext;IIF)V", at = @At("HEAD"))
     public void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
     *///?} else {
+    @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V", at = @At("HEAD"))
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
      //?}
-
         // https://www.reddit.com/r/fabricmc/comments/15drn3l/comment/ju95aqn
         for(int k = 0; k < this.handler.slots.size(); k++) {
             var slot = this.handler.slots.get(k);
