@@ -104,10 +104,10 @@ public abstract class ChatMixin {
                 StringChecker.playersOnlineJoinCheck(message) || StringChecker.raffleWinCheck(message)
             )) {
             //? if >1.19.2 {
-            mc.getNetworkHandler().sendChatMessage("raffle buy 5");
-            //?} else {
-            /*mc.player.sendCommand("raffle buy 5");
-             *///?}
+            /*mc.getNetworkHandler().sendChatMessage("raffle buy 5");
+            *///?} else {
+            mc.player.sendCommand("raffle buy 5");
+             //?}
         }
 
 

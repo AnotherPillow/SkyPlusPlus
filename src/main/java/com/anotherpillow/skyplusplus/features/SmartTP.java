@@ -18,16 +18,16 @@ public class SmartTP {
         MinecraftClient client = MinecraftClient.getInstance();
 
         //? if >1.19.2 {
-        ClientPlayNetworkHandler handler = client.getNetworkHandler();
+        /*ClientPlayNetworkHandler handler = client.getNetworkHandler();
         if (handler == null) return;
         handler.sendCommand("unlock");
         handler.sendCommand("tpahere" + username);
-        //?} else {
-        /*ClientPlayerEntity player = client.player;
+        *///?} else {
+        ClientPlayerEntity player = client.player;
         if (player == null) return;
         player.sendCommand("unlock", Text.empty());
         player.sendCommand("tpahere " + username, Text.empty());
-         *///?}
+         //?}
 
 
         awaitingLock = true;
@@ -40,10 +40,10 @@ public class SmartTP {
 
 
                 //? if >1.19.2 {
-                handler.sendCommand("lock");
-                //?} else {
-                /*player.sendCommand("lock", Text.empty());
-                 *///?}
+                /*handler.sendCommand("lock");
+                *///?} else {
+                player.sendCommand("lock", Text.empty());
+                 //?}
             }
         };
 
@@ -54,12 +54,12 @@ public class SmartTP {
     public static void lock() {
         MinecraftClient client = MinecraftClient.getInstance();
         //? if >1.19.2 {
-        ClientPlayNetworkHandler handler = client.getNetworkHandler();
+        /*ClientPlayNetworkHandler handler = client.getNetworkHandler();
         if (handler == null) return;
-        //?} else {
-        /*ClientPlayerEntity player = client.player;
+        *///?} else {
+        ClientPlayerEntity player = client.player;
         if (player == null) return;
-         *///?}
+         //?}
 
         if (locktask != null) {
             locktask.cancel();
@@ -73,10 +73,10 @@ public class SmartTP {
                 awaitingLock = false;
 
                 //? if >1.19.2 {
-                handler.sendCommand("lock");
-                //?} else {
-                /*player.sendCommand("lock", Text.empty());
-                 *///?}
+                /*handler.sendCommand("lock");
+                *///?} else {
+                player.sendCommand("lock", Text.empty());
+                 //?}
             }
         };
 

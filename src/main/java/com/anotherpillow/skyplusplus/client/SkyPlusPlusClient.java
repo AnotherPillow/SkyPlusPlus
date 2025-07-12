@@ -90,10 +90,10 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                 DiscordRPC.onTick();
 
             //? if >1.19.2 {
-            BlockPos pos = new BlockPos((int) player.getX(), (int) player.getY(), (int) player.getZ());
-            //?} else {
-            /*BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
-             *///?}
+            /*BlockPos pos = new BlockPos((int) player.getX(), (int) player.getY(), (int) player.getZ());
+            *///?} else {
+            BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
+             //?}
             if (pos.equals(lastPos)) return;
 
             if (config.enableTraderFinder) {
