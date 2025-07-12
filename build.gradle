@@ -30,12 +30,12 @@ repositories {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${stonecutter.current.project}"
-    mappings "net.fabricmc:yarn:${property('deps.yarn_mappings')}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${property('deps.loader_version')}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_version')}"
+    mappings "net.fabricmc:yarn:${property('yarn_mappings')}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${property('loader_version')}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${property('fabric_version')}"
 
     include (
-            modImplementation "${property('deps.yacl_pkg')}:${property('deps.yacl')}"
+            modImplementation "${property('yacl_pkg')}:${property('yacl')}"
     )
 
     include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.0")))
