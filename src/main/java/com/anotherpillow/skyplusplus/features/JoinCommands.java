@@ -26,11 +26,19 @@ public class JoinCommands {
         for (String command : commands) {
             if (command.trim().startsWith("/")) {
                 SkyPlusPlus.log(Level.INFO, "Sending command: " + command.trim());
-                SkyPlusPlusClient.client.player.sendCommand(command.trim().substring(1));
+                //? if >1.19.2 {
+                SkyPlusPlusClient.client.getNetworkHandler().sendCommand(command.trim().substring(1));
+                //?} else {
+                /*SkyPlusPlusClient.client.player.sendCommand(command.trim().substring(1));
+                 *///?}
             }
             else {
                 SkyPlusPlus.log(Level.INFO, "Sending chat: " + command);
-                SkyPlusPlusClient.client.player.sendChatMessage(command, Text.of(""));
+                //? if >1.19.2 {
+                SkyPlusPlusClient.client.getNetworkHandler().sendChatMessage(command);
+                //?} else {
+                /*SkyPlusPlusClient.client.player.sendChatMessage(command, Text.of(""));
+                 *///?}
             }
         }
 

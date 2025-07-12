@@ -5,6 +5,7 @@ import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.util.Server;
 import com.anotherpillow.skyplusplus.util.TimeConsts;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.Level;
@@ -29,12 +30,18 @@ public class AutoAdvertisement {
 
     public static void startTask(long interval, TimeUnit timeUnit) {
         ClientPlayerEntity player = SkyPlusPlusClient.client.player;
+        ClientPlayNetworkHandler networkHandler = SkyPlusPlusClient.client.getNetworkHandler();
 
         Runnable task = () -> {
             Server.Mode mode = Server.getSkyblockMode();
 
-            if (mode == Server.Mode.ECONOMY) player.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING, Text.empty());
+            //? if >1.19.2 {
+            if (mode == Server.Mode.ECONOMY) networkHandler.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING);
+            if (mode == Server.Mode.SURVIVAL) networkHandler.sendChatMessage(SkyPlusPlusClient.config.survivalAdMessage + MARKER_STRING);
+            //?} else {
+            /*if (mode == Server.Mode.ECONOMY) player.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING, Text.empty());
             if (mode == Server.Mode.SURVIVAL) player.sendChatMessage(SkyPlusPlusClient.config.survivalAdMessage + MARKER_STRING, Text.empty());
+             *///?}
         };
 
         scheduledFuture = scheduler.scheduleAtFixedRate(task, 0, interval, timeUnit);

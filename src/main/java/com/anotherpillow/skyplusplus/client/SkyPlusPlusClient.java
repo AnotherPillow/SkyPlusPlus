@@ -66,16 +66,18 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             DiscordRPC.start();
 
 
-        HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
+        // drawcontext >= 1.20.1, matrixstack 1.19.x
+        HudRenderCallback.EVENT.register((renderObject, tickDelta) -> {
             if (config.enableTraderFinder && Server.onSkyblock()) {
                 if (inSpawn) {
-                    if (!Objects.equals(TraderFinder.traderXYZString, "")) TraderFinder.showTraderString(matrixStack);
-                    else TraderFinder.findTrader(matrixStack);
+                    if (!Objects.equals(TraderFinder.traderXYZString, "")) TraderFinder.showTraderString(renderObject);
+                    else TraderFinder.findTrader(renderObject);
                 } else {
-                    TraderCountdown.DrawCountdown(matrixStack);
+                    TraderCountdown.DrawCountdown(renderObject);
                 }
 
-                TraderImage.draw(matrixStack);
+
+                TraderImage.draw(/*? >=1.20.1 {*/ renderObject.getMatrices() /*?} else {*/ /*renderObject *//*?}*/);
             }
 
         });
@@ -87,7 +89,11 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             if (config.enableDiscordRPC)
                 DiscordRPC.onTick();
 
-            BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
+            //? if >1.19.2 {
+            BlockPos pos = new BlockPos((int) player.getX(), (int) player.getY(), (int) player.getZ());
+            //?} else {
+            /*BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
+             *///?}
             if (pos.equals(lastPos)) return;
 
             if (config.enableTraderFinder) {

@@ -3,7 +3,6 @@ package com.anotherpillow.skyplusplus.mixin;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import net.minecraft.block.GrassBlock;
 import net.minecraft.item.Item;
-import net.minecraft.item.SkullItem;
 import org.spongepowered.asm.mixin.Mixin;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerInteractionManager;

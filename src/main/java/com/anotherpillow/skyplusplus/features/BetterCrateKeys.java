@@ -2,6 +2,8 @@ package com.anotherpillow.skyplusplus.features;
 
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
+import com.google.gson.JsonParser;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.world.ClientWorld;
@@ -14,11 +16,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.resource.ResourceManager;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
+import net.minecraft.text.*;
 import net.minecraft.util.Identifier;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
 
 import java.util.Objects;
@@ -42,7 +41,12 @@ public class BetterCrateKeys {
             String loreText = loreList.getString(0);
             if (loreText == null) return 0.0f;
 
+            //? if >=1.20.4 {
+            /*String lore = TextCodecs.CODEC.parse(JsonOps.INSTANCE, JsonParser.parseString(loreText)).get().orThrow().getString();
+             *///?} else {
             String lore = Text.Serializer.fromJson(loreText).getString();
+            //?}
+
             // client.inGameHud.getChatHud().addMessage(Text.of(lore));
 
 

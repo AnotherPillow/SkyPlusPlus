@@ -9,6 +9,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.client.MinecraftClient;
+//? if >=1.20.1 {
+import net.minecraft.client.gui.DrawContext;
+ //?} else {
+//?}
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
@@ -26,7 +30,12 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.util.registry.Registry;
+//? if >1.19.2 {
+import net.minecraft.registry.Registries;
+//?} else {
+/*import net.minecraft.util.registry.Registry;
+ *///?}
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -61,8 +70,14 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
     @Invoker("isPointOverSlot")
     protected abstract boolean invokeIsPointOverSlot(Slot slot, double pointX, double pointY);
 
-    @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V", at = @At("HEAD"))
+    //? if >=1.20.1 {
+    @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;render(Lnet/minecraft/client/gui/DrawContext;IIF)V", at = @At("HEAD"))
+    public void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    //?} else {
+    /*@Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V", at = @At("HEAD"))
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+     *///?}
+
         // https://www.reddit.com/r/fabricmc/comments/15drn3l/comment/ju95aqn
         for(int k = 0; k < this.handler.slots.size(); k++) {
             var slot = this.handler.slots.get(k);
@@ -92,8 +107,11 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
 
         if (ShareButton.isApplicable(handler) && config.enableShareButton) {
             addDrawableChild(
-                    // public ButtonWidget(int x, int y, int width, int height, Text message, PressAction onPress) {
-                    new ButtonWidget(midX + 90, midY - 60, 60, 20, Text.of("Share"), (ButtonWidget widget) -> {
+                    //? if >1.19.2 {
+                    new ButtonWidget.Builder(Text.of("Share"), (ButtonWidget widget) -> {
+                        //?} else {
+                        /*new ButtonWidget(midX + 90, midY - 60, 60, 20, Text.of("Share"), (ButtonWidget widget) -> {
+                         *///?}
                         CompletableFuture.runAsync(() -> {
 //                        handler.slots.forEach(slot -> {
                             int slotCount = ShareButton.getInnerSlots(handler);
@@ -113,12 +131,16 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                             json.addProperty("containerName", this.title.getString());
                             json.addProperty("containerType", ShareButton.stringifyContainerType(ShareButton.getContainerType(handler)));
 
-                            for (int i = 0; i < slotCount; i ++) {
+                            for (int i = 0; i < slotCount; i++) {
                                 JsonObject slotJson = new JsonObject();
                                 Slot slot = handler.getSlot(i);
                                 ItemStack stack = slot.getStack();
 
-                                String itemId = Registry.ITEM.getKey(stack.getItem()).get().getValue().toString();
+                                //? if >1.19.2 {
+                                String itemId = Registries.ITEM.getKey(stack.getItem()).get().getValue().toString();
+                                //?} else {
+                                /*String itemId = Registry.ITEM.getKey(stack.getItem()).get().getValue().toString();
+                                 *///?}
 
                                 // id: MinecraftID,
                                 //        Slot: number,
@@ -172,7 +194,7 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                             JsonObject bodyJson = gson.fromJson(body, JsonObject.class);
                             if (bodyJson.has("error")) {
                                 Chat.send(Chat.addLogo("Failed to share: " + bodyJson.get("error").getAsString() + " (" + status + ")"));
-                            } else if (bodyJson.has("message")){
+                            } else if (bodyJson.has("message")) {
                                 String url = bodyJson.get("message").getAsString();
                                 MutableText urlText = Text.literal(url)
                                         .setStyle(Style.EMPTY.withClickEvent(
@@ -186,6 +208,13 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
 
                         });
                     })
+
+
+                    //? if >1.19.2 {
+                            .position(midX + 90, midY - 60).size(60, 20).build()
+                    //?} else {
+                    
+                     //?}
             );
         }
 

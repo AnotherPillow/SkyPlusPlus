@@ -2,13 +2,22 @@ package com.anotherpillow.skyplusplus.features;
 
 import com.anotherpillow.skyplusplus.SkyPlusPlus;
 import com.google.gson.*;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.text.Text;
+//? if >=1.20.4 {
+/*import net.minecraft.text.TextCodecs;
+*///?} else {
+//?}
 import org.apache.logging.log4j.Level;
 
 public class RemoveChatRanks {
 
     public static Text process(Text original) {
+        //? if >=1.20.4 {
+        /*String json = TextCodecs.CODEC.encodeStart(JsonOps.INSTANCE, original).result().toString();
+        *///?} else {
         String json = Text.Serializer.toJson(original);
+         //?}
 
         JsonElement jsonElement = JsonParser.parseString(json);
 
@@ -26,8 +35,13 @@ public class RemoveChatRanks {
         }
 
         Gson gson = new Gson();
-        String newJson = gson.toJson(jsonElement);
 
+        //? if >=1.20.4 {
+        /*return TextCodecs.CODEC.parse(JsonOps.INSTANCE, jsonElement).get().orThrow();
+        *///?} else {
+        String newJson = gson.toJson(jsonElement);
         return Text.Serializer.fromJson(newJson);
+         //?}
+
     }
 }
