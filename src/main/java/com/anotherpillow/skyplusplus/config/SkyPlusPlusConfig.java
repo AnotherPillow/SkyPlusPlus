@@ -1,6 +1,22 @@
 package com.anotherpillow.skyplusplus.config;
 
+//? if >1.19.2 {
 import com.anotherpillow.skyplusplus.util.TimeConsts;
+import dev.isxander.yacl3.api.*;
+import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
+import dev.isxander.yacl3.api.controller.StringControllerBuilder;
+import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
+import dev.isxander.yacl3.config.ConfigEntry;
+import dev.isxander.yacl3.gui.controllers.TickBoxController;
+import dev.isxander.yacl3.config.ConfigInstance;
+import dev.isxander.yacl3.config.GsonConfigInstance;
+import dev.isxander.yacl3.gui.controllers.slider.IntegerSliderController;
+import dev.isxander.yacl3.gui.controllers.string.StringController;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.Text;
+import net.fabricmc.loader.api.FabricLoader;
+//?} else {
+/*import com.anotherpillow.skyplusplus.util.TimeConsts;
 import dev.isxander.yacl.api.ConfigCategory;
 import dev.isxander.yacl.api.Option;
 import dev.isxander.yacl.api.OptionGroup;
@@ -14,6 +30,8 @@ import dev.isxander.yacl.gui.controllers.string.StringController;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.fabricmc.loader.api.FabricLoader;
+*///?}
+
 
 import java.nio.file.Path;
 
@@ -88,312 +106,688 @@ public class SkyPlusPlusConfig {
                         .name(Text.translatable("skyplusplus.config.trader-notifications"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.trader-enable"))
-                                .tooltip(Text.translatable("skyplusplus.config.trader-enable-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.trader-enable-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.trader-enable-desc"))
+                                *///?}
                                 .binding(defaults.enableTraderFinder, () -> config.enableTraderFinder, v -> config.enableTraderFinder = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.trader-enable-title"))
-                                .tooltip(Text.translatable("skyplusplus.config.trader-enable-title-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.trader-enable-title-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.trader-enable-title-desc"))
+                                *///?}
                                 .binding(defaults.enableTraderTitles, () -> config.enableTraderTitles, v -> config.enableTraderTitles = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(int.class)
                                 .name(Text.translatable("skyplusplus.config.trader-notif-x"))
-                                .tooltip(Text.translatable("skyplusplus.config.trader-notif-x-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.trader-notif-x-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.trader-notif-x-desc"))
+                                *///?}
                                 .binding(defaults.traderX, () -> config.traderX, v -> config.traderX = v)
-                                .controller(opt -> new IntegerSliderController(opt, 0, 4000, 16))
+                                //? if >1.19.2 {
+                                .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(0, 4000).step(16))
+                                //?} else {
+                                /*.controller(opt -> new IntegerSliderController(opt, 0, 200, 1))
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(int.class)
                                 .name(Text.translatable("skyplusplus.config.trader-notif-y"))
-                                .tooltip(Text.translatable("skyplusplus.config.trader-notif-y-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.trader-notif-y-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.trader-notif-y-desc"))
+                                *///?}
                                 .binding(defaults.traderY, () -> config.traderY, v -> config.traderY = v)
-                                .controller(opt -> new IntegerSliderController(opt, 0, 4000, 16))
+                                //? if >1.19.2 {
+                                .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(0, 4000).step(16))
+                                //?} else {
+                                /*.controller(opt -> new IntegerSliderController(opt, 0, 4000, 16))
+                                 *///?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.chatfilter.title"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hidevisitmsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidevisitmsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hidevisitmsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hidevisitmsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideVisitingMessages, () -> config.hideVisitingMessages, v -> config.hideVisitingMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hidevisittitles"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidevisittitles-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hidevisittitles-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hidevisittitles-desc"))
+                                *///?}
                                 .binding(defaults.hideVisitingTitle, () -> config.hideVisitingTitle, v -> config.hideVisitingTitle = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hidesbmsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidesbmsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hidesbmsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hidesbmsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideSkyblockMessages, () -> config.hideSkyblockMessages, v -> config.hideSkyblockMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hideunscramble"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hideunscramble-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hideunscramble-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hideunscramble-desc"))
+                                *///?}
                                 .binding(defaults.hideUnscramblingMessages, () -> config.hideUnscramblingMessages, v -> config.hideUnscramblingMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hideafk"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hideafk-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hideafk-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hideafk-desc"))
+                                *///?}
                                 .binding(defaults.hideAFKMessages, () -> config.hideAFKMessages, v -> config.hideAFKMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hidenewusermsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidenewusermsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hidenewusermsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hidenewusermsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideNewUserMessages, () -> config.hideNewUserMessages, v -> config.hideNewUserMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hidedeathcountmsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidedeathcountmsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hidedeathcountmsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hidedeathcountmsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideDeathsMessages, () -> config.hideDeathsMessages, v -> config.hideDeathsMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hiderafflemsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hiderafflemsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hiderafflemsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hiderafflemsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideRaffleMessages, () -> config.hideRaffleMessages, v -> config.hideRaffleMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hideadvancementmsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidedeathcountmsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hidedeathcountmsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hidedeathcountmsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideAdvancementMessages, () -> config.hideAdvancementMessages, v -> config.hideAdvancementMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hidebroadcastmsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidebroadcastmsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hidebroadcastmsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hidebroadcastmsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideBroadcastMessages, () -> config.hideBroadcastMessages, v -> config.hideBroadcastMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hideislandexpansionmsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hideislandexpansionmsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hideislandexpansionmsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hideislandexpansionmsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideExpandMessages, () -> config.hideExpandMessages, v -> config.hideExpandMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hideluckycratemsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hideluckycratemsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hideluckycratemsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hideluckycratemsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideLuckyCratesMessages, () -> config.hideLuckyCratesMessages, v -> config.hideLuckyCratesMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hidemailmsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidemailmsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hidemailmsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hidemailmsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideMailMessages, () -> config.hideMailMessages, v -> config.hideMailMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.hidevotemsgs"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.hidevotemsgs-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.hidevotemsgs-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.hidevotemsgs-desc"))
+                                *///?}
                                 .binding(defaults.hideVoteMessages, () -> config.hideVoteMessages, v -> config.hideVoteMessages = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.removechatranks"))
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.removechatranks-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.removechatranks-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.chatfilter.removechatranks-desc"))
+                                *///?}
                                 .binding(defaults.removeChatRanks, () -> config.removeChatRanks, v -> config.removeChatRanks = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.autoresponder.title"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.autoresponder.enable"))
-                                .tooltip(Text.translatable("skyplusplus.config.autoresponder.enable-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.autoresponder.enable-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.autoresponder.enable-desc"))
+                                *///?}
                                 .binding(defaults.enableAutoResponder, () -> config.enableAutoResponder, v -> config.enableAutoResponder = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(String.class)
                                 .name(Text.translatable("skyplusplus.config.autoresponder.message-desc"))
-                                .tooltip(Text.translatable("skyplusplus.config.autoresponder.message"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.autoresponder.message")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.autoresponder.message"))
+                                *///?}
                                 .binding(defaults.autoResponderMessage, () -> config.autoResponderMessage, v -> config.autoResponderMessage = v)
-                                .controller(StringController::new)
+                                //? if >1.19.2 {
+                                .controller(StringControllerBuilder::create)
+                                //?} else {
+                                /*.controller(StringController::new)
+                                 *///?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.message-prefix-suffix.title"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.message-prefix-suffix.prefix"))
-                                .tooltip(Text.translatable("skyplusplus.config.message-prefix-suffix.prefix-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.message-prefix-suffix.prefix-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.message-prefix-suffix.prefix-desc"))
+                                *///?}
                                 .binding(defaults.chatPrefix, () -> config.chatPrefix, v -> config.chatPrefix = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.message-prefix-suffix.suffix"))
-                                .tooltip(Text.translatable("skyplusplus.config.message-prefix-suffix.suffix-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.message-prefix-suffix.suffix-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.message-prefix-suffix.suffix-desc"))
+                                *///?}
                                 .binding(defaults.chatSuffix, () -> config.chatSuffix, v -> config.chatSuffix = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(String.class)
                                 .name(Text.translatable("skyplusplus.config.message-prefix-suffix.prefix-message"))
-                                .tooltip(Text.translatable("skyplusplus.config.message-prefix-suffix.prefix-message-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.message-prefix-suffix.prefix-message-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.message-prefix-suffix.prefix-message-desc"))
+                                *///?}
                                 .binding(defaults.chatPrefixMessage, () -> config.chatPrefixMessage, v -> config.chatPrefixMessage = v)
-                                .controller(StringController::new)
+                                //? if >1.19.2 {
+                                .controller(StringControllerBuilder::create)
+                                //?} else {
+                                /*.controller(StringController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(String.class)
                                 .name(Text.translatable("skyplusplus.config.message-prefix-suffix.suffix-message"))
-                                .tooltip(Text.translatable("skyplusplus.config.message-prefix-suffix.suffix-message-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.message-prefix-suffix.suffix-message-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.message-prefix-suffix.suffix-message-desc"))
+                                *///?}
                                 .binding(defaults.chatSuffixMessage, () -> config.chatSuffixMessage, v -> config.chatSuffixMessage = v)
-                                .controller(StringController::new)
+                                //? if >1.19.2 {
+                                .controller(StringControllerBuilder::create)
+                                //?} else {
+                                /*.controller(StringController::new)
+                                 *///?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.better-items-uis.title"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.better-items-uis.changebiome"))
-                                .tooltip(Text.translatable("skyplusplus.config.better-items-uis.changebiome-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.better-items-uis.changebiome-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.better-items-uis.changebiome-desc"))
+                                *///?}
                                 .binding(defaults.betterChangeBiomeEnabled, () -> config.betterChangeBiomeEnabled, v -> config.betterChangeBiomeEnabled = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.better-items-uis.better-crate-keys"))
-                                .tooltip(Text.translatable("skyplusplus.config.better-items-uis.better-crate-keys-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.better-items-uis.better-crate-keys-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.better-items-uis.better-crate-keys-desc"))
+                                *///?}
                                 .binding(defaults.betterCrateKeysEnabled, () -> config.betterCrateKeysEnabled, v -> config.betterCrateKeysEnabled = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.better-items-uis.show-empty-shops"))
-                                .tooltip(Text.translatable("skyplusplus.config.better-items-uis.show-empty-shops-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.better-items-uis.show-empty-shops-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.better-items-uis.show-empty-shops-desc"))
+                                *///?}
                                 .binding(defaults.showEmptyShopsEnabled, () -> config.showEmptyShopsEnabled, v -> config.showEmptyShopsEnabled = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.better-items-uis.dynamic-scoreboard-title"))
-                                .tooltip(Text.translatable("skyplusplus.config.better-items-uis.dynamic-scoreboard-title-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.better-items-uis.dynamic-scoreboard-title-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.better-items-uis.dynamic-scoreboard-title-desc"))
+                                *///?}
                                 .binding(defaults.dynamicScoreboardTitle, () -> config.dynamicScoreboardTitle, v -> config.dynamicScoreboardTitle = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.tweaks-improvements.title"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.tweaks-improvements.extratab"))
-                                .tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.extratab-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.tweaks-improvements.extratab-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.extratab-desc"))
+                                *///?}
                                 .binding(defaults.extraTabEnabled, () -> config.extraTabEnabled, v -> config.extraTabEnabled = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.tweaks-improvements.prevent-head-dropping"))
-                                .tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.prevent-head-dropping-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.tweaks-improvements.prevent-head-dropping-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.prevent-head-dropping-desc"))
+                                *///?}
                                 .binding(defaults.preventHeadDropping, () -> config.preventHeadDropping, v -> config.preventHeadDropping = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.tweaks-improvements.prevent-grass-placing"))
-                                .tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.prevent-grass-placing-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.tweaks-improvements.prevent-grass-placing-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.prevent-grass-placing-desc"))
+                                *///?}
                                 .binding(defaults.antiGrassPlace, () -> config.antiGrassPlace, v -> config.antiGrassPlace = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.tweaks-improvements.autoraffle"))
-                                .tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.autoraffle-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.tweaks-improvements.autoraffle-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.autoraffle-desc"))
+                                *///?}
                                 .binding(defaults.autoRaffleEnabled, () -> config.autoRaffleEnabled, v -> config.autoRaffleEnabled = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.tweaks-improvements.antipc"))
-                                .tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.antipc-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.tweaks-improvements.antipc-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.antipc-desc"))
+                                *///?}
                                 .binding(defaults.antiPCEnabled, () -> config.antiPCEnabled, v -> config.antiPCEnabled = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.tweaks-improvements.automatic-lowercase-commands"))
-                                .tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.automatic-lowercase-commands-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.tweaks-improvements.automatic-lowercase-commands-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.automatic-lowercase-commands-desc"))
+                                *///?}
                                 .binding(defaults.lowerCommandsEnabled, () -> config.lowerCommandsEnabled, v -> config.lowerCommandsEnabled = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(String.class)
                                 .name(Text.translatable("skyplusplus.config.tweaks-improvements.join-commands"))
-                                .tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.join-commands-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.tweaks-improvements.join-commands-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.join-commands-desc"))
+                                *///?}
                                 .binding(defaults.joinCommandsList, () -> config.joinCommandsList, v -> config.joinCommandsList = v)
-                                .controller(StringController::new)
+                                //? if >1.19.2 {
+                                .controller(StringControllerBuilder::create)
+                                //?} else {
+                                /*.controller(StringController::new)
+                                 *///?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.discord-rpc.title"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.discord-rpc.enable"))
-                                .tooltip(Text.translatable("skyplusplus.config.discord-rpc.enable-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.discord-rpc.enable-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.discord-rpc.enable-desc"))
+                                *///?}
                                 .binding(defaults.enableDiscordRPC, () -> config.enableDiscordRPC, v -> config.enableDiscordRPC = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.auto-advertisements.title"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.auto-advertisements.economy-enable"))
-                                .tooltip(Text.translatable("skyplusplus.config.auto-advertisements.economy-enable-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.auto-advertisements.economy-enable-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.auto-advertisements.economy-enable-desc"))
+                                *///?}
                                 .binding(defaults.enableEconomyAdverts, () -> config.enableEconomyAdverts, v -> config.enableEconomyAdverts = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.auto-advertisements.survival-enable"))
-                                .tooltip(Text.translatable("skyplusplus.config.auto-advertisements.survival-enable-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.auto-advertisements.survival-enable-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.auto-advertisements.survival-enable-desc"))
+                                *///?}
                                 .binding(defaults.enableSurvivalAdverts, () -> config.enableSurvivalAdverts, v -> config.enableSurvivalAdverts = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(String.class)
                                 .name(Text.translatable("skyplusplus.config.auto-advertisements.economy-advertisement"))
-                                .tooltip(Text.translatable("skyplusplus.config.auto-advertisements.economy-advertisement-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.auto-advertisements.economy-advertisement-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.auto-advertisements.economy-advertisement-desc"))
+                                *///?}
                                 .binding(defaults.economyAdMessage, () -> config.economyAdMessage, v -> config.economyAdMessage = v)
-                                .controller(StringController::new)
+                                //? if >1.19.2 {
+                                .controller(StringControllerBuilder::create)
+                                //?} else {
+                                /*.controller(StringController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(String.class)
                                 .name(Text.translatable("skyplusplus.config.auto-advertisements.survival-advertisement"))
-                                .tooltip(Text.translatable("skyplusplus.config.auto-advertisements.survival-advertisement-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.auto-advertisements.survival-advertisement-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.auto-advertisements.survival-advertisement-desc"))
+                                *///?}
                                 .binding(defaults.survivalAdMessage, () -> config.survivalAdMessage, v -> config.survivalAdMessage = v)
-                                .controller(StringController::new)
+                                //? if >1.19.2 {
+                                .controller(StringControllerBuilder::create)
+                                //?} else {
+                                /*.controller(StringController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(int.class)
                                 .name(Text.translatable("skyplusplus.config.auto-advertisements.economy-interval"))
-                                .tooltip(Text.translatable("skyplusplus.config.auto-advertisements.economy-interval-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.auto-advertisements.economy-interval-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.auto-advertisements.economy-interval-desc"))
+                                *///?}
                                 .binding(defaults.economyAdInterval, () -> config.economyAdInterval, v -> config.economyAdInterval = v)
-                                .controller(opt -> new IntegerSliderController(opt, TimeConsts.MINIMUM_ECONOMY / TimeConsts.Second, TimeConsts.Day / TimeConsts.Second, TimeConsts.Minute / TimeConsts.Second))
+                                //? if >1.19.2 {
+                                .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(TimeConsts.MINIMUM_ECONOMY / TimeConsts.Second, TimeConsts.Day / TimeConsts.Second).step(TimeConsts.Minute / TimeConsts.Second))
+                                //?} else {
+                                /*.controller(opt -> new IntegerSliderController(opt, TimeConsts.MINIMUM_ECONOMY / TimeConsts.Second, TimeConsts.Day / TimeConsts.Second, TimeConsts.Minute / TimeConsts.Second))
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(int.class)
                                 .name(Text.translatable("skyplusplus.config.auto-advertisements.survival-interval"))
-                                .tooltip(Text.translatable("skyplusplus.config.auto-advertisements.survival-interval-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.auto-advertisements.survival-interval-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.auto-advertisements.survival-interval-desc"))
+                                *///?}
                                 .binding(defaults.survivalAdInterval, () -> config.survivalAdInterval, v -> config.survivalAdInterval = v)
-                                .controller(opt -> new IntegerSliderController(opt, TimeConsts.MINIMUM_SKYBLOCK / TimeConsts.Second, TimeConsts.Day / TimeConsts.Second, TimeConsts.Minute / TimeConsts.Second))
+                                //? if >1.19.2 {
+                                .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(TimeConsts.MINIMUM_SKYBLOCK / TimeConsts.Second, TimeConsts.Day / TimeConsts.Second).step(TimeConsts.Minute / TimeConsts.Second))
+                                //?} else {
+                                /*.controller(opt -> new IntegerSliderController(opt, TimeConsts.MINIMUM_SKYBLOCK / TimeConsts.Second, TimeConsts.Day / TimeConsts.Second, TimeConsts.Minute / TimeConsts.Second))
+                                 *///?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.tool-saver.title"))
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.tool-saver.enable"))
-                                .tooltip(Text.translatable("skyplusplus.config.tool-saver.enable-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.tool-saver.enable-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.tool-saver.enable-desc"))
+                                *///?}
                                 .binding(defaults.enableToolSaver, () -> config.enableToolSaver, v -> config.enableToolSaver = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(int.class)
                                 .name(Text.translatable("skyplusplus.config.tool-saver.durability-limit"))
-                                .tooltip(Text.translatable("skyplusplus.config.tool-saver.durability-limit-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.tool-saver.durability-limit-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.tool-saver.durability-limit-desc"))
+                                *///?}
                                 .binding(defaults.toolSaverDurabilityLimit, () -> config.toolSaverDurabilityLimit, v -> config.toolSaverDurabilityLimit = v)
-                                .controller(opt -> new IntegerSliderController(opt, 0, 200, 1))
+                                //? if >1.19.2 {
+                                .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(0, 200).step(1))
+                                //?} else {
+                                /*.controller(opt -> new IntegerSliderController(opt, 0, 200, 1))
+                                *///?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.share.title"))
                         .option(Option.createBuilder(String.class)
                                 .name(Text.translatable("skyplusplus.config.share.api-base-url"))
-                                .tooltip(Text.translatable("skyplusplus.config.share.api-base-url-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.share.api-base-url-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.share.api-base-url-desc"))
+                                *///?}
                                 .binding(defaults.shareApiBaseUrl , () -> config.shareApiBaseUrl , v -> config.shareApiBaseUrl  = v)
-                                .controller(StringController::new)
+                                //? if >1.19.2 {
+                                .controller(StringControllerBuilder::create)
+                                //?} else {
+                                /*.controller(StringController::new)
+                                 *///?}
                                 .build())
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.share.button"))
-                                .tooltip(Text.translatable("skyplusplus.config.share.button-desc"))
+                                //? if >1.19.2 {
+                                .description(OptionDescription.of(Text.translatable("skyplusplus.config.share.button-desc")))
+                                //?} else {
+                                /*.tooltip(Text.translatable("skyplusplus.config.share.button-desc"))
+                                *///?}
                                 .binding(defaults.enableShareButton , () -> config.enableShareButton , v -> config.enableShareButton  = v)
-                                .controller(TickBoxController::new)
+                                //? if >1.19.2 {
+                                .controller(TickBoxControllerBuilder::create)
+                                //?} else {
+                                /*.controller(TickBoxController::new)
+                                 *///?}
                                 .build())
                         .build())
         )).generateScreen(parentScreen);

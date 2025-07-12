@@ -56,7 +56,12 @@ public class StringChecker {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player == null) return false;
 
+        //? if >=1.20.4 {
+        /*if (input.startsWith("[" + client.player.getName().getString() + " -> me]")) return false;
+        *///?} else {
         if (input.startsWith("[" + client.player.getEntityName() + " -> me]")) return false;
+         //?}
+
         return autoResponderPattern.matcher(input).find();
     }
 

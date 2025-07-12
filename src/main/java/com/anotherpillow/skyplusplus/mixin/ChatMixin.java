@@ -102,8 +102,14 @@ public abstract class ChatMixin {
 
         if (config.autoRaffleEnabled && (
                 StringChecker.playersOnlineJoinCheck(message) || StringChecker.raffleWinCheck(message)
-            ))
-            mc.player.sendCommand("raffle buy 5");
+            )) {
+            //? if >1.19.2 {
+            mc.getNetworkHandler().sendChatMessage("raffle buy 5");
+            //?} else {
+            /*mc.player.sendCommand("raffle buy 5");
+             *///?}
+        }
+
 
         if (message.startsWith("You last logged in ")) {
             AutoAdvertisement.onServerJoin();

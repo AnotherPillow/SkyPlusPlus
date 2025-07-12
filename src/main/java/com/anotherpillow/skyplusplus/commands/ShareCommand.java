@@ -21,7 +21,11 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
-import net.minecraft.util.registry.Registry;
+//? if >1.19.2 {
+import net.minecraft.registry.Registries;
+//?} else {
+/*import net.minecraft.util.registry.Registry;
+*///?}
 
 import java.io.IOException;
 import java.net.URI;
@@ -50,8 +54,11 @@ public class ShareCommand {
                     jsonNBT = NbtOps.INSTANCE.convertTo(JsonOps.INSTANCE, nbt).toString();
                 }
 
-
-                String itemId = Registry.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
+                //? if >1.19.2 {
+                String itemId = Registries.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
+                //?} else {
+                /*String itemId = Registry.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
+                *///?}
 
                 Gson gson = new Gson();
                 JsonObject json = new JsonObject();

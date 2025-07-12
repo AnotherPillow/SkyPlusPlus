@@ -4,6 +4,7 @@ import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.util.Chat;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import net.minecraft.SharedConstants;
 
 import java.io.IOException;
 import java.net.URI;
@@ -14,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class UpdateChecker {
-    public static URI API_URL = URI.create("https://api.modrinth.com/v2/project/sky++/version?game_version=1.19.2");
+    public static URI API_URL = URI.create("https://api.modrinth.com/v2/project/sky++/version?game_version=" + SharedConstants.getGameVersion());
     public static String latest = null;
 
     public static String getLatestVersion() {

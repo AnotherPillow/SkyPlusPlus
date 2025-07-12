@@ -2,6 +2,7 @@ package com.anotherpillow.skyplusplus.features;
 
 import com.anotherpillow.skyplusplus.util.Chat;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 
@@ -15,11 +16,20 @@ public class SmartTP {
 
     public static void teleport(String username) {
         MinecraftClient client = MinecraftClient.getInstance();
-        ClientPlayerEntity player = client.player;
 
+        //? if >1.19.2 {
+        ClientPlayNetworkHandler handler = client.getNetworkHandler();
+        if (handler == null) return;
+        handler.sendCommand("unlock");
+        handler.sendCommand("tpahere" + username);
+        //?} else {
+        /*ClientPlayerEntity player = client.player;
         if (player == null) return;
         player.sendCommand("unlock", Text.empty());
         player.sendCommand("tpahere " + username, Text.empty());
+         *///?}
+
+
         awaitingLock = true;
 
         locktask = new TimerTask() {
@@ -28,7 +38,12 @@ public class SmartTP {
                 awaitingLock = false;
                 Chat.send(Chat.addLogo(Text.translatable("skyplusplus.smarttp.timed-out", username)));
 
-                player.sendCommand("lock", Text.empty());
+
+                //? if >1.19.2 {
+                handler.sendCommand("lock");
+                //?} else {
+                /*player.sendCommand("lock", Text.empty());
+                 *///?}
             }
         };
 
@@ -38,9 +53,13 @@ public class SmartTP {
 
     public static void lock() {
         MinecraftClient client = MinecraftClient.getInstance();
-        ClientPlayerEntity player = client.player;
-
+        //? if >1.19.2 {
+        ClientPlayNetworkHandler handler = client.getNetworkHandler();
+        if (handler == null) return;
+        //?} else {
+        /*ClientPlayerEntity player = client.player;
         if (player == null) return;
+         *///?}
 
         if (locktask != null) {
             locktask.cancel();
@@ -53,7 +72,11 @@ public class SmartTP {
             public void run() {
                 awaitingLock = false;
 
-                player.sendCommand("lock", Text.empty());
+                //? if >1.19.2 {
+                handler.sendCommand("lock");
+                //?} else {
+                /*player.sendCommand("lock", Text.empty());
+                 *///?}
             }
         };
 
