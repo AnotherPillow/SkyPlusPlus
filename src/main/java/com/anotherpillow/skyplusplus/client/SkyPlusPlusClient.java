@@ -77,7 +77,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                 }
 
 
-                TraderImage.draw(/*? >=1.20.1 {*/ renderObject.getMatrices() /*?} else {*/ /*renderObject *//*?}*/);
+                TraderImage.draw(/*? >=1.20.1 {*/ /*renderObject.getMatrices() *//*?} else {*/ renderObject /*?}*/);
             }
 
         });

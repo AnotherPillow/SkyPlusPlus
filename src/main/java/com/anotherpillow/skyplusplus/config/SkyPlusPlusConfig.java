@@ -15,7 +15,7 @@ import dev.isxander.yacl3.gui.controllers.string.StringController;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.fabricmc.loader.api.FabricLoader;
-//? } else {
+//?} else {
 /*import com.anotherpillow.skyplusplus.util.TimeConsts;
 import dev.isxander.yacl.api.ConfigCategory;
 import dev.isxander.yacl.api.Option;
