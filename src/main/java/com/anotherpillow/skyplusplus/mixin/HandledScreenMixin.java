@@ -19,13 +19,14 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 //? if >=1.20.1 {
 /*import net.minecraft.client.gui.DrawContext;
- *///?} else {
-//?}
+*///?} else {
 import net.minecraft.client.gui.DrawableHelper;
+//?}
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
+import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.Window;
@@ -83,9 +84,6 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
     @Shadow
     public abstract T getScreenHandler();
 
-    @Shadow
-    public static void drawSlotHighlight(MatrixStack matrices, int x, int y, int z) {}
-
     // WILL BE IGNORED. DO NOT USE
     protected HandledScreenMixin(Text title) {
         super(title);
@@ -94,20 +92,16 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
     @Invoker("isPointOverSlot")
     protected abstract boolean invokeIsPointOverSlot(Slot slot, double pointX, double pointY);
 
+    //? if >=1.20.1 {
+    /*@Inject(method = "drawSlot(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/screen/slot/Slot;)V", at = @At("HEAD"))
+    public void drawSlot(DrawContext context, Slot slot, CallbackInfo ci) {
+    *///?} else {
     @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawSlot(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/screen/slot/Slot;)V", at = @At("HEAD"))
     public void drawSlot(MatrixStack matrices, Slot slot, CallbackInfo ci) {
-//        HandledScreen.drawSprite(matrices, slot.x, slot.y, 20, 16, 16, );
-//        Pair<Identifier, Identifier> bg = slot.getBackgroundSprite();
-//        slot.bac
-//        if (bg == null || this.client == null) return;
+     //?}
+
         HandledScreen<?> screen = (HandledScreen<?>) (Object) this;
-        ScreenHandler handler = screen.getScreenHandler();   // 1.19+ : screen.getScreenHandler()
-//        int totalSlots = handler.slots.size();               // every slot shown on this screen
-//        int thisSlotIndex = slot.id;
-//        int x = slot.x;                                  // left coordinate on the texture
-//        int y = slot.y;                                  // top  coordinate on the texture
-//        int w = 16;                                      // width  (vanilla slots are 16×16)
-//        int h = 16;                                      // height
+        ScreenHandler handler = screen.getScreenHandler();
 
         if (this.client == null) return;
 
@@ -115,13 +109,21 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
         int playerInvStart = handler.slots.size() - (this.client.currentScreen instanceof InventoryScreen ? 37 : 36);
         int indexInInventory = slot.id - playerInvStart;
 
-        // Example: print the size of the currently open container
-//        Chat.send(String.format("Container has %d slots (drawing slot %d at %d,%d)%n",
-//                totalSlots, thisSlotIndex, x, y));
-
-//        if (this.client == null || !(this.client.currentScreen instanceof InventoryScreen)) return;
         IntArrayList lockedSlots = SlotLocker.lockedSlots.get(Server.getSkyblockMode());
         if (lockedSlots != null && lockedSlots.contains(indexInInventory)) {
+            //? if >=1.20.1 {
+            /*context.drawTexture(
+                    SkyPlusPlusClient.lockId,
+                    slot.x,
+                    slot.y,
+                    0f,
+                    0f,
+                    16,
+                    16,
+                    16,
+                    16
+            );
+            *///?} else {
             RenderSystem.setShaderTexture(0, SkyPlusPlusClient.lockId);
             DrawableHelper.drawTexture(
                     matrices,
@@ -134,6 +136,8 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                     16,
                     16
             );
+             //?}
+
         }
 
 

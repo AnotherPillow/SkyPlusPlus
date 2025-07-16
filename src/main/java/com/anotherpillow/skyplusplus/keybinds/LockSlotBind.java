@@ -13,9 +13,12 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
+
+import java.io.IOException;
 
 public class LockSlotBind {
     public static KeyBinding binding;
@@ -30,7 +33,6 @@ public class LockSlotBind {
     }
 
     public static void logic(MinecraftClient client) {
-//        Chat.send("lock slot key pressed! hovered: " + SlotLocker.hoveredSlot.id);
         Server.Mode mode = Server.getSkyblockMode();
         IntArrayList list = SlotLocker.lockedSlots.get(mode);
         HandledScreen<?> currentScreen = (HandledScreen<?>)client.currentScreen;
@@ -52,5 +54,10 @@ public class LockSlotBind {
             list.add(indexInInventory);
         }
         SlotLocker.lockedSlots.put(mode, list); // do I need to readd it?
+        try {
+            SlotLocker.save();
+        } catch (IOException e) {
+            Chat.send(Chat.addLogo("&4Failed to save SlotLocker settings."));
+        }
     }
 }

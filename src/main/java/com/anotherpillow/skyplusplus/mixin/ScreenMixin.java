@@ -18,9 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ScreenMixin {
     @Inject(method = "keyPressed(III)Z", at = @At("HEAD"), cancellable = true)
     public void keyPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
-//        MinecraftClient.getInstance().player.sendMessage(Text.literal(String.format("HBNTBKC: %d / KC: %d, SC: %d, KEYC: %d, KEYR: %d",
-//                HoverNBTCopy.boundKeyCode, keyCode, scanCode, GLFW.GLFW_KEY_C, GLFW.GLFW_KEY_R)), false);
-
         InputUtil.Key hoverNbtKey = KeyBindingHelper.getBoundKeyOf(HoverNBTCopy.binding);
         InputUtil.Key lockslotKey = KeyBindingHelper.getBoundKeyOf(LockSlotBind.binding);
 

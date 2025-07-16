@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class SkyPlusPlusClient implements ClientModInitializer {
@@ -65,6 +66,11 @@ public class SkyPlusPlusClient implements ClientModInitializer {
         ShowEmptyShops.register();
         HoverNBTCopy.register();
         LockSlotBind.register();
+        try {
+            SlotLocker.load();
+        } catch (IOException e) {
+            LOG.error("Failed to load saved SlotLocker settings.");
+        }
 
         if (config.enableDiscordRPC)
             DiscordRPC.start();

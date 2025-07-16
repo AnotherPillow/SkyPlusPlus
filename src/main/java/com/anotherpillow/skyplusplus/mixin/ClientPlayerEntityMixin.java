@@ -29,8 +29,6 @@ public class ClientPlayerEntityMixin {
 
     @Inject(method = "dropSelectedItem(Z)Z", at = @At(value = "HEAD"), cancellable = true)
     private void stopDropSelectedItem(boolean entireStack, CallbackInfoReturnable<Boolean> cb) {
-        // source: ItemStack itemStack = this.getInventory().dropSelectedItem(entireStack);
-
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
         ClientPlayerEntity self = (ClientPlayerEntity) (Object) this;
         ItemStack itemStack = self.getMainHandStack();
@@ -43,9 +41,7 @@ public class ClientPlayerEntityMixin {
         IntArrayList list = SlotLocker.lockedSlots.get(Server.getSkyblockMode());
         if (list == null) return;
 
-//        Chat.send("tried to drop hotbar " + hotbarSlot + " which is inventory " + (inventorySlotId));
         if (list.contains(inventorySlotId)) {
-//            Chat.send("slot drop prevented");
             cb.setReturnValue(false);
             return;
         }
