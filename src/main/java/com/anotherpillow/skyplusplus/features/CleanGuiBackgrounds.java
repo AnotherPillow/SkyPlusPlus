@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 
+
 import java.util.Objects;
 
 public class CleanGuiBackgrounds {
