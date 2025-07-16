@@ -18,6 +18,7 @@
   "skyplusplus.preventheaddropping.prevented-drop": "Prevented dropping %s",
 
   "skyplusplus.keybind.copyhoverednbt": "Copy hovered NBT",
+  "skyplusplus.keybind.lockslot": "Copy hovered NBT",
 
   "skyplusplus.smarttp.timed-out": "Teleport request to %s timed out.",
 

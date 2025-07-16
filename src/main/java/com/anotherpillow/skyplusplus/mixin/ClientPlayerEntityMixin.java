@@ -1,7 +1,12 @@
 package com.anotherpillow.skyplusplus.mixin;
 
+import com.anotherpillow.skyplusplus.features.SlotLocker;
+import com.anotherpillow.skyplusplus.util.Server;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 // was yarn 1.20.2-pre3 i think
 //? if >=1.20.2 {
@@ -12,6 +17,7 @@ import net.minecraft.item.SkullItem;
 
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -20,14 +26,30 @@ import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.util.Chat;
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {
+
     @Inject(method = "dropSelectedItem(Z)Z", at = @At(value = "HEAD"), cancellable = true)
     private void stopDropSelectedItem(boolean entireStack, CallbackInfoReturnable<Boolean> cb) {
+        // source: ItemStack itemStack = this.getInventory().dropSelectedItem(entireStack);
+
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
-        ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) (Object) this;
-        ItemStack itemStack = clientPlayerEntity.getMainHandStack();
+        ClientPlayerEntity self = (ClientPlayerEntity) (Object) this;
+        ItemStack itemStack = self.getMainHandStack();
         MinecraftClient client = MinecraftClient.getInstance();
 
         String name = itemStack.getName().getString();
+        int hotbarSlot = self.getInventory().selectedSlot;
+        int inventorySlotId = 27 + hotbarSlot;
+
+        IntArrayList list = SlotLocker.lockedSlots.get(Server.getSkyblockMode());
+        if (list == null) return;
+
+//        Chat.send("tried to drop hotbar " + hotbarSlot + " which is inventory " + (inventorySlotId));
+        if (list.contains(inventorySlotId)) {
+//            Chat.send("slot drop prevented");
+            cb.setReturnValue(false);
+            return;
+        }
+
 
         //? if >=1.20.2 {
         /*if (itemStack.getItem() instanceof PlayerHeadItem) {

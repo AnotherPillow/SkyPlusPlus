@@ -1,23 +1,33 @@
 package com.anotherpillow.skyplusplus.mixin;
 
+import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.features.ShareButton;
+import com.anotherpillow.skyplusplus.features.SlotLocker;
 import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
+import com.anotherpillow.skyplusplus.keybinds.LockSlotBind;
 import com.anotherpillow.skyplusplus.util.Chat;
+import com.anotherpillow.skyplusplus.util.Server;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.JsonOps;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 //? if >=1.20.1 {
 /*import net.minecraft.client.gui.DrawContext;
  *///?} else {
 //?}
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
 import net.minecraft.client.texture.Sprite;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -28,6 +38,7 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -45,6 +56,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -55,6 +67,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Mixin(HandledScreen.class)
 public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen implements ScreenHandlerProvider<T> {
@@ -62,7 +75,17 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
     protected T handler;
 
     @Shadow
+    protected int x;
+
+    @Shadow
+    protected int y;
+
+    @Shadow
     public abstract T getScreenHandler();
+
+    @Shadow
+    public static void drawSlotHighlight(MatrixStack matrices, int x, int y, int z) {}
+
     // WILL BE IGNORED. DO NOT USE
     protected HandledScreenMixin(Text title) {
         super(title);
@@ -71,13 +94,51 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
     @Invoker("isPointOverSlot")
     protected abstract boolean invokeIsPointOverSlot(Slot slot, double pointX, double pointY);
 
-    @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawSlot(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/screen/slot/Slot;)V", at = @At("TAIL"))
+    @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawSlot(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/screen/slot/Slot;)V", at = @At("HEAD"))
     public void drawSlot(MatrixStack matrices, Slot slot, CallbackInfo ci) {
 //        HandledScreen.drawSprite(matrices, slot.x, slot.y, 20, 16, 16, );
-        Pair<Identifier, Identifier> bg = slot.getBackgroundSprite();
-        if (bg == null) return;
-        Chat.send("x: " + slot.x + "y: " + slot.y);
-        Chat.send("\\-> " + bg.getFirst().toString() + ", " + bg.getSecond().toString());
+//        Pair<Identifier, Identifier> bg = slot.getBackgroundSprite();
+//        slot.bac
+//        if (bg == null || this.client == null) return;
+        HandledScreen<?> screen = (HandledScreen<?>) (Object) this;
+        ScreenHandler handler = screen.getScreenHandler();   // 1.19+ : screen.getScreenHandler()
+//        int totalSlots = handler.slots.size();               // every slot shown on this screen
+//        int thisSlotIndex = slot.id;
+//        int x = slot.x;                                  // left coordinate on the texture
+//        int y = slot.y;                                  // top  coordinate on the texture
+//        int w = 16;                                      // width  (vanilla slots are 16×16)
+//        int h = 16;                                      // height
+
+        if (this.client == null) return;
+
+        // why? idk
+        int playerInvStart = handler.slots.size() - (this.client.currentScreen instanceof InventoryScreen ? 37 : 36);
+        int indexInInventory = slot.id - playerInvStart;
+
+        // Example: print the size of the currently open container
+//        Chat.send(String.format("Container has %d slots (drawing slot %d at %d,%d)%n",
+//                totalSlots, thisSlotIndex, x, y));
+
+//        if (this.client == null || !(this.client.currentScreen instanceof InventoryScreen)) return;
+        IntArrayList lockedSlots = SlotLocker.lockedSlots.get(Server.getSkyblockMode());
+        if (lockedSlots != null && lockedSlots.contains(indexInInventory)) {
+            RenderSystem.setShaderTexture(0, SkyPlusPlusClient.lockId);
+            DrawableHelper.drawTexture(
+                    matrices,
+                    slot.x,
+                    slot.y,
+                    0f,
+                    0f,
+                    16,
+                    16,
+                    16,
+                    16
+            );
+        }
+
+
+//        Chat.send("x: " + slot.x + "y: " + slot.y);
+//        Chat.send("\\-> " + bg.getFirst().toString() + ", " + bg.getSecond().toString());
     }
 
     //? if >=1.20.1 {
@@ -92,6 +153,7 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
             var slot = this.handler.slots.get(k);
             if (this.invokeIsPointOverSlot(slot, (double) mouseX, (double) mouseY)) {
                 HoverNBTCopy.hoveredItem = slot.getStack();
+                SlotLocker.hoveredSlot = slot;
 
                 /* for future reference: get the title.
                 if (this.title != null) {
@@ -100,6 +162,30 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                 }*/
             }
         }
+    }
+
+    @Inject(method = "keyPressed(III)Z", at = @At("HEAD"), cancellable = true)
+    public void keyPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
+        InputUtil.Key lockslotKey = KeyBindingHelper.getBoundKeyOf(LockSlotBind.binding);
+
+        if (keyCode == lockslotKey.getCode()) {
+            LockSlotBind.logic(MinecraftClient.getInstance());
+            cir.cancel();
+        }
+    }
+
+    // quick moving with keys still just runs onMouseClick
+    @Inject(method = "onMouseClick(Lnet/minecraft/screen/slot/Slot;IILnet/minecraft/screen/slot/SlotActionType;)V", at = @At("HEAD"), cancellable = true)
+    public void onMouseClick(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci) {
+        IntArrayList list = SlotLocker.lockedSlots.get(Server.getSkyblockMode());
+        if (this.client == null || slot == null || list == null) return;
+
+        HandledScreen<?> screen = (HandledScreen<?>) (Object) this;
+        ScreenHandler handler = screen.getScreenHandler();
+        int playerInvStart = handler.slots.size() - (this.client.currentScreen instanceof InventoryScreen ? 37 : 36);
+        int indexInInventory = slot.id - playerInvStart;
+
+        if (list.contains(indexInInventory)) ci.cancel();
     }
 
     @Inject(method = "init", at = @At("TAIL"))
@@ -218,8 +304,6 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
 
                         });
                     })
-
-
                     //? if >1.19.2 {
                             /*.position(midX + 90, midY - 60).size(60, 20).build()
                     *///?} else {

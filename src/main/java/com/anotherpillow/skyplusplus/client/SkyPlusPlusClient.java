@@ -3,6 +3,7 @@ package com.anotherpillow.skyplusplus.client;
 import com.anotherpillow.skyplusplus.commands.*;
 import com.anotherpillow.skyplusplus.features.*;
 import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
+import com.anotherpillow.skyplusplus.keybinds.LockSlotBind;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -16,6 +17,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 
@@ -41,6 +43,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
     public static final String NAME;
     public static final Logger LOG;
     public static final String VERSION;
+    public static final Identifier lockId = Identifier.of(MOD_ID, "textures/lockedicon16x.png");
 
     public static SkyPlusPlusConfig config;
     public static MinecraftClient client;
@@ -61,6 +64,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
         BetterCrateKeys.register();
         ShowEmptyShops.register();
         HoverNBTCopy.register();
+        LockSlotBind.register();
 
         if (config.enableDiscordRPC)
             DiscordRPC.start();
