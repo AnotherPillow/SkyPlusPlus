@@ -8,13 +8,15 @@
     "ScoreboardObjectiveMixin"
   ],
   "client": [
-    "NbtTagSizeTrackerMixin",
     "ChatMixin",
     "ChatScreenMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
+    "GenericContainerScreenMixin",
+    "ScreenAccessor",
     "HandledScreenMixin",
     "InGameHudMixin",
+    "NbtTagSizeTrackerMixin",
     "PlayerListHudMixin",
     "ScreenMixin"
   ],

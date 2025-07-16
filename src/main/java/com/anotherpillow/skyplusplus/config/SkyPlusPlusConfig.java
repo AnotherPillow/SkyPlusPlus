@@ -71,6 +71,8 @@ public class SkyPlusPlusConfig {
 
     @ConfigEntry public boolean betterChangeBiomeEnabled = true;
     @ConfigEntry public boolean betterCrateKeysEnabled = true;
+    @ConfigEntry public boolean cleanAdGuiEnabled = true;
+    @ConfigEntry public boolean cleanQuestGuiEnabled = true;
     @ConfigEntry public boolean showEmptyShopsEnabled = true;
     @ConfigEntry public boolean dynamicScoreboardTitle = true;
 
@@ -488,6 +490,34 @@ public class SkyPlusPlusConfig {
                                 .tooltip(Text.translatable("skyplusplus.config.better-items-uis.better-crate-keys-desc"))
                                 //?}
                                 .binding(defaults.betterCrateKeysEnabled, () -> config.betterCrateKeysEnabled, v -> config.betterCrateKeysEnabled = v)
+                                //? if >1.19.2 {
+                                /*.controller(TickBoxControllerBuilder::create)
+                                *///?} else {
+                                .controller(TickBoxController::new)
+                                 //?}
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.translatable("skyplusplus.config.better-items-uis.clean-ads-gui"))
+                                //? if >1.19.2 {
+                                /*.description(OptionDescription.of(Text.translatable("skyplusplus.config.better-items-uis.clean-ads-gui-desc")))
+                                *///?} else {
+                                .tooltip(Text.translatable("skyplusplus.config.better-items-uis.clean-ads-gui-desc"))
+                                //?}
+                                .binding(defaults.cleanAdGuiEnabled, () -> config.cleanAdGuiEnabled, v -> config.cleanAdGuiEnabled = v)
+                                //? if >1.19.2 {
+                                /*.controller(TickBoxControllerBuilder::create)
+                                *///?} else {
+                                .controller(TickBoxController::new)
+                                 //?}
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.translatable("skyplusplus.config.better-items-uis.clean-quests-gui"))
+                                //? if >1.19.2 {
+                                /*.description(OptionDescription.of(Text.translatable("skyplusplus.config.better-items-uis.clean-ads-gui-desc")))
+                                *///?} else {
+                                .tooltip(Text.translatable("skyplusplus.config.better-items-uis.clean-quests-gui-desc"))
+                                //?}
+                                .binding(defaults.cleanQuestGuiEnabled, () -> config.cleanQuestGuiEnabled, v -> config.cleanQuestGuiEnabled = v)
                                 //? if >1.19.2 {
                                 /*.controller(TickBoxControllerBuilder::create)
                                 *///?} else {

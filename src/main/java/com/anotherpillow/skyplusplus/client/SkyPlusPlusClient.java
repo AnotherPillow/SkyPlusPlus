@@ -45,6 +45,10 @@ public class SkyPlusPlusClient implements ClientModInitializer {
     public static final Logger LOG;
     public static final String VERSION;
     public static final Identifier lockId = Identifier.of(MOD_ID, "textures/lockedicon16x.png");
+    public static final Identifier cleanAdBackground  = Identifier.of(MOD_ID, "textures/gui/cleanadgui.png");
+    public static final Identifier cleanAdProfileBackground  = Identifier.of(MOD_ID, "textures/gui/cleanadgui-profile.png");
+    public static final Identifier cleanQuestsMainBackground  = Identifier.of(MOD_ID, "textures/gui/cleanquestsgui-main.png");
+    public static final Identifier cleanQuestsShopBackground  = Identifier.of(MOD_ID, "textures/gui/cleanquestsgui-shop.png");
 
     public static SkyPlusPlusConfig config;
     public static MinecraftClient client;
@@ -64,8 +68,11 @@ public class SkyPlusPlusClient implements ClientModInitializer {
         BetterChangeBiome.register();
         BetterCrateKeys.register();
         ShowEmptyShops.register();
+        CleanGuiBackgrounds.register();
+
         HoverNBTCopy.register();
         LockSlotBind.register();
+
         try {
             SlotLocker.load();
         } catch (IOException e) {
