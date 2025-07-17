@@ -17,17 +17,8 @@ public class SmartTP {
     public static void teleport(String username) {
         MinecraftClient client = MinecraftClient.getInstance();
 
-        //? if >1.19.2 {
-        /*ClientPlayNetworkHandler handler = client.getNetworkHandler();
-        if (handler == null) return;
-        handler.sendCommand("unlock");
-        handler.sendCommand("tpahere" + username);
-        *///?} else {
-        ClientPlayerEntity player = client.player;
-        if (player == null) return;
-        player.sendCommand("unlock", Text.empty());
-        player.sendCommand("tpahere " + username, Text.empty());
-         //?}
+        Chat.sendCommandToServer("unlock");
+        Chat.sendCommandToServer("tpahere " + username);
 
 
         awaitingLock = true;
@@ -40,9 +31,9 @@ public class SmartTP {
 
 
                 //? if >1.19.2 {
-                /*handler.sendCommand("lock");
+                /*Chat.sendCommandToServer("lock");
                 *///?} else {
-                player.sendCommand("lock", Text.empty());
+                Chat.sendCommandToServer("lock");
                  //?}
             }
         };
@@ -73,9 +64,9 @@ public class SmartTP {
                 awaitingLock = false;
 
                 //? if >1.19.2 {
-                /*handler.sendCommand("lock");
+                /*Chat.sendCommandToServer("lock");
                 *///?} else {
-                player.sendCommand("lock", Text.empty());
+                Chat.sendCommandToServer("lock");
                  //?}
             }
         };

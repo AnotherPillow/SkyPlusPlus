@@ -62,9 +62,12 @@ public class SkyPlusPlusClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+
         SkyPlusPlusConfig.configInstance.load();
         config = SkyPlusPlusConfig.configInstance.getConfig();
         client = MinecraftClient.getInstance();
+        Chatcryption.generateKeysAndSave();
+
         BetterChangeBiome.register();
         BetterCrateKeys.register();
         ShowEmptyShops.register();

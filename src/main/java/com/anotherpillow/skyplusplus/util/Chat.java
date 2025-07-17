@@ -1,6 +1,7 @@
 package com.anotherpillow.skyplusplus.util;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
@@ -34,6 +35,19 @@ public class Chat {
     public static void _sendTitle(Text text, int fadein, int stay, int fadeout) {
         client.inGameHud.setTitleTicks(fadein, stay, fadeout);
         client.inGameHud.setTitle(text);
+    }
+
+    // e.g. sendCommandToServer("tpahere Noobcrew")
+    public static void sendCommandToServer(String noSlashCommandWithAllArguments) {
+        //? if >1.19.2 {
+        /*ClientPlayNetworkHandler handler = client.getNetworkHandler();
+        if (handler == null) return;
+        handler.sendCommand(noSlashCommandWithAllArguments);
+        *///?} else {
+        ClientPlayerEntity player = client.player;
+        if (player == null) return;
+        player.sendCommand(noSlashCommandWithAllArguments, Text.empty());
+        //?}
     }
 
 }

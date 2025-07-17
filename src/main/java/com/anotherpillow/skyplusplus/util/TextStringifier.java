@@ -63,6 +63,6 @@ public class TextStringifier {
             return Optional.empty();
         }, Style.EMPTY);
 
-        return out.toString();
+        return out.toString().replaceAll("§", "&");
     }
 }
