@@ -84,6 +84,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean antiGrassPlace = false;
     @ConfigEntry public boolean lowerCommandsEnabled = true;
     @ConfigEntry public String joinCommandsList = "";
+    @ConfigEntry public boolean copyChatMessageButtonEnabled = false;
 
     @ConfigEntry public boolean enableDiscordRPC = true;
 
@@ -652,6 +653,20 @@ public class SkyPlusPlusConfig {
                                 *///?} else {
                                 .controller(StringController::new)
                                  //?}
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.translatable("skyplusplus.config.tweaks-improvements.copy-chat-message"))
+                                //? if >1.19.2 {
+                                /*.description(OptionDescription.of(Text.translatable("skyplusplus.config.tweaks-improvements.copy-chat-message")))
+                                 *///?} else {
+                                .tooltip(Text.translatable("skyplusplus.config.tweaks-improvements.copy-chat-message-desc"))
+                                //?}
+                                .binding(defaults.copyChatMessageButtonEnabled, () -> config.copyChatMessageButtonEnabled, v -> config.copyChatMessageButtonEnabled = v)
+                                //? if >1.19.2 {
+                                /*.controller(TickBoxControllerBuilder::create)
+                                 *///?} else {
+                                .controller(TickBoxController::new)
+                                //?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()

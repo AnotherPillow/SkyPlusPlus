@@ -113,6 +113,8 @@
   "skyplusplus.config.tweaks-improvements.automatic-lowercase-commands-desc": "Automatically converts commands to lowercase.",
   "skyplusplus.config.tweaks-improvements.join-commands": "Join Commands",
   "skyplusplus.config.tweaks-improvements.join-commands-desc": "Commands to run upon joining the server. Separate with ,. Leave empty for none.",
+  "skyplusplus.config.tweaks-improvements.copy-chat-message": "Copy Chat Messages",
+  "skyplusplus.config.tweaks-improvements.copy-chat-message-desc": "Adds a <c> button to the start of chat messages to copy them.",
 
   "skyplusplus.config.discord-rpc.title": "Discord RPC",
   "skyplusplus.config.discord-rpc.enable": "Enable Discord RPC",

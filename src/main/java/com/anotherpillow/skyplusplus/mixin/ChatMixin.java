@@ -3,10 +3,14 @@ package com.anotherpillow.skyplusplus.mixin;
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.features.*;
 import com.anotherpillow.skyplusplus.util.Chat;
+import com.anotherpillow.skyplusplus.util.TextStringifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.MessageIndicator;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.HoverEvent;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.network.message.MessageSignatureData;
@@ -124,6 +128,11 @@ public abstract class ChatMixin {
 
         if (SkyPlusPlusClient.config.removeChatRanks) {
             addMessage(RemoveChatRanks.process(message), signature, client.inGameHud.getTicks(), indicator, false);
+            ci.cancel();
+        }
+
+        if (SkyPlusPlusClient.config.copyChatMessageButtonEnabled) {
+            addMessage(TextStringifier.prefixButton(message), signature, client.inGameHud.getTicks(), indicator, false);
             ci.cancel();
         }
 
