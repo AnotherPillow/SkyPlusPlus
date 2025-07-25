@@ -3,6 +3,7 @@ package com.anotherpillow.skyplusplus.mixin;
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.features.*;
 import com.anotherpillow.skyplusplus.util.Chat;
+import com.anotherpillow.skyplusplus.util.Server;
 import com.anotherpillow.skyplusplus.util.TextStringifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
@@ -107,11 +108,11 @@ public abstract class ChatMixin {
         if (config.autoRaffleEnabled && (
                 StringChecker.playersOnlineJoinCheck(message) || StringChecker.raffleWinCheck(message)
             )) {
-            //? if >1.19.2 {
-            /*mc.getNetworkHandler().sendChatMessage("raffle buy 5");
-            *///?} else {
-            mc.player.sendCommand("raffle buy 5");
-             //?}
+            if (Server.onSkyblock()) {
+                if (Server.getSkyblockMode() == Server.Mode.ECONOMY ||
+                    Server.getSkyblockMode() == Server.Mode.SURVIVAL
+                ) Chat.sendCommandToServer("raffle buy 5");
+            }
         }
 
 
