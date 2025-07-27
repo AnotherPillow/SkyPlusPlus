@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.screen;
 
+import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
@@ -18,6 +19,8 @@ import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 
 public class TraderImage {
     public static void draw(MatrixStack matrixStack) {
+        // not draw in f1
+        if (SkyPlusPlusClient.client.options.hudHidden) return;
         Matrix4f positionMatrix = matrixStack.peek().getPositionMatrix();
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
@@ -30,8 +33,6 @@ public class TraderImage {
         buffer.vertex(positionMatrix, config.traderX + 32, config.traderY + 32, 0).color(1f, 1f, 1f, 1f).texture(1f, 1f).next();
         buffer.vertex(positionMatrix, config.traderX + 32, config.traderY, 0).color(1f, 1f, 1f, 1f).texture(1f, 0f).next();
 
-
-        //set net.minecraft.client.render.GameRenderer to a variable a
 
         //? if >1.19.2 {
 
