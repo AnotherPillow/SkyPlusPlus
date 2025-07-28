@@ -4,6 +4,7 @@ import com.anotherpillow.skyplusplus.commands.*;
 import com.anotherpillow.skyplusplus.features.*;
 import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
 import com.anotherpillow.skyplusplus.keybinds.LockSlotBind;
+import com.anotherpillow.skyplusplus.keybinds.ShopsTradingBind;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -72,6 +73,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
 
         HoverNBTCopy.register();
         LockSlotBind.register();
+        ShopsTradingBind.register();
 
         try {
             SlotLocker.load();

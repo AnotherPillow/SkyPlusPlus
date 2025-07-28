@@ -6,6 +6,7 @@ import com.anotherpillow.skyplusplus.features.ShareButton;
 import com.anotherpillow.skyplusplus.features.SlotLocker;
 import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
 import com.anotherpillow.skyplusplus.keybinds.LockSlotBind;
+import com.anotherpillow.skyplusplus.keybinds.ShopsTradingBind;
 import com.anotherpillow.skyplusplus.util.Chat;
 import com.anotherpillow.skyplusplus.util.Server;
 import com.google.gson.Gson;
@@ -158,6 +159,7 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
             if (this.invokeIsPointOverSlot(slot, (double) mouseX, (double) mouseY)) {
                 HoverNBTCopy.hoveredItem = slot.getStack();
                 SlotLocker.hoveredSlot = slot;
+                ShopsTradingBind.hoveredSlot = slot;
 
                 /* for future reference: get the title.
                 if (this.title != null) {

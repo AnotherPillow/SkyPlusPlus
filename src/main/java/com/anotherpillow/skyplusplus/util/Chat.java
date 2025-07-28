@@ -4,6 +4,11 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+//? if >1.19.2 {
+/*import net.minecraft.client.network.ClientPlayNetworkHandler;
+*///?} else {
+
+//?}
 
 public class Chat {
     public static String logo = "§8§l[§b§lSky§3§l++§8§l]§r ";
