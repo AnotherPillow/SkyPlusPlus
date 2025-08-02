@@ -1,6 +1,10 @@
 package com.anotherpillow.skyplusplus.util;
 
 import net.minecraft.client.MinecraftClient;
+//? if >1.19.2 {
+/*import net.minecraft.client.network.ClientPlayNetworkHandler;
+*///?} else {
+//?}
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -39,7 +43,7 @@ public class Chat {
 
     // e.g. sendCommandToServer("tpahere Noobcrew")
     public static void sendCommandToServer(String noSlashCommandWithAllArguments) {
-        //? if >1.19.2 {
+        //? if >1.19.4 {
         /*ClientPlayNetworkHandler handler = client.getNetworkHandler();
         if (handler == null) return;
         handler.sendCommand(noSlashCommandWithAllArguments);
