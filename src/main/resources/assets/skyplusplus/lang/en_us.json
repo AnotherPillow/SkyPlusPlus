@@ -117,6 +117,8 @@
   "skyplusplus.config.tweaks-improvements.join-commands-desc": "Commands to run upon joining the server. Separate with ,. Leave empty for none.",
   "skyplusplus.config.tweaks-improvements.copy-chat-message": "Copy Chat Messages",
   "skyplusplus.config.tweaks-improvements.copy-chat-message-desc": "Adds a <c> button to the start of chat messages to copy them.",
+  "skyplusplus.config.tweaks-improvements.chatcryption": "Chatcryption",
+  "skyplusplus.config.tweaks-improvements.chatcryption-desc": "RSA encrypts private message communications. Requires all players you are messaging to use Sky++ with this enabled, it won't downgrade to plaintext.",
 
   "skyplusplus.config.discord-rpc.title": "Discord RPC",
   "skyplusplus.config.discord-rpc.enable": "Enable Discord RPC",

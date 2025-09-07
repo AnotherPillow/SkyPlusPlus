@@ -1,6 +1,10 @@
 package com.anotherpillow.skyplusplus.util;
 
 import net.minecraft.client.MinecraftClient;
+//? if >1.19.2 {
+/*import net.minecraft.client.network.ClientPlayNetworkHandler;
+*///?} else {
+//?}
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;

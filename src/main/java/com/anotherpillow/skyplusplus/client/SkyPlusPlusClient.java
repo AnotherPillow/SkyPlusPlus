@@ -63,9 +63,12 @@ public class SkyPlusPlusClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+
         SkyPlusPlusConfig.configInstance.load();
         config = SkyPlusPlusConfig.configInstance.getConfig();
         client = MinecraftClient.getInstance();
+        Chatcryption.generateKeysAndSave();
+
         BetterChangeBiome.register();
         BetterCrateKeys.register();
         ShowEmptyShops.register();
@@ -144,6 +147,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             GetHeadTextureCommand.register(dispatcher);
             GetNBTJsonCommand.register(dispatcher);
             ShareCommand.register(dispatcher);
+            SinkholeCommand.register(dispatcher);
         });
 
         AttackBlockCallback.EVENT.register((PlayerEntity player, World world, Hand hand, BlockPos pos, Direction direction) -> {

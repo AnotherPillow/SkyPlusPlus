@@ -24,6 +24,7 @@ public class StringChecker {
     public static Pattern playersOnlineJoinPattern = Pattern.compile("Players online: \\(\\d+/\\d+\\) - World Time: \\d+:\\d+ [A-Z]M");
     public static Pattern raffleWinPattern = Pattern.compile("\\[SBRaffle\\] Congratulations go to [A-Z0-9_\\.]+ for winning [0-9\\.]+$ with \\d tickets");
     public static Pattern visitingTitlePattern = Pattern.compile("§6\\-=§e[A-Za-z0-9_\\.]{1,16}'s Island§6=\\-"); // even names ending with "s" still have "'s"
+    public static Pattern directMessageRawPattern = Pattern.compile("^(?:<c>)?\\[(?:\\[[A-Za-z]+?\\] )?([A-Za-z0-9\\_]{0,16})(?:@[a-zA-Z0-9\\_\\-]+)? -> me\\] (.+)");
 
     public static String COLOUR_CODE_STRING = "[&§][0-9a-fkrl-o]";
     public static Pattern COLOUR_CODE = Pattern.compile(COLOUR_CODE_STRING);

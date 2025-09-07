@@ -63,6 +63,6 @@ public class TextStringifier {
             return Optional.empty();
         }, Style.EMPTY);
 
-        return out.toString().replace("§", "&");
+        return out.toString().replaceAll("§", "&").replaceAll("&r", "&f"); // r is banned but f is default.
     }
 }

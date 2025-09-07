@@ -1,12 +1,11 @@
 package com.anotherpillow.skyplusplus.mixin;
 
+import com.anotherpillow.skyplusplus.features.Chatcryption;
 import com.anotherpillow.skyplusplus.features.SlotLocker;
 import com.anotherpillow.skyplusplus.util.Server;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 // was yarn 1.20.2-pre3 i think
 //? if >=1.20.2 {
@@ -17,13 +16,17 @@ import net.minecraft.item.SkullItem;
 
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
+import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.util.Chat;
+
+import java.util.Arrays;
+
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {
 
@@ -57,5 +60,64 @@ public class ClientPlayerEntityMixin {
                 cb.setReturnValue(false);
             }
         }
+    }
+
+    @ModifyArg(
+            method = "sendChatMessage(Ljava/lang/String;Lnet/minecraft/text/Text;)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendChatMessageInternal(Ljava/lang/String;Lnet/minecraft/text/Text;)V"
+            ),
+            index = 0
+    )
+    private String sendChatMessage(String message) {
+        // intercept chat messages NOT commands
+        return message;
+    }
+    @ModifyArg(
+            method = "sendCommand(Ljava/lang/String;Lnet/minecraft/text/Text;)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendCommandInternal(Ljava/lang/String;Lnet/minecraft/text/Text;)V"
+            ),
+            index = 0
+    )
+    private String sendCommand(String command) {
+        SkyPlusPlusClient.LOG.info("Intercepted sending command: {}", command);
+        // intercept commands without leading slash
+        String[] _parts = command.split(" ");
+        String name = _parts[0];
+        String content = String.join(" ", Arrays.copyOfRange(_parts, 1, _parts.length));
+
+        // Chat.send("sending command: " + command);
+        // Chat.send("command as colours:" + Chatcryption.obfuscateBytesAsColour(command).replaceAll("&", "§"));
+
+        if (!SkyPlusPlusClient.config.chatcryptionEnabled) return command;
+
+        if (Chatcryption.messageAliases.contains(name)) {
+            String[] _cparts = content.split(" ");
+            String destname = _cparts[0];
+            String mcontent = String.join(" ", Arrays.copyOfRange(_cparts, 1, _cparts.length));
+            // Chat.send("sending dm with content: [" + mcontent + "], does it start with start sign?" + mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN));
+            if (mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN)) return command;
+
+            Chatcryption.processOutgoingChatMessage(destname, mcontent);
+            return "sky++_sinkhole";
+        }
+        if (Chatcryption.replyAliases.contains(name)) {
+            String[] _cparts = content.split(" ");
+
+            if (Chatcryption.lastCommunicatedUser == null) return command;
+
+            String mcontent = String.join(" ", Arrays.copyOfRange(_cparts, 1, _cparts.length));
+            // Chat.send("sending dm with content: [" + mcontent + "], does it start with start sign?" + mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN));
+            if (mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN)) return command;
+
+            Chatcryption.processOutgoingChatMessage(Chatcryption.lastCommunicatedUser, mcontent);
+            return "sky++_sinkhole";
+        }
+
+
+        return command;
     }
 }

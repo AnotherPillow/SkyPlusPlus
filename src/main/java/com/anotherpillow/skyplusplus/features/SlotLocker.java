@@ -14,6 +14,8 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.anotherpillow.skyplusplus.util.Filesystem.resolveConfigPath;
+
 public class SlotLocker {
     public static Slot hoveredSlot = null;
     public static ConcurrentHashMap<Server.Mode, IntArrayList> lockedSlots = new ConcurrentHashMap<>();
@@ -21,12 +23,6 @@ public class SlotLocker {
     private static final Path CONFIG_FILE = resolveConfigPath("skyplusplus-slots.json");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Type MAP_TYPE = new TypeToken<ConcurrentHashMap<Server.Mode, int[]>>() {}.getType();
-
-    private static Path resolveConfigPath(String fileName) {
-        return net.fabricmc.loader.api.FabricLoader.getInstance()
-            .getConfigDir()
-            .resolve(fileName);
-    }
 
     public static void save() throws IOException {
         // Convert IntArrayList → int[] for JSON
