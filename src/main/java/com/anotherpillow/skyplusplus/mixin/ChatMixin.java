@@ -44,6 +44,11 @@ public abstract class ChatMixin {
 //        System.out.println(Text.Serializer.toJson(text_message));
         String message = text_message.getString();
 
+        if (message.contains(Chatcryption.MESSAGE_START_SIGN) && Chatcryption.processIncomingMessage(text_message)) {
+            callback.cancel();
+            return;
+        }
+
         if (config.hideVisitingMessages
             && StringChecker.welcomeIslandCheck(message))
                 callback.cancel();

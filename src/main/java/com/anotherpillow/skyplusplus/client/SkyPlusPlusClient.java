@@ -145,6 +145,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             GetHeadTextureCommand.register(dispatcher);
             GetNBTJsonCommand.register(dispatcher);
             ShareCommand.register(dispatcher);
+            SinkholeCommand.register(dispatcher);
         });
 
         AttackBlockCallback.EVENT.register((PlayerEntity player, World world, Hand hand, BlockPos pos, Direction direction) -> {

@@ -1,4 +1,5 @@
 run/
+run*/
 build/
 remappedSrc/
 .gradle/
