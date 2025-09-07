@@ -2,6 +2,7 @@ package com.anotherpillow.skyplusplus.mixin;
 
 import com.anotherpillow.skyplusplus.keybinds.HoverNBTCopy;
 import com.anotherpillow.skyplusplus.keybinds.LockSlotBind;
+import com.anotherpillow.skyplusplus.keybinds.ShopsTradingBind;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -21,10 +22,24 @@ public class ScreenMixin {
         InputUtil.Key hoverNbtKey = KeyBindingHelper.getBoundKeyOf(HoverNBTCopy.binding);
         InputUtil.Key lockslotKey = KeyBindingHelper.getBoundKeyOf(LockSlotBind.binding);
 
+        InputUtil.Key sellingKey = KeyBindingHelper.getBoundKeyOf(ShopsTradingBind.sellingBinding);
+        InputUtil.Key buyingKey = KeyBindingHelper.getBoundKeyOf(ShopsTradingBind.buyingBinding);
+
         if (keyCode == hoverNbtKey.getCode()) {
             HoverNBTCopy.logic(MinecraftClient.getInstance());
             cir.cancel();
         }
+        if (MinecraftClient.getInstance().currentScreen instanceof HandledScreen<?>) {
+            if (keyCode == sellingKey.getCode()) {
+                ShopsTradingBind.logic(MinecraftClient.getInstance(), false);
+                cir.cancel();
+            }
+            if (keyCode == buyingKey.getCode()) {
+                ShopsTradingBind.logic(MinecraftClient.getInstance(), true);
+                cir.cancel();
+            }
+        }
+
     }
 
 }

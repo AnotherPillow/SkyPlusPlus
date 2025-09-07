@@ -22,6 +22,8 @@ public class TraderCountdown {
 
     public static void draw(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/, String txt, int textOffset) {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
+        // not draw in f1
+        if (SkyPlusPlusClient.client.options.hudHidden) return;
 
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
         //? if >=1.20.1 {
