@@ -148,6 +148,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
             GetNBTJsonCommand.register(dispatcher);
             ShareCommand.register(dispatcher);
             SinkholeCommand.register(dispatcher);
+            GetNearbyPlayersCommand.register(dispatcher);
         });
 
         AttackBlockCallback.EVENT.register((PlayerEntity player, World world, Hand hand, BlockPos pos, Direction direction) -> {

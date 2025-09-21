@@ -30,10 +30,14 @@ public class TextStringifier {
     }
 
     public static String from(Text text) {
+        if (text == null) return "";
         StringBuilder out = new StringBuilder();
         MutableObject<Style> last = new MutableObject<>(Style.EMPTY);
 
         text.visit((style, string) -> {
+
+            if (style == null) style = Style.EMPTY;
+
             if (!style.equals(last.getValue())) {
                 out.append("&r");
                 last.setValue(style);

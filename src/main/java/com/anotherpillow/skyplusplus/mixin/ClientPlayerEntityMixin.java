@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
@@ -52,9 +53,9 @@ public class ClientPlayerEntityMixin {
 
         //? if >=1.20.2 {
         /*if (itemStack.getItem() instanceof PlayerHeadItem) {
-        *///?} else {
-        if (itemStack.getItem() instanceof SkullItem) {
-         //?}
+            *///?} else {
+            if (itemStack.getItem() instanceof SkullItem) {
+             //?}
             if (config.preventHeadDropping) {
                 client.inGameHud.getChatHud().addMessage(Text.of(String.valueOf(Chat.addLogo(Text.translatable("skyplusplus.preventheaddropping.prevented-drop", name)))));
                 cb.setReturnValue(false);
@@ -62,17 +63,33 @@ public class ClientPlayerEntityMixin {
         }
     }
 
-    @ModifyArg(
-            method = "sendChatMessage(Ljava/lang/String;Lnet/minecraft/text/Text;)V",
+
+    //? if >=1.20.1 {
+    /*@Inject(
+            method = "Lnet/minecraft/client/network/ClientPlayerEntity;sendMessage(Lnet/minecraft/text/Text;Z)V",
             at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendChatMessageInternal(Ljava/lang/String;Lnet/minecraft/text/Text;)V"
+                    value = "HEAD"
             ),
-            index = 0
+            cancellable = true
+    )
+    private void sendChatMessage(Text message, boolean overlay, CallbackInfo ci) {
+        *///?} else {
+    @ModifyArg(
+        method = "sendChatMessage(Ljava/lang/String;Lnet/minecraft/text/Text;)V",
+        at = @At(
+                value = "INVOKE",
+                target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendChatMessageInternal(Ljava/lang/String;Lnet/minecraft/text/Text;)V"
+        ),
+        index = 0
     )
     private String sendChatMessage(String message) {
+        //?}
         // intercept chat messages NOT commands
+        //? if >=1.20.1 {
+         
+        //?} else {
         return message;
+         //?}
     }
     @ModifyArg(
             method = "sendCommand(Ljava/lang/String;Lnet/minecraft/text/Text;)V",
