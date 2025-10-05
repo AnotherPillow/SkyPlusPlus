@@ -12,12 +12,13 @@
     "ChatScreenMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
+    "ClientPlayNetworkHandlerMixin",
     "GenericContainerScreenMixin",
-    "ScreenAccessor",
     "HandledScreenMixin",
     "InGameHudMixin",
     "NbtTagSizeTrackerMixin",
     "PlayerListHudMixin",
+    "ScreenAccessor",
     "ScreenMixin"
   ],
   "injectors": {

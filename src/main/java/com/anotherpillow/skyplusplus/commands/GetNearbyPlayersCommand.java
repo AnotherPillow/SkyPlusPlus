@@ -19,25 +19,25 @@ public class GetNearbyPlayersCommand {
 
         dispatcher.register(ClientCommandManager.literal("nearbyplayerinfo").executes(context -> {
 
-            getPlayers();
-            for (AbstractClientPlayerEntity player : players) {
-                Chat.send(Text.empty()
-                        .append("name: ")
-                        .append(player.getName())
-                        .append(", entity name: ")
-                        .append(Text.of(player.getEntityName() == null ? "<null>" : player.getEntityName()))
-                        .append(", custom name: ")
-                        .append(player.getCustomName() == null ? Text.of("<null>") : player.getCustomName())
-                        .append(", display name: ")
-                        .append(player.getDisplayName() == null ? Text.of("<null>") : player.getDisplayName())
-                        .append(Text.of(" ("))
-                        .append(Text.of(player.getUuidAsString()))
-                        .append(Text.of("), Cape: "))
-                        .append(Text.of(player.getCapeTexture() == null ? "N/A" : player.getCapeTexture().toString()))
-                        .append(Text.of(", Skin: "))
-                        .append(Text.of(player.getSkinTexture() == null ? "N/A" : player.getSkinTexture().toString()))
-                );
-            }
+//            getPlayers();
+//            for (AbstractClientPlayerEntity player : players) {
+//                Chat.send(Text.empty()
+//                        .append("name: ")
+//                        .append(player.getName())
+//                        .append(", entity name: ")
+//                        .append(Text.of(player.getEntityName() == null ? "<null>" : player.getEntityName()))
+//                        .append(", custom name: ")
+//                        .append(player.getCustomName() == null ? Text.of("<null>") : player.getCustomName())
+//                        .append(", display name: ")
+//                        .append(player.getDisplayName() == null ? Text.of("<null>") : player.getDisplayName())
+//                        .append(Text.of(" ("))
+//                        .append(Text.of(player.getUuidAsString()))
+//                        .append(Text.of("), Cape: "))
+//                        .append(Text.of(player.getCapeTexture() == null ? "N/A" : player.getCapeTexture().toString()))
+//                        .append(Text.of(", Skin: "))
+//                        .append(Text.of(player.getSkinTexture() == null ? "N/A" : player.getSkinTexture().toString()))
+//                );
+//            }
 
             return 1;
         }));

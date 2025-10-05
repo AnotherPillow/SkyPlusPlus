@@ -5,6 +5,7 @@ import com.anotherpillow.skyplusplus.features.SlotLocker;
 import com.anotherpillow.skyplusplus.util.Server;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.client.MinecraftClient;
+import com.anotherpillow.skyplusplus.util.MixinCommon;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 // was yarn 1.20.2-pre3 i think
@@ -64,16 +65,11 @@ public class ClientPlayerEntityMixin {
     }
 
 
-    //? if >=1.20.1 {
-    /*@Inject(
-            method = "Lnet/minecraft/client/network/ClientPlayerEntity;sendMessage(Lnet/minecraft/text/Text;Z)V",
-            at = @At(
-                    value = "HEAD"
-            ),
-            cancellable = true
-    )
-    private void sendChatMessage(Text message, boolean overlay, CallbackInfo ci) {
-        *///?} else {
+    //? if >1.19.2 {
+    //?} else {
+    
+
+
     @ModifyArg(
         method = "sendChatMessage(Ljava/lang/String;Lnet/minecraft/text/Text;)V",
         at = @At(
@@ -83,13 +79,7 @@ public class ClientPlayerEntityMixin {
         index = 0
     )
     private String sendChatMessage(String message) {
-        //?}
-        // intercept chat messages NOT commands
-        //? if >=1.20.1 {
-         
-        //?} else {
-        return message;
-         //?}
+        return MixinCommon.genericChatMixinMethod(message);
     }
     @ModifyArg(
             method = "sendCommand(Ljava/lang/String;Lnet/minecraft/text/Text;)V",
@@ -100,41 +90,9 @@ public class ClientPlayerEntityMixin {
             index = 0
     )
     private String sendCommand(String command) {
-        SkyPlusPlusClient.LOG.info("Intercepted sending command: {}", command);
-        // intercept commands without leading slash
-        String[] _parts = command.split(" ");
-        String name = _parts[0];
-        String content = String.join(" ", Arrays.copyOfRange(_parts, 1, _parts.length));
-
-        // Chat.send("sending command: " + command);
-        // Chat.send("command as colours:" + Chatcryption.obfuscateBytesAsColour(command).replaceAll("&", "§"));
-
-        if (!SkyPlusPlusClient.config.chatcryptionEnabled) return command;
-
-        if (Chatcryption.messageAliases.contains(name)) {
-            String[] _cparts = content.split(" ");
-            String destname = _cparts[0];
-            String mcontent = String.join(" ", Arrays.copyOfRange(_cparts, 1, _cparts.length));
-            // Chat.send("sending dm with content: [" + mcontent + "], does it start with start sign?" + mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN));
-            if (mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN)) return command;
-
-            Chatcryption.processOutgoingChatMessage(destname, mcontent);
-            return "sky++_sinkhole";
-        }
-        if (Chatcryption.replyAliases.contains(name)) {
-            String[] _cparts = content.split(" ");
-
-            if (Chatcryption.lastCommunicatedUser == null) return command;
-
-            String mcontent = String.join(" ", Arrays.copyOfRange(_cparts, 1, _cparts.length));
-            // Chat.send("sending dm with content: [" + mcontent + "], does it start with start sign?" + mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN));
-            if (mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN)) return command;
-
-            Chatcryption.processOutgoingChatMessage(Chatcryption.lastCommunicatedUser, mcontent);
-            return "sky++_sinkhole";
-        }
-
-
-        return command;
+        return MixinCommon.genericCommandMixinMethod(command);
     }
+
+    
+    //?}
 }
