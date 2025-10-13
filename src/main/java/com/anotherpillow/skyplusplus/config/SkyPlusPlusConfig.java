@@ -75,6 +75,7 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean cleanQuestGuiEnabled = true;
     @ConfigEntry public boolean showEmptyShopsEnabled = true;
     @ConfigEntry public boolean dynamicScoreboardTitle = true;
+    @ConfigEntry public boolean reEditPrivateSigns = true;
 
 
     @ConfigEntry public boolean extraTabEnabled = true;
@@ -548,6 +549,20 @@ public class SkyPlusPlusConfig {
                                 .tooltip(Text.translatable("skyplusplus.config.better-items-uis.dynamic-scoreboard-title-desc"))
                                 //?}
                                 .binding(defaults.dynamicScoreboardTitle, () -> config.dynamicScoreboardTitle, v -> config.dynamicScoreboardTitle = v)
+                                //? if >1.19.2 {
+                                /*.controller(TickBoxControllerBuilder::create)
+                                *///?} else {
+                                .controller(TickBoxController::new)
+                                 //?}
+                                .build())
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.translatable("skyplusplus.config.better-items-uis.reedit-private-signs"))
+                                //? if >1.19.2 {
+                                /*.description(OptionDescription.of(Text.translatable("skyplusplus.config.better-items-uis.reedit-private-signs-desc")))
+                                *///?} else {
+                                .tooltip(Text.translatable("skyplusplus.config.better-items-uis.reedit-private-signs-desc"))
+                                //?}
+                                .binding(defaults.reEditPrivateSigns, () -> config.reEditPrivateSigns, v -> config.reEditPrivateSigns = v)
                                 //? if >1.19.2 {
                                 /*.controller(TickBoxControllerBuilder::create)
                                 *///?} else {

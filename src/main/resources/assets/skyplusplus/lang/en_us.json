@@ -99,6 +99,8 @@
   "skyplusplus.config.better-items-uis.show-empty-shops-desc": "Enables showing barriers on the shops screen when they have no stock (may require a restart!)",
   "skyplusplus.config.better-items-uis.dynamic-scoreboard-title": "Dynamic Scoreboard Title",
   "skyplusplus.config.better-items-uis.dynamic-scoreboard-title-desc": "Changes scoreboard title based on connected subserver.",
+  "skyplusplus.config.better-items-uis.reedit-private-signs": "Re-Edit private Signs",
+  "skyplusplus.config.better-items-uis.reedit-private-signs-desc": "Edit private signs after they've been placed with the sign UI.",
 
   "skyplusplus.config.tweaks-improvements.title": "Tweaks/Improvements",
   "skyplusplus.config.tweaks-improvements.extratab": "ExtraTab",

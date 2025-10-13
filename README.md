@@ -39,6 +39,7 @@ Yet another skyblock.net mod for 1.19.2
 | Tool Saver                     | Saves your tools when they run low on durability                                                                                                                                                                                                                                                                                                                                                            |
 | Share Button                   | Adds a button to chests/shulkers to share them to https://skyblock.onl/item quickly.                                                                                                                                                                                                                                                                                                                        |
 | Chatcryption                   | RSA Encrypts private message communications. Communicates public key via plaintext once per session. **Note**: This means if a person communicates changes public keys (e.g. MITM attempted, changed computers without copying key, etc.) messages from them will be unreadable until you restart. Also, there is no downgrading to plaintext and it's either all encrypted or all plaintext.               |
+| Re-Edit Private Signs          | Makes it possible to edit private signs after being placed with the normal sign GUI.                                                                                                                                                                                                                                                                                                                        | 
 
 ## Commands
 
@@ -51,6 +52,7 @@ Yet another skyblock.net mod for 1.19.2
 | `/getheadtexture` | Gets the texture of the head held in your hand                                 |
 | `/getnbtjson`     | Gets the NBT represented as JSON from the current held item.                   |
 | `/share`          | Shares the current held item to https://skyblock.onl/item                      |
+| `/sky++_sinkhole` | Internal command, just discards any input                                      |
 
 ## Keybinds
 

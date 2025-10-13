@@ -4,6 +4,7 @@
   "package": "com.anotherpillow.skyplusplus.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractSignBlockMixin",
     "NbtTagSizeTrackerMixin",
     "ScoreboardObjectiveMixin"
   ],
@@ -19,7 +20,8 @@
     "NbtTagSizeTrackerMixin",
     "PlayerListHudMixin",
     "ScreenAccessor",
-    "ScreenMixin"
+    "ScreenMixin",
+    "SignEditScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
