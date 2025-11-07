@@ -3,6 +3,7 @@ package com.anotherpillow.skyplusplus.mixin;
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.util.Chat;
+import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,20 +17,27 @@ import java.util.Objects;
 
 @Mixin(SignEditScreen.class)
 public class SignEditScreenMixin {
-    @Shadow @Final private String[] text;
+    //? if <1.21 {
+    /*@Shadow @Final private String[] text;
+    *///?}
     @Unique
     private String[] initialText;
 
     @Inject(
-            method="Lnet/minecraft/client/gui/screen/ingame/SignEditScreen;init()V",
+            method="init()V",
             at=@At("TAIL")
     )
     private void init(CallbackInfo ci) {
-        this.initialText = this.text.clone();
+
+        //? if >=1.21 {
+        this.initialText = ((AbstractSignEditScreen)(Object)(this)).text.clone();
+        //?} else {
+        /*this.initialText = this.text.clone();
+         *///?}
     }
 
     @Inject(
-            method="Lnet/minecraft/client/gui/screen/ingame/SignEditScreen;finishEditing()V",
+            method="finishEditing()V",
             at=@At("TAIL")
     )
     private void finishEditing(CallbackInfo ci) {

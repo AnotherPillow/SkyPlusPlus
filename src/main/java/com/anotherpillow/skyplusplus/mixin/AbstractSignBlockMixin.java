@@ -46,7 +46,7 @@ public abstract class AbstractSignBlockMixin {
         // /blocklocker:blocklocker only works for locked signs :(
         if (Objects.equals(firstLine, "[Private]") || Objects.equals(firstLine, "[More Users]")
             || Objects.equals(firstLine, "[Everyone]")) {
-            SignEditScreen ns = new SignEditScreen(signBE, /*? >=1.20.1 {*//*true, *//*?}*/false);
+            SignEditScreen ns = new SignEditScreen(signBE, /*? >=1.20.1 {*/true, /*?}*/false);
 
             SkyPlusPlusClient.client.setScreen(ns);
         }

@@ -42,10 +42,10 @@ public class BetterCrateKeys {
             if (loreText == null) return 0.0f;
 
             //? if >=1.20.4 {
-            /*String lore = TextCodecs.CODEC.parse(JsonOps.INSTANCE, JsonParser.parseString(loreText)).get().orThrow().getString();
-             *///?} else {
-            String lore = Text.Serializer.fromJson(loreText).getString();
-            //?}
+            String lore = TextCodecs.CODEC.parse(JsonOps.INSTANCE, JsonParser.parseString(loreText)).get().orThrow().getString();
+             //?} else {
+            /*String lore = Text.Serializer.fromJson(loreText).getString();
+            *///?}
 
             // client.inGameHud.getChatHud().addMessage(Text.of(lore));
 

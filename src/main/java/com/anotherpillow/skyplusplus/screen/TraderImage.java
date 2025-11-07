@@ -9,10 +9,10 @@ import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 //? if >1.19.2 {
-/*import org.joml.Matrix4f;
-*///?} else {
-import net.minecraft.util.math.Matrix4f;
- //?}
+import org.joml.Matrix4f;
+//?} else {
+/*import net.minecraft.util.math.Matrix4f;
+ *///?}
 import net.minecraft.client.render.GameRenderer;
 
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
@@ -37,8 +37,8 @@ public class TraderImage {
         //? if >1.19.2 {
 
         //?} else {
-        RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
-         //?}
+        /*RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
+         *///?}
 
 
         RenderSystem.setShaderTexture(0, new Identifier("skyplusplus", "traderhead.png"));

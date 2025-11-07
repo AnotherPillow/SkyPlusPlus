@@ -27,18 +27,18 @@ public class JoinCommands {
             if (command.trim().startsWith("/")) {
                 SkyPlusPlus.log(Level.INFO, "Sending command: " + command.trim());
                 //? if >1.19.2 {
-                /*SkyPlusPlusClient.client.getNetworkHandler().sendCommand(command.trim().substring(1));
-                *///?} else {
-                SkyPlusPlusClient.client.player.sendCommand(command.trim().substring(1));
-                 //?}
+                SkyPlusPlusClient.client.getNetworkHandler().sendCommand(command.trim().substring(1));
+                //?} else {
+                /*SkyPlusPlusClient.client.player.sendCommand(command.trim().substring(1));
+                 *///?}
             }
             else {
                 SkyPlusPlus.log(Level.INFO, "Sending chat: " + command);
                 //? if >1.19.2 {
-                /*SkyPlusPlusClient.client.getNetworkHandler().sendChatMessage(command);
-                *///?} else {
-                SkyPlusPlusClient.client.player.sendChatMessage(command, Text.of(""));
-                 //?}
+                SkyPlusPlusClient.client.getNetworkHandler().sendChatMessage(command);
+                //?} else {
+                /*SkyPlusPlusClient.client.player.sendChatMessage(command, Text.of(""));
+                 *///?}
             }
         }
 

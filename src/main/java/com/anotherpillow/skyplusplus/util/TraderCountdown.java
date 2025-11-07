@@ -4,10 +4,10 @@ import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 //? if >=1.20.1 {
-/*import net.minecraft.client.gui.DrawContext;
-*///?} else {
-import net.minecraft.client.gui.DrawableHelper;
- //?}
+import net.minecraft.client.gui.DrawContext;
+//?} else {
+/*import net.minecraft.client.gui.DrawableHelper;
+ *///?}
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
@@ -20,19 +20,19 @@ import net.minecraft.text.Text;
 
 public class TraderCountdown {
 
-    public static void draw(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/, String txt, int textOffset) {
+    public static void draw(/*? >=1.20.1 {*/ DrawContext ctx /*?} else {*/ /*MatrixStack matrixStack *//*?}*/, String txt, int textOffset) {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
         // not draw in f1
         if (SkyPlusPlusClient.client.options.hudHidden) return;
 
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
         //? if >=1.20.1 {
-        /*ctx.drawCenteredTextWithShadow(textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
-        *///?} else if >1.19.2 {
+        ctx.drawCenteredTextWithShadow(textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
+        //?} else if >1.19.2 {
         /*DrawableHelper.drawCenteredTextWithShadow(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
         *///?} else {
-        DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
-         //?}
+        /*DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
+         *///?}
 
     }
 
@@ -66,10 +66,10 @@ public class TraderCountdown {
         return "0:" + minutesString;
     }
 
-    public static void DrawCountdown(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/) {
+    public static void DrawCountdown(/*? >=1.20.1 {*/ DrawContext ctx /*?} else {*/ /*MatrixStack matrixStack *//*?}*/) {
         String txt = Text.translatable("skyplusplus.trader.countdown.timer").getString() + countdown();
         int textWidth = MinecraftClient.getInstance().textRenderer.getWidth(txt);
         int textOffset = textWidth / 2;
-        draw(/*? >=1.20.1 {*/ /*ctx *//*?} else {*/ matrixStack /*?}*/, txt, textOffset);
+        draw(/*? >=1.20.1 {*/ ctx /*?} else {*/ /*matrixStack *//*?}*/, txt, textOffset);
     }
 }
