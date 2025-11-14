@@ -92,7 +92,7 @@
   "skyplusplus.config.better-items-uis.clean-ads-gui": "Enable Clean Ads Gui",
   "skyplusplus.config.better-items-uis.clean-ads-gui-desc": "Makes the /ads GUI cleaner by emulating the inventory style with the filler items.",
   "skyplusplus.config.better-items-uis.clean-quests-gui": "Enable Clean Quests Gui",
-  "skyplusplus.config.better-items-uis.clean-quests-gui": "Makes the /quests  GUI cleaner by emulating the inventory style with the filler items.",
+  "skyplusplus.config.better-items-uis.clean-quests-gui-desc": "Makes the /quests  GUI cleaner by emulating the inventory style with the filler items.",
   "skyplusplus.config.better-items-uis.better-crate-keys": "Enable Better Crate Keys",
   "skyplusplus.config.better-items-uis.better-crate-keys-desc": "Enables coloured crate keys (may require a restart!)",
   "skyplusplus.config.better-items-uis.show-empty-shops": "Enable Show Empty Shops",
