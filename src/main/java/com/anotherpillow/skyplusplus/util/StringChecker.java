@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class StringChecker {
     public static Pattern welcomeIslandPattern = Pattern.compile("============ Welcome to [A-Za-z0-9_\\.]+'s Island ============");
     public static Pattern visitingIslandPatten = Pattern.compile("Visiting [A-Za-z0-9_\\.]+'s island");
-    public static Pattern skyblockMessagePattern = Pattern.compile("^\\[Skyblock] .+$");
+    public static Pattern skyblockMessagePattern = Pattern.compile("\\[Skyblock] .+");
     public static Pattern broadcastMessagePattern = Pattern.compile("^\\[Broadcast] .+$");
     public static Pattern AFKMessagePattern = Pattern.compile("^\\* \\[[A-Za-z]+] [A-Za-z0-9_\\.]+ is no(w| longer) AFK\\.?$");
     public static Pattern newUserMessagePattern = Pattern.compile("^Welcome [A-Za-z0-9_\\.]+ to Skyblock!$");
@@ -26,7 +26,7 @@ public class StringChecker {
     public static Pattern visitingTitlePattern = Pattern.compile("§6\\-=§e[A-Za-z0-9_\\.]{1,16}'s Island§6=\\-"); // even names ending with "s" still have "'s"
     public static Pattern directMessageRawPattern = Pattern.compile("^(?:<c>)?\\[(?:\\[[A-Za-z]+?\\] )?([A-Za-z0-9\\_]{0,16})(?:@[a-zA-Z0-9\\_\\-]+)? -> me\\] (.+)");
 
-    public static String COLOUR_CODE_STRING = "[&§][0-9a-fkrl-o]";
+    public static String COLOUR_CODE_STRING = "[&§][0-9a-fkrl-ox]";
     public static Pattern COLOUR_CODE = Pattern.compile(COLOUR_CODE_STRING);
 
     public static boolean welcomeIslandCheck(String input) {
