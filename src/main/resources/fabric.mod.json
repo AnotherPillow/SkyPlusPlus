@@ -25,6 +25,7 @@
   "mixins": [
     "skyplusplus.mixins.json"
   ],
+  "accessWidener" : "skyplusplus.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",

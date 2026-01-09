@@ -2,7 +2,9 @@ package com.anotherpillow.skyplusplus.features;
 
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
+//? if <1.21 {
+/*import net.minecraft.client.item.ModelPredicateProviderRegistry;
+ *///?}
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,7 +22,8 @@ public class ShowEmptyShops {
     public static void generatePredicateProvider(Item item) {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
         MinecraftClient client = MinecraftClient.getInstance();
-        ModelPredicateProviderRegistry.register(item, new Identifier("skyplusplus:empty_shop"), (itemStack, clientWorld, livingEntity, randomSeed) -> {
+        //? if <1.21 {
+        /*ModelPredicateProviderRegistry.register(item, new Identifier("skyplusplus:empty_shop"), (itemStack, clientWorld, livingEntity, randomSeed) -> {
             if (!config.showEmptyShopsEnabled) return 0.0f;
             NbtCompound nbtCompound = itemStack.getNbt();
 
@@ -30,6 +33,7 @@ public class ShowEmptyShops {
 
             return 0.0f;
         });
+        *///?}
     }
     public static void register() {
         generatePredicateProvider(Items.CHEST);

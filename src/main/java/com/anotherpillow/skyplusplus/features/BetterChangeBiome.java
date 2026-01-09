@@ -3,7 +3,9 @@ package com.anotherpillow.skyplusplus.features;
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
+//? if <1.21 {
+/*import net.minecraft.client.item.ModelPredicateProviderRegistry;
+ *///?}
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtSizeTracker;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -20,7 +23,12 @@ import java.util.Objects;
 public class BetterChangeBiome {
     public static void generatePredicateProvider(Item item) {
         SkyPlusPlusConfig config = SkyPlusPlusClient.config;
-        ModelPredicateProviderRegistry.register(item, new Identifier("skyplusplus:betterchangebiome"), (itemStack, clientWorld, livingEntity, randomSeed) -> {
+
+        // Identifier.of("skyplusplus:betterchangebiome"),
+        //? if <1.21 {
+        /*ModelPredicateProviderRegistry.register(item, new Identifier("skyplusplus:betterchangebiome"), (itemStack, clientWorld, livingEntity, randomSeed) -> {
+
+
             if (!config.betterChangeBiomeEnabled) return 0.0f;
             NbtCompound nbtCompound = itemStack.getNbt();
 
@@ -39,7 +47,8 @@ public class BetterChangeBiome {
 
             //System.out.println(nbtCompound);
             return 0.6f;
-        });
+         *///?}
+
     }
     public static void register() {
         generatePredicateProvider(Items.ALLIUM);

@@ -13,16 +13,20 @@ import net.minecraft.text.Text;
 //? if >=1.20.1 {
 
 //?} else {
-import org.spongepowered.asm.mixin.injection.Redirect;
+/*import org.spongepowered.asm.mixin.injection.Redirect;
 import com.mojang.blaze3d.systems.RenderSystem;
-//?}
+*///?}
 
 @Mixin(GenericContainerScreen.class)
 public abstract class GenericContainerScreenMixin {
     @Unique
-    private static final Identifier skyplusplus$OLD_TEXTURE = new Identifier("textures/gui/container/generic_54.png");
+    //? if >=1.21 {
+    private static final Identifier skyplusplus$OLD_TEXTURE = Identifier.of("minecraft", "textures/gui/container/generic_54.png");
+    //?} else {
+    /*private static final Identifier skyplusplus$OLD_TEXTURE = new Identifier("textures/gui/container/generic_54.png");
+     *///?}
 
-    //? if >=1.20.1 {
+    //? if >=1.20.1 && <1.21 {
     /*@ModifyArg(
         method = "Lnet/minecraft/client/gui/screen/ingame/GenericContainerScreen;drawBackground(Lnet/minecraft/client/gui/DrawContext;FII)V",
         at = @At(
@@ -48,10 +52,10 @@ public abstract class GenericContainerScreenMixin {
             return texture;
         }
     }
-    *///?} else {
+    *///?} else if <1.20.1 {
     
 
-    @Redirect(
+    /*@Redirect(
             method = "drawBackground(Lnet/minecraft/client/util/math/MatrixStack;FII)V",
 
             at = @At(
@@ -78,5 +82,5 @@ public abstract class GenericContainerScreenMixin {
             RenderSystem.setShaderTexture(sampler, skyplusplus$OLD_TEXTURE);
         }
 
-    }//?}
+    }*///?}
 }

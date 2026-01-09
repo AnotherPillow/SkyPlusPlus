@@ -50,7 +50,11 @@ public class ShopsTradingBind {
 
         client.interactionManager.clickSlot(
                 handler.syncId, hoveredSlot.id,
-                client.player.getInventory().selectedSlot,
+                //? if >=1.21 {
+                client.player.getInventory().getSelectedSlot(),
+                //?} else {
+                /*client.player.getInventory().selectedSlot,
+                *///?}
                 SlotActionType.SWAP, client.player
         );
 
@@ -58,7 +62,11 @@ public class ShopsTradingBind {
 
         client.interactionManager.clickSlot(
                 handler.syncId, hoveredSlot.id,
-                client.player.getInventory().selectedSlot,
+                //? if >=1.21 {
+                client.player.getInventory().getSelectedSlot(),
+                //?} else {
+                /*client.player.getInventory().selectedSlot,
+                 *///?}
                 SlotActionType.SWAP, client.player
         );
     }

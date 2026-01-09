@@ -19,10 +19,11 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 //? if >=1.20.1 {
-/*import net.minecraft.client.gui.DrawContext;
-*///?} else {
-import net.minecraft.client.gui.DrawableHelper;
-//?}
+import net.minecraft.client.gl.RenderPipelines;
+import net.minecraft.client.gui.DrawContext;
+//?} else {
+/*import net.minecraft.client.gui.DrawableHelper;
+*///?}
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
@@ -47,10 +48,10 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 //? if >1.19.2 {
-/*import net.minecraft.registry.Registries;
-*///?} else {
-import net.minecraft.util.registry.Registry;
- //?}
+import net.minecraft.registry.Registries;
+//?} else {
+/*import net.minecraft.util.registry.Registry;
+ *///?}
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -94,12 +95,12 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
     protected abstract boolean invokeIsPointOverSlot(Slot slot, double pointX, double pointY);
 
     //? if >=1.20.1 {
-    /*@Inject(method = "drawSlot(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/screen/slot/Slot;)V", at = @At("HEAD"))
+    @Inject(method = "drawSlot(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/screen/slot/Slot;)V", at = @At("HEAD"))
     public void drawSlot(DrawContext context, Slot slot, CallbackInfo ci) {
-    *///?} else {
-    @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawSlot(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/screen/slot/Slot;)V", at = @At("HEAD"))
+    //?} else {
+    /*@Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawSlot(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/screen/slot/Slot;)V", at = @At("HEAD"))
     public void drawSlot(MatrixStack matrices, Slot slot, CallbackInfo ci) {
-     //?}
+     *///?}
 
         HandledScreen<?> screen = (HandledScreen<?>) (Object) this;
         ScreenHandler handler = screen.getScreenHandler();
@@ -113,7 +114,9 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
         IntArrayList lockedSlots = SlotLocker.lockedSlots.get(Server.getSkyblockMode());
         if (lockedSlots != null && lockedSlots.contains(indexInInventory)) {
             //? if >=1.20.1 {
-            /*context.drawTexture(
+            context.drawTexture(
+                    //? if >=1.21
+                    RenderPipelines.GUI_TEXTURED,
                     SkyPlusPlusClient.lockId,
                     slot.x,
                     slot.y,
@@ -124,8 +127,8 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                     16,
                     16
             );
-            *///?} else {
-            RenderSystem.setShaderTexture(0, SkyPlusPlusClient.lockId);
+            //?} else {
+            /*RenderSystem.setShaderTexture(0, SkyPlusPlusClient.lockId);
             DrawableHelper.drawTexture(
                     matrices,
                     slot.x,
@@ -137,7 +140,7 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                     16,
                     16
             );
-             //?}
+             *///?}
 
         }
 
@@ -147,12 +150,12 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
     }
 
     //? if >=1.20.1 {
-    /*@Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;render(Lnet/minecraft/client/gui/DrawContext;IIF)V", at = @At("HEAD"))
+    @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;render(Lnet/minecraft/client/gui/DrawContext;IIF)V", at = @At("HEAD"))
     public void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-    *///?} else {
-    @Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V", at = @At("HEAD"))
+    //?} else {
+    /*@Inject(method = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V", at = @At("HEAD"))
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-     //?}
+     *///?}
         // https://www.reddit.com/r/fabricmc/comments/15drn3l/comment/ju95aqn
         for(int k = 0; k < this.handler.slots.size(); k++) {
             var slot = this.handler.slots.get(k);
@@ -210,11 +213,14 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
         if (ShareButton.isApplicable(handler) && config.enableShareButton) {
             addDrawableChild(
                     //? if >1.19.2 {
-                    /*new ButtonWidget.Builder(Text.of("Share"), (ButtonWidget widget) -> {
-                        *///?} else {
-                        new ButtonWidget(midX + 90, midY - 60, 60, 20, Text.of("Share"), (ButtonWidget widget) -> {
-                         //?}
-                        CompletableFuture.runAsync(() -> {
+                    new ButtonWidget.Builder(Text.of("Share"), (ButtonWidget widget) -> {
+                        //?} else {
+                        /*new ButtonWidget(midX + 90, midY - 60, 60, 20, Text.of("Share"), (ButtonWidget widget) -> {
+                         *///?}
+                        //? if >=1.21
+                        Runnable placeholder = () -> {
+                            //? if <1.21
+                            /*CompletableFuture.runAsync(() -> {*/
 //                        handler.slots.forEach(slot -> {
                             int slotCount = ShareButton.getInnerSlots(handler);
                             if (slotCount <= 0) {
@@ -239,10 +245,10 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                                 ItemStack stack = slot.getStack();
 
                                 //? if >1.19.2 {
-                                /*String itemId = Registries.ITEM.getKey(stack.getItem()).get().getValue().toString();
-                                *///?} else {
-                                String itemId = Registry.ITEM.getKey(stack.getItem()).get().getValue().toString();
-                                 //?}
+                                String itemId = Registries.ITEM.getKey(stack.getItem()).get().getValue().toString();
+                                //?} else {
+                                /*String itemId = Registry.ITEM.getKey(stack.getItem()).get().getValue().toString();
+                                 *///?}
 
                                 // id: MinecraftID,
                                 //        Slot: number,
@@ -255,13 +261,15 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
 
                                 String jsonNBT = "{}";
 
-                                if (stack.hasNbt()) {
+                                //? if <1.21 {
+                                /*if (stack.hasNbt()) {
                                     NbtCompound nbt = stack.getNbt();
                                     jsonNBT = NbtOps.INSTANCE.convertTo(JsonOps.INSTANCE, nbt).toString();
                                 }
 
                                 JsonObject nbtObject = gson.fromJson(jsonNBT, JsonObject.class);
                                 slotJson.add("tag", nbtObject);
+                                 *///?}
 
                                 jsonSlots.add(slotJson);
                             }
@@ -300,7 +308,11 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                                 String url = bodyJson.get("message").getAsString();
                                 MutableText urlText = Text.literal(url)
                                         .setStyle(Style.EMPTY.withClickEvent(
-                                                        new ClickEvent(ClickEvent.Action.OPEN_URL, url))
+                                                        //? if >=1.21 {
+                                                        new ClickEvent.OpenUrl(URI.create(url)))
+                                                //?} else {
+                                                /*new ClickEvent(ClickEvent.Action.OPEN_URL, url))
+                                                 *///?}
                                                 .withUnderline(true));
                                 MutableText finalMessage = Text.literal("Shared URL: ").append(urlText);
                                 Chat.send(Chat.addLogo(finalMessage));
@@ -308,11 +320,14 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                                 Chat.send(Chat.addLogo("Failed to share (status: " + status + ", body: " + body + ")"));
                             }
 
-                        });
+                        }
+                        //? if <1.21
+                        /*)*/
+                        ;
                     })
                     //? if >1.19.2 {
-                            /*.position(midX + 90, midY - 60).size(60, 20).build()
-                    *///?} else {
+                            .position(midX + 90, midY - 60).size(60, 20).build()
+                    //?} else {
                     
                      //?}
             );
