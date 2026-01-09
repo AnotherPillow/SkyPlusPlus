@@ -38,11 +38,11 @@ public class BetterChangeBiome {
             if (nbtCompound == null) return 0.0f;
             // client.inGameHud.getChatHud().addMessage(Text.of(nbtCompound.toString()));
             if (itemStack.isOf(Items.WATER_BUCKET)) {//client.inGameHud.getChatHud().addMessage(Text.of("WATERBUCKET: " + nbtCompound.toString()));
-                if (!nbtCompound.contains("CHANGE_BIOME")) return 0.0f;
-                if (nbtCompound.getString("CHANGE_BIOME").equals("WARM_OCEAN")) return 0.4f;
-                else if (nbtCompound.getString("CHANGE_BIOME").equals("RIVER")) return 0.7f;
+                if (!nbtCompound.contains("SBGUI_ACTION_CHANGE_BIOME")) return 0.0f;
+                if (nbtCompound.getString("SBGUI_ACTION_CHANGE_BIOME").equals("WARM_OCEAN")) return 0.4f;
+                else if (nbtCompound.getString("SBGUI_ACTION_CHANGE_BIOME").equals("RIVER")) return 0.7f;
             }
-            if (!nbtCompound.contains("CHANGE_BIOME")) return 0.0f; //yes, this seems to be required bc null check
+            if (!nbtCompound.contains("SBGUI_ACTION_CHANGE_BIOME")) return 0.0f; //yes, this seems to be required bc null check
             //client.inGameHud.getChatHud().addMessage(Text.of("CHANGEBIOME: " + nbtCompound.getString("CHANGE_BIOME")));
 
             //System.out.println(nbtCompound);
