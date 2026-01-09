@@ -19,7 +19,11 @@ public class ClientPlayNetworkHandlerMixin {
     }
     // idk what the difference is
     @ModifyVariable(
-            method= "sendCommand(Ljava/lang/String;)Z",
+            //? if >= 1.21 {
+            method="sendChatCommand",
+            //?} else {
+            /*method= "sendCommand(Ljava/lang/String;)Z",
+            *///?}
             at=@At("HEAD"),
             ordinal = 0
     )

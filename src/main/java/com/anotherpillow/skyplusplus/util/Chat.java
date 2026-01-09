@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.util;
 
+import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import net.minecraft.client.MinecraftClient;
 //? if >1.19.2 {
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -48,15 +49,19 @@ public class Chat {
 
     // e.g. sendCommandToServer("tpahere Noobcrew")
     public static void sendCommandToServer(String noSlashCommandWithAllArguments) {
-        //? if >1.19.2 {
+        //? if >=1.21 {
         ClientPlayNetworkHandler handler = client.getNetworkHandler();
         if (handler == null) return;
+        handler.sendChatCommand(noSlashCommandWithAllArguments);
+        //?} else if >1.19.2 && <1.21 {
+        /*ClientPlayNetworkHandler handler = client.getNetworkHandler();
+        if (handler == null) return;
         handler.sendCommand(noSlashCommandWithAllArguments);
-        //?} else {
+        *///?} else {
         /*ClientPlayerEntity player = client.player;
         if (player == null) return;
         player.sendCommand(noSlashCommandWithAllArguments, Text.empty());
-        *///?}
+         *///?}
     }
 
 }

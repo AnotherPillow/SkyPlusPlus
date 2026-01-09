@@ -4,6 +4,7 @@ import com.anotherpillow.skyplusplus.SkyPlusPlus;
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.util.Chat;
 import com.anotherpillow.skyplusplus.util.Server;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.Level;
 
@@ -27,8 +28,10 @@ public class JoinCommands {
             if (command.trim().startsWith("/")) {
                 SkyPlusPlus.log(Level.INFO, "Sending command: " + command.trim());
                 //? if >1.19.2 {
-                SkyPlusPlusClient.client.getNetworkHandler().sendCommand(command.trim().substring(1));
-                //?} else {
+                SkyPlusPlusClient.client.getNetworkHandler().sendChatCommand(command.trim().substring(1));
+                //?} else if >1.19.2 && <1.21 {
+                /*SkyPlusPlusClient.client.getNetworkHandler().sendCommand(command.trim().substring(1));
+                *///?} else {
                 /*SkyPlusPlusClient.client.player.sendCommand(command.trim().substring(1));
                  *///?}
             }

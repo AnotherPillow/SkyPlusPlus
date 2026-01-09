@@ -29,11 +29,15 @@ public abstract class AbstractSignBlockMixin {
     @Shadow public abstract BlockEntity createBlockEntity(BlockPos pos, BlockState state);
 
     @Inject(
-            method = "onUse(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/util/hit/BlockHitResult;)Lnet/minecraft/util/ActionResult;",
+            method = "onUse",
             at=@At("HEAD")
     )
-    private void onUse(BlockState state, World world, BlockPos pos,
+    //? if <1.21 {
+    /*private void onUse(BlockState state, World world, BlockPos pos,
            PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
+    *///?} else {
+    private void onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
+    //?}
         if (!world.isClient) return;
         if (!SkyPlusPlusClient.config.reEditPrivateSigns) return;
 
@@ -42,7 +46,12 @@ public abstract class AbstractSignBlockMixin {
             return;
         }
 
-        String firstLine = signBE.getTextOnRow(0, false).getString();
+
+        //? if >=1.21 {
+        String firstLine = signBE.getText(true).getMessage(0, false).getString();
+        //?} else {
+        /*String firstLine = signBE.getTextOnRow(0, false).getString();
+         *///?}
         // /blocklocker:blocklocker only works for locked signs :(
         if (Objects.equals(firstLine, "[Private]") || Objects.equals(firstLine, "[More Users]")
             || Objects.equals(firstLine, "[Everyone]")) {

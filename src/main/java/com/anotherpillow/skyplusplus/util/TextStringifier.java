@@ -12,7 +12,15 @@ public class TextStringifier {
         Text prefixedWithStringifier = Text.empty().append(Text.literal("<c>").setStyle(
                 Style.EMPTY
                         .withColor(Formatting.GRAY)
+                        //? if >=1.21 {
                         .withHoverEvent(
+                                new HoverEvent.ShowText(Text.literal(stringified))
+                        )
+                        .withClickEvent(
+                                new ClickEvent.CopyToClipboard(stringified)
+                        )
+                        //?} else {
+                        /*.withHoverEvent(
                                 new HoverEvent(
                                         HoverEvent.Action.SHOW_TEXT,
                                         Text.literal(stringified)
@@ -24,6 +32,7 @@ public class TextStringifier {
                                         stringified
                                 )
                         )
+                        *///?}
         )).append(main);
 
         return prefixedWithStringifier;

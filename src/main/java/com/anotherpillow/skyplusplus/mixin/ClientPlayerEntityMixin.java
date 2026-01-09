@@ -40,7 +40,11 @@ public class ClientPlayerEntityMixin {
         MinecraftClient client = MinecraftClient.getInstance();
 
         String name = itemStack.getName().getString();
-        int hotbarSlot = self.getInventory().selectedSlot;
+        //? if >=1.21 {
+        int hotbarSlot = self.getInventory().getSelectedSlot();
+        //?} else {
+        /*int hotbarSlot = self.getInventory().selectedSlot;
+         *///?}
         int inventorySlotId = 27 + hotbarSlot;
 
         IntArrayList list = SlotLocker.lockedSlots.get(Server.getSkyblockMode());

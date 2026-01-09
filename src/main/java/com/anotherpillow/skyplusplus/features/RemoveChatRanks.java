@@ -36,9 +36,11 @@ public class RemoveChatRanks {
 
         Gson gson = new Gson();
 
-        //? if >=1.20.4 {
-        return TextCodecs.CODEC.parse(JsonOps.INSTANCE, jsonElement).get().orThrow();
-        //?} else {
+        //? if >=1.21 {
+        return TextCodecs.CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow();
+        //?} else if >=1.20.4 {
+        /*return TextCodecs.CODEC.parse(JsonOps.INSTANCE, jsonElement).get().orThrow();
+        *///?} else {
         /*String newJson = gson.toJson(jsonElement);
         return Text.Serializer.fromJson(newJson);
          *///?}

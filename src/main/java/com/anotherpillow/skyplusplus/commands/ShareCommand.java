@@ -45,20 +45,31 @@ public class ShareCommand {
                 return 0;
             }
 
-            CompletableFuture.runAsync(() -> {
+            //? if >=1.21 {
+            Runnable placeholder = () -> {
+            //?} else {
+            /*CompletableFuture.runAsync(() -> {
+             *///?}
+
                 ItemStack mainHand = client.player.getStackInHand(Hand.MAIN_HAND);
 
                 String jsonNBT = "{}";
-                if (mainHand.hasNbt()) {
+                //? if >=1.21 {
+                //?} else {
+                /*if (mainHand.hasNbt()) {
                     NbtCompound nbt = mainHand.getNbt();
                     jsonNBT = NbtOps.INSTANCE.convertTo(JsonOps.INSTANCE, nbt).toString();
                 }
+                 *///?}
+
 
                 //? if >1.19.2 {
                 String itemId = Registries.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
                 //?} else {
                 /*String itemId = Registry.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
                 *///?}
+
+                if (jsonNBT.equals("{}")) return;
 
                 Gson gson = new Gson();
                 JsonObject json = new JsonObject();
@@ -103,7 +114,12 @@ public class ShareCommand {
                     String url = bodyJson.get("message").getAsString();
                     MutableText urlText = Text.literal(url)
                         .setStyle(Style.EMPTY.withClickEvent(
-                                new ClickEvent(ClickEvent.Action.OPEN_URL, url))
+                                //? if >=1.21 {
+                                new ClickEvent.OpenUrl(URI.create(url)))
+                                //?} else {
+                                /*new ClickEvent(ClickEvent.Action.OPEN_URL, url))
+                                 *///?}
+
                             .withUnderline(true));
                     MutableText finalMessage = Text.literal("Shared URL: ").append(urlText);
                     Chat.send(Chat.addLogo(finalMessage));
@@ -112,7 +128,12 @@ public class ShareCommand {
                 }
 
 
-            });
+
+            //? if >=1.21 {
+            };
+            //?} else {
+            /*});
+             *///?}
             return 1;
         }));
     }

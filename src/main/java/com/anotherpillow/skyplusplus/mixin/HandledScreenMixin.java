@@ -19,6 +19,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 //? if >=1.20.1 {
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 //?} else {
 /*import net.minecraft.client.gui.DrawableHelper;
@@ -114,6 +115,8 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
         if (lockedSlots != null && lockedSlots.contains(indexInInventory)) {
             //? if >=1.20.1 {
             context.drawTexture(
+                    //? if >=1.21
+                    RenderPipelines.GUI_TEXTURED,
                     SkyPlusPlusClient.lockId,
                     slot.x,
                     slot.y,
@@ -214,7 +217,10 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                         //?} else {
                         /*new ButtonWidget(midX + 90, midY - 60, 60, 20, Text.of("Share"), (ButtonWidget widget) -> {
                          *///?}
-                        CompletableFuture.runAsync(() -> {
+                        //? if >=1.21
+                        Runnable placeholder = () -> {
+                            //? if <1.21
+                            /*CompletableFuture.runAsync(() -> {*/
 //                        handler.slots.forEach(slot -> {
                             int slotCount = ShareButton.getInnerSlots(handler);
                             if (slotCount <= 0) {
@@ -255,13 +261,15 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
 
                                 String jsonNBT = "{}";
 
-                                if (stack.hasNbt()) {
+                                //? if <1.21 {
+                                /*if (stack.hasNbt()) {
                                     NbtCompound nbt = stack.getNbt();
                                     jsonNBT = NbtOps.INSTANCE.convertTo(JsonOps.INSTANCE, nbt).toString();
                                 }
 
                                 JsonObject nbtObject = gson.fromJson(jsonNBT, JsonObject.class);
                                 slotJson.add("tag", nbtObject);
+                                 *///?}
 
                                 jsonSlots.add(slotJson);
                             }
@@ -300,7 +308,11 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                                 String url = bodyJson.get("message").getAsString();
                                 MutableText urlText = Text.literal(url)
                                         .setStyle(Style.EMPTY.withClickEvent(
-                                                        new ClickEvent(ClickEvent.Action.OPEN_URL, url))
+                                                        //? if >=1.21 {
+                                                        new ClickEvent.OpenUrl(URI.create(url)))
+                                                //?} else {
+                                                /*new ClickEvent(ClickEvent.Action.OPEN_URL, url))
+                                                 *///?}
                                                 .withUnderline(true));
                                 MutableText finalMessage = Text.literal("Shared URL: ").append(urlText);
                                 Chat.send(Chat.addLogo(finalMessage));
@@ -308,7 +320,10 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                                 Chat.send(Chat.addLogo("Failed to share (status: " + status + ", body: " + body + ")"));
                             }
 
-                        });
+                        }
+                        //? if <1.21
+                        /*)*/
+                        ;
                     })
                     //? if >1.19.2 {
                             .position(midX + 90, midY - 60).size(60, 20).build()

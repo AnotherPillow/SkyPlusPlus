@@ -5,7 +5,9 @@ import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.google.gson.JsonParser;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
+//? if <1.21 {
+/*import net.minecraft.client.item.ModelPredicateProviderRegistry;
+ *///?}
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,7 +27,9 @@ import java.util.Objects;
 public class BetterCrateKeys {
     public static void generatePredicateProvider(Item item) {
         SkyPlusPlusConfig config = SkyPlusPlusClient.config;
-        ModelPredicateProviderRegistry.register(item, new Identifier("skyplusplus:bettercratekeys"), (itemStack, clientWorld, livingEntity, randomSeed) -> {
+        //? if <1.21 {
+        /*ModelPredicateProviderRegistry.register(item, new Identifier("skyplusplus:bettercratekeys"), (itemStack, clientWorld, livingEntity, randomSeed) -> {
+
             if (!config.betterCrateKeysEnabled) return 0.0f;
             NbtCompound nbtCompound = itemStack.getNbt();
 
@@ -34,20 +38,22 @@ public class BetterCrateKeys {
 
             if (nbtCompound == null) return 0.0f;
             // client.inGameHud.getChatHud().addMessage(Text.of(nbtCompound.toString()));
-            NbtList loreList = nbtCompound .getCompound("display").getList("Lore", NbtElement.STRING_TYPE);
+            NbtList loreList = nbtCompound.getCompound("display").getList("Lore", NbtElement.STRING_TYPE);
 
             if (loreList.isEmpty()) return 0.0f;
 
             String loreText = loreList.getString(0);
             if (loreText == null) return 0.0f;
-
-            //? if >=1.20.4 {
-            String lore = TextCodecs.CODEC.parse(JsonOps.INSTANCE, JsonParser.parseString(loreText)).get().orThrow().getString();
-             //?} else {
+             *///?}
+            //? if 1.20.4 {
+            /*String lore = TextCodecs.CODEC.parse(JsonOps.INSTANCE, JsonParser.parseString(loreText)).get().orThrow().getString();
+            *///?} else if <=1.20.1 {
             /*String lore = Text.Serializer.fromJson(loreText).getString();
             *///?}
+        //? if <1.21 {
+        
 
-            // client.inGameHud.getChatHud().addMessage(Text.of(lore));
+            /*// client.inGameHud.getChatHud().addMessage(Text.of(lore));
 
 
             return switch (lore) {
@@ -59,6 +65,7 @@ public class BetterCrateKeys {
                 default -> 0.0f;
             };
         });
+        *///?}
     }
     public static void register() {
         generatePredicateProvider(Items.TRIPWIRE_HOOK);

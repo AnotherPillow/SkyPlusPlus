@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.lang.reflect.Field;
 import java.util.Objects;
 
 @Mixin(SignEditScreen.class)
@@ -30,13 +31,23 @@ public class SignEditScreenMixin {
     private void init(CallbackInfo ci) {
 
         //? if >=1.21 {
-        this.initialText = ((AbstractSignEditScreen)(Object)(this)).text.clone();
+        try {
+            // should really fix the AW but reflection is fun ig
+            Field field = ((AbstractSignEditScreen)(Object)(this)).getClass().getDeclaredField("text");
+            field.setAccessible(true);
+
+            this.initialText = ((String[])field.get(((AbstractSignEditScreen)(Object)(this)))).clone();
+        } catch (Exception e) {
+            this.initialText = new String[]{};
+        }
+
         //?} else {
         /*this.initialText = this.text.clone();
          *///?}
     }
 
-    @Inject(
+    //? if <1.21 {
+    /*@Inject(
             method="finishEditing()V",
             at=@At("TAIL")
     )
@@ -44,11 +55,14 @@ public class SignEditScreenMixin {
         if (!SkyPlusPlusClient.config.reEditPrivateSigns) return;
 
         String[] endText = this.text;
+
         for (int i = 1; i < 4; i++) { // can't modify top line
             if (!Objects.equals(initialText[i], endText[i])) {
                 Chat.sendCommandToServer(String.format("blocklocker:blocklocker %d %s", i + 1,
-                    endText[i].replaceAll(" ", "-")) ); // can't have spaces in it :(
+                        endText[i].replaceAll(" ", "-")) ); // can't have spaces in it :(
             }
         }
+
     }
+    *///?}
 }
