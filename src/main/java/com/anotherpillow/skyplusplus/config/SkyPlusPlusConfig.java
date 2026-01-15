@@ -91,8 +91,8 @@ public class SkyPlusPlusConfig {
 
     @ConfigEntry public boolean enableEconomyAdverts = false;
     @ConfigEntry public boolean enableSurvivalAdverts = false;
-    @ConfigEntry public int economyAdInterval = TimeConsts.Minute * 10;
-    @ConfigEntry public int survivalAdInterval = TimeConsts.Minute * 5;
+    @ConfigEntry public int economyAdInterval = (TimeConsts.Minute * 10) / 1000;
+    @ConfigEntry public int survivalAdInterval = (TimeConsts.Minute * 5) / 1000;
     @ConfigEntry public String economyAdMessage = "Come visit my very cool economy island!";
     @ConfigEntry public String survivalAdMessage = "Come visit my very cool skyblock island!";
 
