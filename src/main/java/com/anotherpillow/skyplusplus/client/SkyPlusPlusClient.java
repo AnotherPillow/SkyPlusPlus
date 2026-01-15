@@ -30,7 +30,7 @@ import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 //? >=1.21
-import org.joml.Matrix3x2f;
+/*import org.joml.Matrix3x2f;*/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -104,15 +104,15 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                 //? <1.21 && >=1.20.1 {
                 /*TraderImage.draw(renderObject.getMatrices());
                 *///?} else if <1.20.1 {
-                /*TraderImage.draw(renderObject);
-                *///?}
+                TraderImage.draw(renderObject);
+                //?}
 
 
                 //? >=1.21 {
-                Matrix3x2f m = new Matrix3x2f();
+                /*Matrix3x2f m = new Matrix3x2f();
                 renderObject.getMatrices().get(m);
                 TraderImage.draw(m);
-                //?}
+                *///?}
 
             }
 
@@ -126,10 +126,10 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                 DiscordRPC.onTick();
 
             //? if >1.19.2 {
-            BlockPos pos = new BlockPos((int) player.getX(), (int) player.getY(), (int) player.getZ());
-            //?} else {
-            /*BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
-             *///?}
+            /*BlockPos pos = new BlockPos((int) player.getX(), (int) player.getY(), (int) player.getZ());
+            *///?} else {
+            BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
+             //?}
             if (pos.equals(lastPos)) return;
 
             if (config.enableTraderFinder) {

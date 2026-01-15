@@ -10,11 +10,11 @@ import com.anotherpillow.skyplusplus.util.StringChecker;
 import com.mojang.blaze3d.systems.RenderSystem;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 //? if >=1.20.1 {
-import net.minecraft.client.gl.RenderPipelines;
+/*import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-//?} else {
-/*import net.minecraft.client.gui.DrawableHelper;
- *///?}
+*///?} else {
+import net.minecraft.client.gui.DrawableHelper;
+ //?}
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.math.MatrixStack;
@@ -38,14 +38,14 @@ public class InGameHudMixin {
     //? if >=1.20.4 {
 
     //?} else {
-    /*@Shadow
+    @Shadow
     private static final Identifier WIDGETS_TEXTURE = new Identifier("textures/gui/widgets.png");
-     *///?}
+     //?}
 
     //? if <1.21 {
-    /*@Shadow
+    @Shadow
     private int scaledHeight;
-    *///?}
+    //?}
 
 
     @Inject(
@@ -60,7 +60,7 @@ public class InGameHudMixin {
 
     // inject between drawing the hotbar and drawing the selected overlay
     //? if >=1.21 {
-    @Inject(
+    /*@Inject(
             method = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V",
             at = @At(
                     value = "INVOKE",
@@ -72,7 +72,7 @@ public class InGameHudMixin {
     )
     private void renderHotbar(DrawContext context, RenderTickCounter tickCounter,
                               CallbackInfo ci, PlayerEntity playerEntity, ItemStack itemStack, Arm arm, int i, int j, int k) {
-    //?} else if >=1.20.1 {
+    *///?} else if >=1.20.1 {
     /*@Inject(
             method = "renderHotbar",
             at = @At(
@@ -89,7 +89,7 @@ public class InGameHudMixin {
     )
     private void renderHotbar(float tickDelta, DrawContext context, CallbackInfo ci, PlayerEntity playerEntity, ItemStack itemStack, Arm arm, int i, int j, int k) {
     *///?} else {
-    /*@Inject(
+    @Inject(
             method = "renderHotbar(FLnet/minecraft/client/util/math/MatrixStack;)V",
             at = @At(
                     value = "INVOKE",
@@ -99,7 +99,7 @@ public class InGameHudMixin {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     private void renderHotbar(float tickDelta, MatrixStack matrices, CallbackInfo ci, PlayerEntity playerEntity, ItemStack itemStack, Arm arm, int i, int j) {
-     *///?}
+     //?}
 
         IntArrayList lockedSlots = SlotLocker.lockedSlots.get(Server.getSkyblockMode());
 //        Chat.send("lockSlots: " + lockedSlots);
@@ -108,23 +108,23 @@ public class InGameHudMixin {
         //? if >=1.20.1 {
 
         //?} else {
-        /*RenderSystem.setShaderTexture(0, SkyPlusPlusClient.lockId);
-         *///?}
+        RenderSystem.setShaderTexture(0, SkyPlusPlusClient.lockId);
+         //?}
 
         for (int slotOffset = 0; slotOffset < 9; slotOffset++) {
             if (!lockedSlots.contains(27 + slotOffset)) continue;
 
             int _x = (i - 88) + (slotOffset * 20);
             //? if >=1.21 {
-            int _y = context.getScaledWindowHeight() - 19;
-            //?} else {
-            /*int _y = this.scaledHeight - 19;
-            *///?}
+            /*int _y = context.getScaledWindowHeight() - 19;
+            *///?} else {
+            int _y = this.scaledHeight - 19;
+            //?}
 
             //? if >=1.20.1 {
-            context.drawTexture(
+            /*context.drawTexture(
                     //? if >=1.21
-                    RenderPipelines.GUI_TEXTURED,
+                    /^RenderPipelines.GUI_TEXTURED,^/
                     SkyPlusPlusClient.lockId,
                     _x,
                     _y,
@@ -135,8 +135,8 @@ public class InGameHudMixin {
                     16,
                     16
             );
-            //?} else {
-            /*DrawableHelper.drawTexture(
+            *///?} else {
+            DrawableHelper.drawTexture(
                     matrices,
                     _x,
                     _y,
@@ -147,15 +147,15 @@ public class InGameHudMixin {
                     16,
                     16
             );
-             *///?}
+             //?}
 
         };
         // revert to old texture
         //? if >=1.20.4 {
 
         //?} else {
-        /*RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE);
-         *///?}
+        RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE);
+         //?}
 
     }
 }

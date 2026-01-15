@@ -3,15 +3,15 @@ package com.anotherpillow.skyplusplus.util;
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import net.minecraft.client.MinecraftClient;
 //? if >1.19.2 {
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-//?} else {
+/*import net.minecraft.client.network.ClientPlayNetworkHandler;
+*///?} else {
 //?}
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 //? if >1.19.2 {
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-//?} else {
+/*import net.minecraft.client.network.ClientPlayNetworkHandler;
+*///?} else {
 
 //?}
 
@@ -50,18 +50,18 @@ public class Chat {
     // e.g. sendCommandToServer("tpahere Noobcrew")
     public static void sendCommandToServer(String noSlashCommandWithAllArguments) {
         //? if >=1.21 {
-        ClientPlayNetworkHandler handler = client.getNetworkHandler();
+        /*ClientPlayNetworkHandler handler = client.getNetworkHandler();
         if (handler == null) return;
         handler.sendChatCommand(noSlashCommandWithAllArguments);
-        //?} else if >1.19.2 && <1.21 {
+        *///?} else if >1.19.2 && <1.21 {
         /*ClientPlayNetworkHandler handler = client.getNetworkHandler();
         if (handler == null) return;
         handler.sendCommand(noSlashCommandWithAllArguments);
         *///?} else {
-        /*ClientPlayerEntity player = client.player;
+        ClientPlayerEntity player = client.player;
         if (player == null) return;
         player.sendCommand(noSlashCommandWithAllArguments, Text.empty());
-         *///?}
+         //?}
     }
 
 }

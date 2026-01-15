@@ -35,12 +35,12 @@ public class AutoAdvertisement {
 
 <<<<<<< HEAD
             //? if >1.19.2 {
-            if (mode == Server.Mode.ECONOMY) networkHandler.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING);
+            /*if (mode == Server.Mode.ECONOMY) networkHandler.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING);
             if (mode == Server.Mode.SURVIVAL) networkHandler.sendChatMessage(SkyPlusPlusClient.config.survivalAdMessage + MARKER_STRING);
-            //?} else {
-            /*if (mode == Server.Mode.ECONOMY) player.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING, Text.empty());
+            *///?} else {
+            if (mode == Server.Mode.ECONOMY) player.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING, Text.empty());
             if (mode == Server.Mode.SURVIVAL) player.sendChatMessage(SkyPlusPlusClient.config.survivalAdMessage + MARKER_STRING, Text.empty());
-             *///?}
+             //?}
 =======
             if (mode == Server.Mode.ECONOMY) Chat.sendCommandToServer("cg " + SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING);
             if (mode == Server.Mode.SURVIVAL) Chat.sendCommandToServer("cg " + SkyPlusPlusClient.config.survivalAdMessage + MARKER_STRING);

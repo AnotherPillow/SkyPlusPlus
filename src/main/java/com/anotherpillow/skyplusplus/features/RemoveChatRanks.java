@@ -5,8 +5,8 @@ import com.google.gson.*;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.text.Text;
 //? if >=1.20.4 {
-import net.minecraft.text.TextCodecs;
-//?} else {
+/*import net.minecraft.text.TextCodecs;
+*///?} else {
 //?}
 import org.apache.logging.log4j.Level;
 
@@ -14,10 +14,10 @@ public class RemoveChatRanks {
 
     public static Text process(Text original) {
         //? if >=1.20.4 {
-        String json = TextCodecs.CODEC.encodeStart(JsonOps.INSTANCE, original).result().toString();
-        //?} else {
-        /*String json = Text.Serializer.toJson(original);
-         *///?}
+        /*String json = TextCodecs.CODEC.encodeStart(JsonOps.INSTANCE, original).result().toString();
+        *///?} else {
+        String json = Text.Serializer.toJson(original);
+         //?}
 
         JsonElement jsonElement = JsonParser.parseString(json);
 
@@ -37,13 +37,13 @@ public class RemoveChatRanks {
         Gson gson = new Gson();
 
         //? if >=1.21 {
-        return TextCodecs.CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow();
-        //?} else if >=1.20.4 {
+        /*return TextCodecs.CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow();
+        *///?} else if >=1.20.4 {
         /*return TextCodecs.CODEC.parse(JsonOps.INSTANCE, jsonElement).get().orThrow();
         *///?} else {
-        /*String newJson = gson.toJson(jsonElement);
+        String newJson = gson.toJson(jsonElement);
         return Text.Serializer.fromJson(newJson);
-         *///?}
+         //?}
 
     }
 }

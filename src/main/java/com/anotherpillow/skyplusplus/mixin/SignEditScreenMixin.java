@@ -19,8 +19,8 @@ import java.util.Objects;
 @Mixin(SignEditScreen.class)
 public class SignEditScreenMixin {
     //? if <1.21 {
-    /*@Shadow @Final private String[] text;
-    *///?}
+    @Shadow @Final private String[] text;
+    //?}
     @Unique
     private String[] initialText;
 
@@ -31,7 +31,7 @@ public class SignEditScreenMixin {
     private void init(CallbackInfo ci) {
 
         //? if >=1.21 {
-        try {
+        /*try {
             // should really fix the AW but reflection is fun ig
             Field field = ((AbstractSignEditScreen)(Object)(this)).getClass().getDeclaredField("text");
             field.setAccessible(true);
@@ -41,13 +41,13 @@ public class SignEditScreenMixin {
             this.initialText = new String[]{};
         }
 
-        //?} else {
-        /*this.initialText = this.text.clone();
-         *///?}
+        *///?} else {
+        this.initialText = this.text.clone();
+         //?}
     }
 
     //? if <1.21 {
-    /*@Inject(
+    @Inject(
             method="finishEditing()V",
             at=@At("TAIL")
     )
@@ -64,5 +64,5 @@ public class SignEditScreenMixin {
         }
 
     }
-    *///?}
+    //?}
 }

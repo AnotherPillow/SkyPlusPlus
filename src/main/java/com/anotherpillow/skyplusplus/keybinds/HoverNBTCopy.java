@@ -11,10 +11,10 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 //? if >=1.21 {
-import net.minecraft.command.DataCommandObject;
+/*import net.minecraft.command.DataCommandObject;
 import net.minecraft.command.EntityDataObject;
 import net.minecraft.command.argument.NbtPathArgumentType;
-//?}
+*///?}
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -47,7 +47,7 @@ public class HoverNBTCopy {
         MutableText text = Chat.addLogo(Text.empty());
 
         //? if >=1.21 {
-        try {
+        /*try {
             DataCommandObject dataCommandObject = new EntityDataObject(SkyPlusPlusClient.client.player);
             NbtPathArgumentType.NbtPath handPath = NbtPathArgumentType.NbtPath.parse("SelectedItem");
             List<NbtElement> nbtElement = handPath.get(dataCommandObject.getNbt());
@@ -56,11 +56,11 @@ public class HoverNBTCopy {
         } catch (Exception e) {
             text.append("{}");
         }
-        //?} else {
-        /*var nbt = hoveredItem.getNbt();
+        *///?} else {
+        var nbt = hoveredItem.getNbt();
         if (nbt != null) text.append(NbtHelper.toPrettyPrintedText(nbt));
         else text.append("{}");
-        *///?}
+        //?}
 
         Chat.send(text);
     }

@@ -38,7 +38,7 @@ public class GetNBTJsonCommand {
                 ItemStack mainHand = client.player.getStackInHand(Hand.MAIN_HAND);
 
                 //? <1.21 {
-                /*if (!mainHand.hasNbt()) {
+                if (!mainHand.hasNbt()) {
                     Chat.send(Chat.addLogo("No NBT found on held item"));
                     return;
                 }
@@ -47,9 +47,9 @@ public class GetNBTJsonCommand {
                 String jsonNBT = NbtOps.INSTANCE.convertTo(JsonOps.INSTANCE, nbt).toString();
                 MutableText txt = Text.literal(jsonNBT)
                         .setStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, jsonNBT)).withUnderline(true));
-                *///?} else {
-                    MutableText txt = Text.of("no worky on 1.21.8").copy();
-                //?}
+                //?} else {
+                    /*MutableText txt = Text.of("no worky on 1.21.8").copy();
+                *///?}
 
                 Chat.send(Chat.addLogo(txt));
             });

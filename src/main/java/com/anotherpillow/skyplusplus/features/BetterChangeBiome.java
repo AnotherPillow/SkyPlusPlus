@@ -4,8 +4,8 @@ import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import net.minecraft.client.MinecraftClient;
 //? if <1.21 {
-/*import net.minecraft.client.item.ModelPredicateProviderRegistry;
- *///?}
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
+ //?}
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,7 +26,7 @@ public class BetterChangeBiome {
 
         // Identifier.of("skyplusplus:betterchangebiome"),
         //? if <1.21 {
-        /*ModelPredicateProviderRegistry.register(item, new Identifier("skyplusplus:betterchangebiome"), (itemStack, clientWorld, livingEntity, randomSeed) -> {
+        ModelPredicateProviderRegistry.register(item, new Identifier("skyplusplus:betterchangebiome"), (itemStack, clientWorld, livingEntity, randomSeed) -> {
 
 
             if (!config.betterChangeBiomeEnabled) return 0.0f;
@@ -47,7 +47,7 @@ public class BetterChangeBiome {
 
             //System.out.println(nbtCompound);
             return 0.6f;
-         *///?}
+         //?}
 
     }
     public static void register() {

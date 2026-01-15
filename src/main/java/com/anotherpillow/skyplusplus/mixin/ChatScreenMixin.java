@@ -14,10 +14,10 @@ public class ChatScreenMixin {
         at=@At(
                 value="INVOKE",
                 //? if >= 1.21 {
-                target="Lnet/minecraft/client/gui/screen/ChatScreen;sendMessage(Ljava/lang/String;Z)V"
-                //?} else {
-                /*target="Lnet/minecraft/client/gui/screen/ChatScreen;sendMessage(Ljava/lang/String;Z)Z"
-                *///?}
+                /*target="Lnet/minecraft/client/gui/screen/ChatScreen;sendMessage(Ljava/lang/String;Z)V"
+                *///?} else {
+                target="Lnet/minecraft/client/gui/screen/ChatScreen;sendMessage(Ljava/lang/String;Z)Z"
+                //?}
         ),
         index=0
     )

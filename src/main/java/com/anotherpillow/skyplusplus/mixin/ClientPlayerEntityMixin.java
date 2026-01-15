@@ -10,10 +10,10 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 // was yarn 1.20.2-pre3 i think
 //? if >=1.20.2 {
-import net.minecraft.item.PlayerHeadItem;
-//?} else {
-/*import net.minecraft.item.SkullItem;
- *///?}
+/*import net.minecraft.item.PlayerHeadItem;
+*///?} else {
+import net.minecraft.item.SkullItem;
+ //?}
 
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,10 +41,10 @@ public class ClientPlayerEntityMixin {
 
         String name = itemStack.getName().getString();
         //? if >=1.21 {
-        int hotbarSlot = self.getInventory().getSelectedSlot();
-        //?} else {
-        /*int hotbarSlot = self.getInventory().selectedSlot;
-         *///?}
+        /*int hotbarSlot = self.getInventory().getSelectedSlot();
+        *///?} else {
+        int hotbarSlot = self.getInventory().selectedSlot;
+         //?}
         int inventorySlotId = 27 + hotbarSlot;
 
         IntArrayList list = SlotLocker.lockedSlots.get(Server.getSkyblockMode());
@@ -57,10 +57,10 @@ public class ClientPlayerEntityMixin {
 
 
         //? if >=1.20.2 {
-        if (itemStack.getItem() instanceof PlayerHeadItem) {
-            //?} else {
-            /*if (itemStack.getItem() instanceof SkullItem) {
-             *///?}
+        /*if (itemStack.getItem() instanceof PlayerHeadItem) {
+            *///?} else {
+            if (itemStack.getItem() instanceof SkullItem) {
+             //?}
             if (config.preventHeadDropping) {
                 client.inGameHud.getChatHud().addMessage(Text.of(String.valueOf(Chat.addLogo(Text.translatable("skyplusplus.preventheaddropping.prevented-drop", name)))));
                 cb.setReturnValue(false);
@@ -74,7 +74,7 @@ public class ClientPlayerEntityMixin {
     
 
 
-    /*@ModifyArg(
+    @ModifyArg(
         method = "sendChatMessage(Ljava/lang/String;Lnet/minecraft/text/Text;)V",
         at = @At(
                 value = "INVOKE",
@@ -98,5 +98,5 @@ public class ClientPlayerEntityMixin {
     }
 
     
-    *///?}
+    //?}
 }
