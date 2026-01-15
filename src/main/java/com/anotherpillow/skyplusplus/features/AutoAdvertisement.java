@@ -33,18 +33,8 @@ public class AutoAdvertisement {
         Runnable task = () -> {
             Server.Mode mode = Server.getSkyblockMode();
 
-<<<<<<< HEAD
-            //? if >1.19.2 {
-            /*if (mode == Server.Mode.ECONOMY) networkHandler.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING);
-            if (mode == Server.Mode.SURVIVAL) networkHandler.sendChatMessage(SkyPlusPlusClient.config.survivalAdMessage + MARKER_STRING);
-            *///?} else {
-            if (mode == Server.Mode.ECONOMY) player.sendChatMessage(SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING, Text.empty());
-            if (mode == Server.Mode.SURVIVAL) player.sendChatMessage(SkyPlusPlusClient.config.survivalAdMessage + MARKER_STRING, Text.empty());
-             //?}
-=======
             if (mode == Server.Mode.ECONOMY) Chat.sendCommandToServer("cg " + SkyPlusPlusClient.config.economyAdMessage + MARKER_STRING);
             if (mode == Server.Mode.SURVIVAL) Chat.sendCommandToServer("cg " + SkyPlusPlusClient.config.survivalAdMessage + MARKER_STRING);
->>>>>>> e09272f (fix auto ads)
         };
 
         scheduledFuture = scheduler.scheduleAtFixedRate(task, 0, interval, timeUnit);

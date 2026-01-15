@@ -13,7 +13,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtSizeTracker;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -42,12 +41,14 @@ public class BetterChangeBiome {
                 if (nbtCompound.getString("SBGUI_ACTION_CHANGE_BIOME").equals("WARM_OCEAN")) return 0.4f;
                 else if (nbtCompound.getString("SBGUI_ACTION_CHANGE_BIOME").equals("RIVER")) return 0.7f;
             }
-            if (!nbtCompound.contains("SBGUI_ACTION_CHANGE_BIOME")) return 0.0f; //yes, this seems to be required bc null check
+            if (!nbtCompound.contains("SBGUI_ACTION_CHANGE_BIOME"))
+                return 0.0f; //yes, this seems to be required bc null check
             //client.inGameHud.getChatHud().addMessage(Text.of("CHANGEBIOME: " + nbtCompound.getString("CHANGE_BIOME")));
 
             //System.out.println(nbtCompound);
             return 0.6f;
-         //?}
+        });
+        //?}
 
     }
     public static void register() {

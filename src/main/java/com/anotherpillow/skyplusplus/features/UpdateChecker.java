@@ -15,7 +15,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class UpdateChecker {
-    public static URI API_URL = URI.create("https://api.modrinth.com/v2/project/sky++/version?game_version=" + SharedConstants.getGameVersion().name());
+    //? if >=1.21 {
+    /*public static URI API_URL = URI.create("https://api.modrinth.com/v2/project/sky++/version?game_version=" + SharedConstants.getGameVersion().name());
+    *///?} else {
+    public static URI API_URL = URI.create("https://api.modrinth.com/v2/project/sky++/version?game_version=" + SharedConstants.getGameVersion().getName());
+    //?}
+
     public static String latest = null;
 
     public static String getLatestVersion() {

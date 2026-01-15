@@ -363,23 +363,6 @@ public class SkyPlusPlusConfig {
                                 .controller(TickBoxController::new)
                                  //?}
                                 .build())
-<<<<<<< HEAD
-                        .option(Option.createBuilder(boolean.class)
-                                .name(Text.translatable("skyplusplus.config.chatfilter.removechatranks"))
-                                //? if >1.19.2 {
-                                /*.description(OptionDescription.of(Text.translatable("skyplusplus.config.chatfilter.removechatranks-desc")))
-                                *///?} else {
-                                .tooltip(Text.translatable("skyplusplus.config.chatfilter.removechatranks-desc"))
-                                //?}
-                                .binding(defaults.removeChatRanks, () -> config.removeChatRanks, v -> config.removeChatRanks = v)
-                                //? if >1.19.2 {
-                                /*.controller(TickBoxControllerBuilder::create)
-                                *///?} else {
-                                .controller(TickBoxController::new)
-                                 //?}
-                                .build())
-=======
->>>>>>> 080a1a6 (remove removechatranks)
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.autoresponder.title"))

@@ -3,7 +3,8 @@ package com.anotherpillow.skyplusplus.mixin;
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.util.Chat;
-import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
+//? if >=1.21
+/*import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;*/
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

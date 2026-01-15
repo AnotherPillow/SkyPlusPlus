@@ -2,7 +2,6 @@ package com.anotherpillow.skyplusplus.screen;
 
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
 //? if >=1.21 {

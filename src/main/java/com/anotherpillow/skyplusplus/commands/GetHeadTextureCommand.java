@@ -12,8 +12,7 @@ import net.minecraft.client.MinecraftClient;
 //? >=1.21 {
 /*import net.minecraft.component.ComponentMap;
 import net.minecraft.component.DataComponentTypes;
-//}?
-import net.minecraft.component.type.ProfileComponent;
+*///?}
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -53,11 +52,12 @@ public class GetHeadTextureCommand {
                 }
 
                 //? if >=1.21 {
-                /^ComponentMap components = mainHand.getComponents();
+                /*ComponentMap components = mainHand.getComponents();
 
                 if (components.isEmpty()) {
                     return;
                 }
+                *///?}
 
 
                 NbtCompound itemTag = mainHand.getNbt();
@@ -148,9 +148,8 @@ public class GetHeadTextureCommand {
                 Chat.send(Chat.addLogo(finalMessage));
             });
             return 1;
-        }));^///?}
+        }));//?}
     }
 
 
 }
-*/
