@@ -142,12 +142,15 @@ public abstract class ChatMixin {
     public void addMessageMixin(Text message, @Nullable MessageSignatureData signature, @Nullable MessageIndicator indicator, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
 
+<<<<<<< HEAD
         //? if <1.21 {
         /*if (SkyPlusPlusClient.config.removeChatRanks) {
             addMessage(RemoveChatRanks.process(message), signature, client.inGameHud.getTicks(), indicator, false);
             ci.cancel();
         }
 
+=======
+>>>>>>> 080a1a6 (remove removechatranks)
         if (SkyPlusPlusClient.config.copyChatMessageButtonEnabled) {
             addMessage(TextStringifier.prefixButton(message), signature, client.inGameHud.getTicks(), indicator, false);
             ci.cancel();

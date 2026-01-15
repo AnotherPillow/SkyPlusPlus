@@ -58,7 +58,6 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public boolean hideLuckyCratesMessages = true;
     @ConfigEntry public boolean hideMailMessages = true;
     @ConfigEntry public boolean hideVoteMessages = false;
-    @ConfigEntry public boolean removeChatRanks = false;
     @ConfigEntry public boolean allWhiteChat = false;
 
     @ConfigEntry public boolean enableAutoResponder = false;
@@ -364,6 +363,7 @@ public class SkyPlusPlusConfig {
                                 /*.controller(TickBoxController::new)
                                  *///?}
                                 .build())
+<<<<<<< HEAD
                         .option(Option.createBuilder(boolean.class)
                                 .name(Text.translatable("skyplusplus.config.chatfilter.removechatranks"))
                                 //? if >1.19.2 {
@@ -378,6 +378,8 @@ public class SkyPlusPlusConfig {
                                 /*.controller(TickBoxController::new)
                                  *///?}
                                 .build())
+=======
+>>>>>>> 080a1a6 (remove removechatranks)
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("skyplusplus.config.autoresponder.title"))
