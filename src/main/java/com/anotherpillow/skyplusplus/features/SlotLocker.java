@@ -25,7 +25,6 @@ public class SlotLocker {
     private static final Type MAP_TYPE = new TypeToken<ConcurrentHashMap<Server.Mode, int[]>>() {}.getType();
 
     public static void save() throws IOException {
-        // Convert IntArrayList → int[] for JSON
         ConcurrentHashMap<Server.Mode, int[]> plain = new ConcurrentHashMap<>();
         lockedSlots.forEach((mode, list) -> plain.put(mode, list.toIntArray()));
 

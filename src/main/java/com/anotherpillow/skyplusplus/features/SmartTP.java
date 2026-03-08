@@ -29,12 +29,7 @@ public class SmartTP {
                 awaitingLock = false;
                 Chat.send(Chat.addLogo(Text.translatable("skyplusplus.smarttp.timed-out", username)));
 
-
-                //? if >1.19.2 {
-                /*Chat.sendCommandToServer("lock");
-                *///?} else {
                 Chat.sendCommandToServer("lock");
-                 //?}
             }
         };
 
@@ -44,13 +39,6 @@ public class SmartTP {
 
     public static void lock() {
         MinecraftClient client = MinecraftClient.getInstance();
-        //? if >1.19.2 {
-        /*ClientPlayNetworkHandler handler = client.getNetworkHandler();
-        if (handler == null) return;
-        *///?} else {
-        ClientPlayerEntity player = client.player;
-        if (player == null) return;
-         //?}
 
         if (locktask != null) {
             locktask.cancel();
@@ -62,12 +50,7 @@ public class SmartTP {
             @Override
             public void run() {
                 awaitingLock = false;
-
-                //? if >1.19.2 {
-                /*Chat.sendCommandToServer("lock");
-                *///?} else {
                 Chat.sendCommandToServer("lock");
-                 //?}
             }
         };
 

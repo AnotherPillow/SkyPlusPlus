@@ -64,4 +64,13 @@ public class Chat {
          //?}
     }
 
+    public static void sendChatToServer(String message) {
+        if (SkyPlusPlusClient.client.player == null) return; // just silently fail, unlikely to hit anyway
+        //? if >1.19.2 {
+        /*SkyPlusPlusClient.client.getNetworkHandler().sendChatMessage(message);
+         *///?} else {
+        SkyPlusPlusClient.client.player.sendChatMessage(message, Text.of(""));
+        //?}
+    }
+
 }

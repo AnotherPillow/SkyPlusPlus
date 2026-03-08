@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.commands;
 
+import com.anotherpillow.skyplusplus.util.Chat;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -31,13 +32,9 @@ public class RunAfterCommand {
 
                 client.send(() -> {
                     if (client.player == null) return;
-                    //? if >1.19.2 {
-                    /*if (command.startsWith("/")) client.getNetworkHandler().sendChatMessage(command.substring(1));
-                    else client.getNetworkHandler().sendChatMessage(command);
-                    *///?} else {
-                    if (command.startsWith("/")) client.player.sendCommand(command.substring(1), Text.empty());
-                    else client.player.sendChatMessage(command, Text.of(command));
-                     //?}
+
+                    if (command.startsWith("/")) Chat.sendCommandToServer(command.substring(1));
+                    else Chat.sendChatToServer(command);
 
                 });
 

@@ -102,6 +102,9 @@ public class SkyPlusPlusConfig {
     @ConfigEntry public String shareApiBaseUrl = "https://skyblock.onl";
     @ConfigEntry public boolean enableShareButton = true;
 
+    @ConfigEntry public boolean waveDisplayEnabled = false;
+    @ConfigEntry public int waveDisplayX = 800;
+    @ConfigEntry public int waveDisplayY = 200;
 
     public static Screen getConfigScreen(Screen parentScreen) {
         return YetAnotherConfigLib.create(configInstance, ((defaults, config, builder) -> builder
@@ -848,6 +851,51 @@ public class SkyPlusPlusConfig {
                                 *///?} else {
                                 .controller(TickBoxController::new)
                                  //?}
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("skyplusplus.config.mobarenahelper.title"))
+                        .option(Option.createBuilder(boolean.class)
+                                .name(Text.translatable("skyplusplus.config.mobarenahelper.wave-display"))
+                                //? if >1.19.2 {
+                                /*.description(OptionDescription.of(Text.translatable("skyplusplus.config.mobarenahelper-wave-display-desc")))
+                                *///?} else {
+                                .tooltip(Text.translatable("skyplusplus.config.mobarenahelper.wave-display-desc"))
+                                //?}
+                                .binding(defaults.waveDisplayEnabled , () -> config.waveDisplayEnabled , v -> config.waveDisplayEnabled  = v)
+                                //? if >1.19.2 {
+                                /*.controller(TickBoxControllerBuilder::create)
+                                 *///?} else {
+                                .controller(TickBoxController::new)
+                                //?}
+                                .build())
+                        .option(Option.createBuilder(int.class)
+                                .name(Text.translatable("skyplusplus.config.mobarenahelper-wavedisplay-x"))
+                                //? if >1.19.2 {
+                                /*.description(OptionDescription.of(Text.translatable("skyplusplus.config.mobarenahelper-wavedisplay-x-desc")))
+                                 *///?} else {
+                                .tooltip(Text.translatable("skyplusplus.config.mobarenahelper-wavedisplay-x-desc"))
+                                //?}
+                                .binding(defaults.waveDisplayX, () -> config.waveDisplayX, v -> config.waveDisplayX = v)
+                                //? if >1.19.2 {
+                                /*.controller(opt -> IntegerSliderControllerBuilder.create(opt).range(0, 4000).step(16))
+                                 *///?} else {
+                                .controller(opt -> new IntegerSliderController(opt, 0, 4000, 1))
+                                //?}
+                                .build())
+                        .option(Option.createBuilder(int.class)
+                                .name(Text.translatable("skyplusplus.config.mobarenahelper-wavedisplay-y"))
+                                //? if >1.19.2 {
+                                /*.description(OptionDescription.of(Text.translatable("skyplusplus.config.mobarenahelper-wavedisplay-y-desc")))
+                                 *///?} else {
+                                .tooltip(Text.translatable("skyplusplus.config.mobarenahelper-wavedisplay-y-desc"))
+                                //?}
+                                .binding(defaults.waveDisplayY, () -> config.waveDisplayY, v -> config.waveDisplayY = v)
+                                //? if >1.19.2 {
+                                /*.controller(opt -> IntegerSliderControllerBuilder.create(opt).range(0, 4000).step(16))
+                                 *///?} else {
+                                .controller(opt -> new IntegerSliderController(opt, 0, 4000, 16))
+                                //?}
                                 .build())
                         .build())
         )).generateScreen(parentScreen);

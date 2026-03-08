@@ -15,6 +15,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.decoration.GlowItemFrameEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -100,7 +101,6 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                     TraderCountdown.DrawCountdown(renderObject);
                 }
 
-
                 //? <1.21 && >=1.20.1 {
                 /*TraderImage.draw(renderObject.getMatrices());
                 *///?} else if <1.20.1 {
@@ -114,6 +114,7 @@ public class SkyPlusPlusClient implements ClientModInitializer {
                 TraderImage.draw(m);
                 *///?}
 
+                MobArenaHelper.WaveDisplay.render(renderObject);
             }
 
         });

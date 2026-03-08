@@ -148,5 +148,13 @@
   "skyplusplus.config.share.api-base-url": "API Base Url",
   "skyplusplus.config.share.api-base-url-desc": "Base URL for the api to share items with. Protocol required. Default https://skyblock.onl",
   "skyplusplus.config.share.button": "Enable share button",
-  "skyplusplus.config.share.button-desc": "Whether to have the share button in chests and shulkers."
+  "skyplusplus.config.share.button-desc": "Whether to have the share button in chests and shulkers.",
+
+  "skyplusplus.config.mobarenahelper.title": "Mob Arena Helper",
+  "skyplusplus.config.mobarenahelper.wave-display": "Wave Display",
+  "skyplusplus.config.mobarenahelper.wave-display-desc": "Shows the waves of the current arena when in one.",
+  "skyplusplus.config.mobarenahelper-wavedisplay-x": "Notification X",
+  "skyplusplus.config.mobarenahelper-wavedisplay-x-desc": "X Position",
+  "skyplusplus.config.mobarenahelper-wavedisplay-y": "Notification Y",
+  "skyplusplus.config.mobarenahelper-wavedisplay-y-desc": "Y Position"
 }

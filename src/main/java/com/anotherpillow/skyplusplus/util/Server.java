@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.util;
 
+import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
@@ -23,8 +24,14 @@ public class Server {
         SKYWARS,
         EVENT,
         MOBARENA,
-
     }
+
+    public static enum Arena {
+        NONE,
+        SB,
+        CATACLYSM,
+    }
+
     public static boolean isSkyblock(String domain) {
         List<String> skyblockDomains = Arrays.asList(
                 "skyblock.net",
@@ -67,7 +74,7 @@ public class Server {
 
     public static Mode getSkyblockMode() {
         if (!onSkyblock()) return Mode.NONE;
-        MinecraftClient client = MinecraftClient.getInstance();
+        MinecraftClient client = SkyPlusPlusClient.client;
         ClientPlayerEntity player = client.player;
 
         if (client.world == null) return Mode.NONE;
@@ -82,8 +89,17 @@ public class Server {
             case 8 -> Mode.EVENT;
             default -> Mode.UNKNOWN;
         };
-
     }
+
+    public static Arena getMobArena() {
+        ClientPlayerEntity player = SkyPlusPlusClient.client.player;
+        if (getSkyblockMode() != Mode.MOBARENA || player == null) return Arena.NONE;
+
+        // cataclysm is at ~-11800,  sb is at ~-12800
+        if (player.getX() > -12000) return Arena.CATACLYSM;
+        return Arena.SB;
+    }
+
     public static boolean onSkyblock() {
         ServerInfo server = MinecraftClient.getInstance().getCurrentServerEntry();
         return isSkyblock(server == null ? "" : server.address);
