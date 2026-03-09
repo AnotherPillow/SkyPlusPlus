@@ -34,6 +34,10 @@ public class MobArenaHelper {
         MobArenaHelper.lastKnownWave = wave;
     }
 
+    public static void onFinish() {
+        lastKnownWave = 0;
+    }
+
     public static class WaveDisplay {
 
         public static void render(/*? >=1.20.1 {*/ /*DrawContext drawMatrix *//*?} else {*/ MatrixStack drawMatrix /*?}*/) {
