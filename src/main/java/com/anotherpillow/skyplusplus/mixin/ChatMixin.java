@@ -54,6 +54,7 @@ public abstract class ChatMixin {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
 //        System.out.println(Text.Serializer.toJson(text_message));
         String message = text_message.getString();
+        if (message.startsWith("<c>")) message = message.substring(3);
 
         if (message.contains(Chatcryption.MESSAGE_START_SIGN) && Chatcryption.processIncomingMessage(text_message)) {
             callback.cancel();
@@ -131,7 +132,9 @@ public abstract class ChatMixin {
         }
 
         if (StringChecker.mobArenaWavePatternCheck(message) ||
-                StringChecker.cataclysmWavePatternCheck(message)) MobArenaHelper.onWave(message);
+                StringChecker.cataclysmWavePatternCheck(message)){
+            MobArenaHelper.onWave(message);
+        }
 
 
         if (message.startsWith("You last logged in ")) {

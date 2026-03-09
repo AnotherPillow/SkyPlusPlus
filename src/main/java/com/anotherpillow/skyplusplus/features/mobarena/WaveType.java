@@ -7,4 +7,8 @@ public enum WaveType {
     BOSS,
     SWARM,
     UNKNOWN,
+
+    NETHER,
+    END,
+    PILLAGER
 }

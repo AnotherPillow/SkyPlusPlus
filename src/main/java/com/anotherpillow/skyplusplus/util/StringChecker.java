@@ -1,5 +1,6 @@
 package com.anotherpillow.skyplusplus.util;
 
+import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import net.minecraft.client.MinecraftClient;
 
 import java.util.Objects;
