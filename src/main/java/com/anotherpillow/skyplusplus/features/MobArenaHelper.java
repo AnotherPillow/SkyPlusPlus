@@ -24,7 +24,6 @@ public class MobArenaHelper {
 
     public static void onWave(String message) {
         Pattern p = Server.getMobArena() == Server.Arena.SB ? StringChecker.mobArenaWavePattern : StringChecker.catacylsmWavePattern;
-        Chat.send("on wave, arena is " + Server.getMobArena());
         Matcher m = p.matcher(message);
         if (!m.matches()) return;
 
@@ -100,11 +99,11 @@ public class MobArenaHelper {
 
     private static final Map<Server.Arena, Map<Integer, Wave>> ARENA_WAVES = Map.of(
             Server.Arena.SB, Map.ofEntries(
-                    Map.entry(10, new Wave(10, WaveType.BOSS, EntityType.HUSK, "§2Dustbane", "§2")),
-                    Map.entry(20, new Wave(20, WaveType.BOSS, EntityType.SPIDER, "§4Venomix", "§4")),
-                    Map.entry(30, new Wave(30, WaveType.BOSS, EntityType.PIGLIN_BRUTE, "§6Firelin", "§6")),
-                    Map.entry(40, new Wave(40, WaveType.BOSS, EntityType.WITCH, "§5Grimwort", "§5")),
-                    Map.entry(50, new Wave(50, WaveType.BOSS, EntityType.WARDEN, "§3Titan", "§3")),
+                    Map.entry(10, new Wave(10, WaveType.BOSS, EntityType.HUSK, "§2Dustbane ★", "§2")),
+                    Map.entry(20, new Wave(20, WaveType.BOSS, EntityType.SPIDER, "§4Venomix ★", "§4")),
+                    Map.entry(30, new Wave(30, WaveType.BOSS, EntityType.PIGLIN_BRUTE, "§6Firelin ★", "§6")),
+                    Map.entry(40, new Wave(40, WaveType.BOSS, EntityType.WITCH, "§5Grimwort ★", "§5")),
+                    Map.entry(50, new Wave(50, WaveType.BOSS, EntityType.WARDEN, "§3Titan ★", "§3")),
 
                     // sourced from wiki
                     Map.entry(1, new Wave(1, WaveType.NORMAL, null, "§8Normal", "§8")),
@@ -117,6 +116,7 @@ public class MobArenaHelper {
                     Map.entry(2, new Wave(2, WaveType.NETHER, null, "§4Nether", "§4")),
                     Map.entry(7, new Wave(7, WaveType.NETHER, null, "§4Nether", "§4")),
                     Map.entry(12, new Wave(12, WaveType.NETHER, null, "§4Nether", "§4")),
+                    Map.entry(17, new Wave(17, WaveType.NETHER, null, "§4Nether", "§4")),
                     Map.entry(22, new Wave(22, WaveType.NETHER, null, "§4Nether", "§4")),
                     Map.entry(27, new Wave(27, WaveType.NETHER, null, "§4Nether", "§4")),
                     Map.entry(32, new Wave(32, WaveType.NETHER, null, "§4Nether", "§4")),
