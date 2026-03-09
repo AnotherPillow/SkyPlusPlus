@@ -130,7 +130,8 @@ public abstract class ChatMixin {
             }
         }
 
-        if (StringChecker.mobArenaWavePatternCheck(message)) MobArenaHelper.onWave(message);
+        if (StringChecker.mobArenaWavePatternCheck(message) ||
+                StringChecker.cataclysmWavePatternCheck(message)) MobArenaHelper.onWave(message);
 
 
         if (message.startsWith("You last logged in ")) {

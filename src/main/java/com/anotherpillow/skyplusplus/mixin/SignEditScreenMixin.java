@@ -6,15 +6,13 @@ import com.anotherpillow.skyplusplus.util.Chat;
 //? if >=1.21
 /*import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;*/
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Objects;
 
 @Mixin(SignEditScreen.class)
@@ -43,7 +41,10 @@ public class SignEditScreenMixin {
         }
 
         *///?} else {
-        this.initialText = this.text.clone();
+        // sometimes is null somehow so not break it? just .clone() will break on my main instance
+        this.initialText = this.text == null
+                ? new String[0]
+                : Arrays.copyOf(this.text, this.text.length);
          //?}
     }
 

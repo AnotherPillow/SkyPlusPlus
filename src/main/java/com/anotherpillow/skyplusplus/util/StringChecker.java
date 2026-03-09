@@ -26,6 +26,7 @@ public class StringChecker {
     public static Pattern visitingTitlePattern = Pattern.compile("§6\\-=§e[A-Za-z0-9_\\.]{1,16}'s Island§6=\\-"); // even names ending with "s" still have "'s"
     public static Pattern directMessageRawPattern = Pattern.compile("^(?:<c>)?\\[(?:\\[[A-Za-z]+?\\] )?([A-Za-z0-9\\_]{0,16})(?:@[a-zA-Z0-9\\_\\-]+)? -> me\\] (.+)");
     public static Pattern mobArenaWavePattern = Pattern.compile("^\\[MobArena] Wave #(\\d+)!(?: \\[(SPECIAL|UPGRADE|SWARM|BOSS)])?$");
+    public static Pattern catacylsmWavePattern = Pattern.compile("^\\[Cataclysm] Wave #(\\d+)!(?: \\[(SPECIAL|UPGRADE|SWARM|BOSS)])?$");
 
     public static String COLOUR_CODE_STRING = "[&§][0-9a-fkrl-ox]";
     public static Pattern COLOUR_CODE = Pattern.compile(COLOUR_CODE_STRING);
@@ -88,6 +89,8 @@ public class StringChecker {
     public static boolean visitingTitleCheck(String input) { return visitingTitlePattern.matcher(input).find(); }
 
     public static boolean mobArenaWavePatternCheck(String input) { return mobArenaWavePattern.matcher(input).find(); }
+
+    public static boolean cataclysmWavePatternCheck(String input) { return catacylsmWavePattern.matcher(input).find(); }
 
     public static boolean colourCodeCheck(String input) { return COLOUR_CODE.matcher(input).find(); }
 

@@ -98,6 +98,13 @@ public class MobArenaHelper {
                     40, new Wave(40, WaveType.BOSS, EntityType.WITCH, "§5Grimwort", "§5"),
                     50, new Wave(50, WaveType.BOSS, EntityType.WARDEN, "§3Titan", "§3")
             ),
-            Server.Arena.CATACLYSM, Map.of() // TODO
+            Server.Arena.CATACLYSM, Map.of(
+                    10, new Wave(10, WaveType.BOSS, EntityType.CREEPER, "§bThermo", "§b"), // charged creeper technically
+                    // todo: colours
+                    25, new Wave(25, WaveType.BOSS, EntityType.MAGMA_CUBE, "§fOb'Lazrak", "§f"),
+                    40, new Wave(40, WaveType.BOSS, EntityType.SKELETON, "§fNecromancer", "§f"),
+                    50, new Wave(50, WaveType.BOSS, EntityType.MAGMA_CUBE, "§fDoom of the Nullvoid", "§f"),
+                    60, new Wave(60, WaveType.BOSS, EntityType.WITHER, "§fArbiter", "§f")
+            ) // TODO
     );
 }
