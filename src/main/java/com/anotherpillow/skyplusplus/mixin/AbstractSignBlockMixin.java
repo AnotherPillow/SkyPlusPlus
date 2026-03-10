@@ -47,7 +47,7 @@ public abstract class AbstractSignBlockMixin {
         }
 
 
-        //? if >=1.21 {
+        //? if >=1.20.1 {
         /*String firstLine = signBE.getText(true).getMessage(0, false).getString();
         *///?} else {
         String firstLine = signBE.getTextOnRow(0, false).getString();

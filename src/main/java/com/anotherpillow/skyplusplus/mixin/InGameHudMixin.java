@@ -9,9 +9,11 @@ import com.anotherpillow.skyplusplus.util.Server;
 import com.anotherpillow.skyplusplus.util.StringChecker;
 import com.mojang.blaze3d.systems.RenderSystem;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
-//? if >=1.20.1 {
+//? if >=1.21 {
 /*import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.gui.DrawContext;
+ *///?}
+//? if >=1.20.1 {
+/*import net.minecraft.client.gui.DrawContext;
 *///?} else {
 import net.minecraft.client.gui.DrawableHelper;
  //?}
@@ -78,10 +80,10 @@ public class InGameHudMixin {
             at = @At(
                     value = "INVOKE",
                     //? if >=1.20.4 {
-                    target="Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V",
-                    //?} else {
-                    /^target="Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V",
-                     ^///?}
+                    /^target="Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V",
+                    ^///?} else {
+                    target="Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V",
+                     //?}
 
                     shift = At.Shift.AFTER
             ),
