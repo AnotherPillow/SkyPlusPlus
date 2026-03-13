@@ -9,6 +9,7 @@
     "ScoreboardObjectiveMixin"
   ],
   "client": [
+    "AbstractSignEditScreenAccessor",
     "ChatMixin",
     "ChatScreenMixin",
     "ClientPlayerEntityMixin",
