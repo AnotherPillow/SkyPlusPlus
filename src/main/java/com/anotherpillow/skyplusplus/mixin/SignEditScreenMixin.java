@@ -18,11 +18,11 @@ import java.util.Objects;
 @Mixin(SignEditScreen.class)
 public class SignEditScreenMixin {
     //? if <1.21 {
-    //? if =1.20.1 {
-    /*private String[] text;
-    *///?} else {
-    @Shadow @Final private String[] text;
-    //?}
+    //? if ~1.20.1 {
+    private String[] text;
+    //?} else {
+    /*@Shadow @Final private String[] text;
+    *///?}
     //?}
     @Unique
     private String[] initialText;
@@ -57,8 +57,8 @@ public class SignEditScreenMixin {
          //?}
     }
 
-    //? if <1.21 && != 1.20.1 {
-    @Inject(
+    //? if <1.21 && !~1.20.4 {
+    /*@Inject(
             method="finishEditing()V",
             at=@At("TAIL")
     )
@@ -75,5 +75,5 @@ public class SignEditScreenMixin {
         }
 
     }
-    //?}
+    *///?}
 }

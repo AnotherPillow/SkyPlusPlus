@@ -46,10 +46,10 @@ public class BetterCrateKeys {
             if (loreText == null) return 0.0f;
              //?}
             //? if 1.20.4 {
-            /*String lore = TextCodecs.CODEC.parse(JsonOps.INSTANCE, JsonParser.parseString(loreText)).get().orThrow().getString();
-            *///?} else if <=1.20.1 {
-            String lore = Text.Serializer.fromJson(loreText).getString();
-            //?}
+            String lore = TextCodecs.CODEC.parse(JsonOps.INSTANCE, JsonParser.parseString(loreText)).get().orThrow().getString();
+            //?} else if <=1.20.1 {
+            /*String lore = Text.Serializer.fromJson(loreText).getString();
+            *///?}
         //? if <1.21 {
         
 

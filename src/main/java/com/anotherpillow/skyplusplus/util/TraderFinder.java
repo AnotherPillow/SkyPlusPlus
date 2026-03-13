@@ -11,10 +11,10 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.WanderingTraderEntity;
 //? if >=1.20.1 {
-/*import net.minecraft.client.gui.DrawContext;
-*///?} else {
-import net.minecraft.client.gui.DrawableHelper;
- //?}
+import net.minecraft.client.gui.DrawContext;
+//?} else {
+/*import net.minecraft.client.gui.DrawableHelper;
+ *///?}
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -60,7 +60,7 @@ public class TraderFinder {
         return traderLocation.getString();
     }
 
-    public static void showTraderString(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/) {
+    public static void showTraderString(/*? >=1.20.1 {*/ DrawContext ctx /*?} else {*/ /*MatrixStack matrixStack *//*?}*/) {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
 
 
@@ -76,16 +76,16 @@ public class TraderFinder {
         int textOffset = textWidth / 2;
 
         //? if >=1.20.1 {
-        /*ctx.drawCenteredTextWithShadow(textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
-        *///?} else if >1.19.2 {
+        ctx.drawCenteredTextWithShadow(textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
+        //?} else if >1.19.2 {
         /*DrawableHelper.drawCenteredTextWithShadow(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
          *///?} else {
-        DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
-         //?}
+        /*DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
+         *///?}
 
     }
 
-    public static void loopTraders(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/) {
+    public static void loopTraders(/*? >=1.20.1 {*/ DrawContext ctx /*?} else {*/ /*MatrixStack matrixStack *//*?}*/) {
         MinecraftClient client = MinecraftClient.getInstance();
         Camera camera = MinecraftClient.getInstance().gameRenderer.getCamera();
 
@@ -98,19 +98,19 @@ public class TraderFinder {
                 int traderZ = (int) entity.getZ();
 
                 setTraderXYZString(traderX, traderY, traderZ);
-                showTraderString(/*? >=1.20.1 {*/ /*ctx *//*?} else {*/ matrixStack /*?}*/);
+                showTraderString(/*? >=1.20.1 {*/ ctx /*?} else {*/ /*matrixStack *//*?}*/);
             }
         }
 
     }
-    public static void findTrader(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/) {
+    public static void findTrader(/*? >=1.20.1 {*/ DrawContext ctx /*?} else {*/ /*MatrixStack matrixStack *//*?}*/) {
         MinecraftClient mc = MinecraftClient.getInstance();
         Entity player = mc.player;
 
         if (player == null || mc.world == null) return;
 
         BlockPos playerPos = player.getBlockPos();
-        loopTraders(/*? >=1.20.1 {*/ /*ctx *//*?} else {*/ matrixStack /*?}*/);
+        loopTraders(/*? >=1.20.1 {*/ ctx /*?} else {*/ /*matrixStack *//*?}*/);
 
     }
 }

@@ -13,10 +13,10 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 /*import net.minecraft.client.gl.RenderPipelines;
  *///?}
 //? if >=1.20.1 {
-/*import net.minecraft.client.gui.DrawContext;
-*///?} else {
-import net.minecraft.client.gui.DrawableHelper;
- //?}
+import net.minecraft.client.gui.DrawContext;
+//?} else {
+/*import net.minecraft.client.gui.DrawableHelper;
+ *///?}
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.math.MatrixStack;
@@ -40,9 +40,9 @@ public class InGameHudMixin {
     //? if >=1.20.4 {
 
     //?} else {
-    @Shadow
+    /*@Shadow
     private static final Identifier WIDGETS_TEXTURE = new Identifier("textures/gui/widgets.png");
-     //?}
+     *///?}
 
     //? if <1.21 {
     @Shadow
@@ -75,23 +75,23 @@ public class InGameHudMixin {
     private void renderHotbar(DrawContext context, RenderTickCounter tickCounter,
                               CallbackInfo ci, PlayerEntity playerEntity, ItemStack itemStack, Arm arm, int i, int j, int k) {
     *///?} else if >=1.20.1 {
-    /*@Inject(
+    @Inject(
             method = "renderHotbar",
             at = @At(
                     value = "INVOKE",
                     //? if >=1.20.4 {
-                    /^target="Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V",
-                    ^///?} else {
-                    target="Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V",
-                     //?}
+                    target="Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V",
+                    //?} else {
+                    /*target="Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V",
+                     *///?}
 
                     shift = At.Shift.AFTER
             ),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     private void renderHotbar(float tickDelta, DrawContext context, CallbackInfo ci, PlayerEntity playerEntity, ItemStack itemStack, Arm arm, int i, int j, int k) {
-    *///?} else {
-    @Inject(
+    //?} else {
+    /*@Inject(
             method = "renderHotbar(FLnet/minecraft/client/util/math/MatrixStack;)V",
             at = @At(
                     value = "INVOKE",
@@ -101,7 +101,7 @@ public class InGameHudMixin {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     private void renderHotbar(float tickDelta, MatrixStack matrices, CallbackInfo ci, PlayerEntity playerEntity, ItemStack itemStack, Arm arm, int i, int j) {
-     //?}
+     *///?}
 
         IntArrayList lockedSlots = SlotLocker.lockedSlots.get(Server.getSkyblockMode());
 //        Chat.send("lockSlots: " + lockedSlots);
@@ -110,8 +110,8 @@ public class InGameHudMixin {
         //? if >=1.20.1 {
 
         //?} else {
-        RenderSystem.setShaderTexture(0, SkyPlusPlusClient.lockId);
-         //?}
+        /*RenderSystem.setShaderTexture(0, SkyPlusPlusClient.lockId);
+         *///?}
 
         for (int slotOffset = 0; slotOffset < 9; slotOffset++) {
             if (!lockedSlots.contains(27 + slotOffset)) continue;
@@ -124,9 +124,9 @@ public class InGameHudMixin {
             //?}
 
             //? if >=1.20.1 {
-            /*context.drawTexture(
+            context.drawTexture(
                     //? if >=1.21
-                    /^RenderPipelines.GUI_TEXTURED,^/
+                    /*RenderPipelines.GUI_TEXTURED,*/
                     SkyPlusPlusClient.lockId,
                     _x,
                     _y,
@@ -137,8 +137,8 @@ public class InGameHudMixin {
                     16,
                     16
             );
-            *///?} else {
-            DrawableHelper.drawTexture(
+            //?} else {
+            /*DrawableHelper.drawTexture(
                     matrices,
                     _x,
                     _y,
@@ -149,15 +149,15 @@ public class InGameHudMixin {
                     16,
                     16
             );
-             //?}
+             *///?}
 
         };
         // revert to old texture
         //? if >=1.20.4 {
 
         //?} else {
-        RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE);
-         //?}
+        /*RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE);
+         *///?}
 
     }
 }
