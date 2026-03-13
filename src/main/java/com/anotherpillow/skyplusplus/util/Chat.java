@@ -3,15 +3,15 @@ package com.anotherpillow.skyplusplus.util;
 import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import net.minecraft.client.MinecraftClient;
 //? if >1.19.2 {
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-//?} else {
+/*import net.minecraft.client.network.ClientPlayNetworkHandler;
+*///?} else {
 //?}
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 //? if >1.19.2 {
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-//?} else {
+/*import net.minecraft.client.network.ClientPlayNetworkHandler;
+*///?} else {
 
 //?}
 
@@ -54,23 +54,23 @@ public class Chat {
         if (handler == null) return;
         handler.sendChatCommand(noSlashCommandWithAllArguments);
         *///?} else if >1.19.2 && <1.21 {
-        ClientPlayNetworkHandler handler = client.getNetworkHandler();
+        /*ClientPlayNetworkHandler handler = client.getNetworkHandler();
         if (handler == null) return;
         handler.sendCommand(noSlashCommandWithAllArguments);
-        //?} else {
-        /*ClientPlayerEntity player = client.player;
+        *///?} else {
+        ClientPlayerEntity player = client.player;
         if (player == null) return;
         player.sendCommand(noSlashCommandWithAllArguments, Text.empty());
-         *///?}
+         //?}
     }
 
     public static void sendChatToServer(String message) {
         if (SkyPlusPlusClient.client.player == null) return; // just silently fail, unlikely to hit anyway
         //? if >1.19.2 {
-        SkyPlusPlusClient.client.getNetworkHandler().sendChatMessage(message);
-         //?} else {
-        /*SkyPlusPlusClient.client.player.sendChatMessage(message, Text.of(""));
-        *///?}
+        /*SkyPlusPlusClient.client.getNetworkHandler().sendChatMessage(message);
+         *///?} else {
+        SkyPlusPlusClient.client.player.sendChatMessage(message, Text.of(""));
+        //?}
     }
 
 }

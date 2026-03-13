@@ -17,13 +17,11 @@ import java.util.Objects;
 
 @Mixin(SignEditScreen.class)
 public class SignEditScreenMixin {
-    //? if <1.21 {
-    //? if ~1.20.1 {
-    private String[] text;
+    //? if 1.19.2 {
+    @Shadow @Final private String[] text;
     //?} else {
-    /*@Shadow @Final private String[] text;
+    /*private String[] text;
     *///?}
-    //?}
     @Unique
     private String[] initialText;
 
@@ -47,9 +45,6 @@ public class SignEditScreenMixin {
         *///?} else {
         // sometimes is null somehow so not break it? just .clone() will break on my main instance
 
-        //? if =1.20.1
-        /*this.text = ((AbstractSignEditScreenAccessor) (Object) this).skyplusplus$getMessages();*/
-
         this.initialText = this.text == null
                 ? new String[0]
                 : Arrays.copyOf(this.text, this.text.length);
@@ -57,8 +52,8 @@ public class SignEditScreenMixin {
          //?}
     }
 
-    //? if <1.21 && !~1.20.4 {
-    /*@Inject(
+    //? if 1.19.2 {
+    @Inject(
             method="finishEditing()V",
             at=@At("TAIL")
     )
@@ -75,5 +70,5 @@ public class SignEditScreenMixin {
         }
 
     }
-    *///?}
+    //?}
 }

@@ -4,18 +4,18 @@ import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 import com.anotherpillow.skyplusplus.util.Server;
 //? if >1.19.2 {
-import dev.isxander.yacl3.gui.YACLScreen;
-//?} else {
-/*import dev.isxander.yacl.gui.YACLScreen;
- *///?}
+/*import dev.isxander.yacl3.gui.YACLScreen;
+*///?} else {
+import dev.isxander.yacl.gui.YACLScreen;
+ //?}
 import meteordevelopment.discordipc.DiscordIPC;
 import meteordevelopment.discordipc.RichPresence;
 import net.minecraft.client.MinecraftClient;
 //? if >=1.20.4 {
-import net.minecraft.client.gui.screen.world.LevelLoadingScreen;
-//?} else {
-/*import net.minecraft.client.gui.screen.LevelLoadingScreen;
- *///?}
+/*import net.minecraft.client.gui.screen.world.LevelLoadingScreen;
+*///?} else {
+import net.minecraft.client.gui.screen.LevelLoadingScreen;
+ //?}
 
 import net.minecraft.client.gui.screen.TitleScreen;
 
