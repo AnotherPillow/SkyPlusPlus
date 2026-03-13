@@ -4,6 +4,7 @@ Yet another skyblock.net mod for 1.19.2, 1.19.4, 1.20.1, 1.20.4, and (kind of) 1
 
 [![img](https://img.shields.io/github/release/anotherpillow/SkyPlusPlus.svg)](https://github.com/AnotherPillow/SkyPlusPlus/releases/)
 [![img](https://img.shields.io/github/downloads/anotherpillow/SkyPlusPlus/total.svg)](https://github.com/AnotherPillow/SkyPlusPlus/releases/)
+![Modrinth Downloads](https://img.shields.io/modrinth/dt/sky++)
 
 ## Installation
 
