@@ -26,19 +26,19 @@ public class MixinCommon {
             if (mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN)) return command;
 
             Chatcryption.processOutgoingChatMessage(destname, mcontent);
-            return "sky++_sinkhole";
+            return null;
         }
         if (Chatcryption.replyAliases.contains(name)) {
             String[] _cparts = content.split(" ");
 
             if (Chatcryption.lastCommunicatedUser == null) return command;
 
-            String mcontent = String.join(" ", Arrays.copyOfRange(_cparts, 1, _cparts.length));
+            String mcontent = String.join(" ", Arrays.copyOfRange(_cparts, 0, _cparts.length));
             // Chat.send("sending dm with content: [" + mcontent + "], does it start with start sign?" + mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN));
             if (mcontent.startsWith(Chatcryption.MESSAGE_START_SIGN)) return command;
 
             Chatcryption.processOutgoingChatMessage(Chatcryption.lastCommunicatedUser, mcontent);
-            return "sky++_sinkhole";
+            return null;
         }
 
 

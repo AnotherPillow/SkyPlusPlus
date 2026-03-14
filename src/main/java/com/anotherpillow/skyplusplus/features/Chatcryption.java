@@ -37,6 +37,7 @@ public class Chatcryption {
         private static ConcurrentHashMap<String, PublicKey> keys = new ConcurrentHashMap<>();
 
         public static PublicKey base64ToPublicKey(String base64Key) throws Exception {
+            SkyPlusPlusClient.LOG.info("trying to decode base64 public key: " + base64Key);
             byte[] keyBytes = Base64.getDecoder().decode(base64Key);
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
@@ -396,6 +397,8 @@ public class Chatcryption {
                         Chat.send(Chat.addLogo(String.format("§7Imported §5%s§7's public key.", username)));
                     } catch (Exception e) {
                         Chat.send(Chat.addLogo("§cFailed to import public key. Received error: §4" + e.getMessage()));
+                        SkyPlusPlusClient.LOG.warn("Failed to import public key. Error: ");
+                        SkyPlusPlusClient.LOG.warn(e.toString());
                     }
                 }
 

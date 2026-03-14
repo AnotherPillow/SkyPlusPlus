@@ -3,6 +3,7 @@ package com.anotherpillow.skyplusplus.mixin;
 import com.anotherpillow.skyplusplus.features.Chatcryption;
 import com.anotherpillow.skyplusplus.features.SlotLocker;
 import com.anotherpillow.skyplusplus.util.Server;
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.client.MinecraftClient;
 import com.anotherpillow.skyplusplus.util.MixinCommon;
@@ -20,6 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -85,16 +87,20 @@ public class ClientPlayerEntityMixin {
     private String sendChatMessage(String message) {
         return MixinCommon.genericChatMixinMethod(message);
     }
-    @ModifyArg(
+
+    @WrapWithCondition(
             method = "sendCommand(Ljava/lang/String;Lnet/minecraft/text/Text;)V",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendCommandInternal(Ljava/lang/String;Lnet/minecraft/text/Text;)V"
-            ),
-            index = 0
+            )
     )
-    private String sendCommand(String command) {
-        return MixinCommon.genericCommandMixinMethod(command);
+    private boolean shouldSendCommandInternal(
+            ClientPlayerEntity player,
+            String command,
+            Text preview
+    ) {
+        return MixinCommon.genericCommandMixinMethod(command) != null; // false -> call is skipped
     }
 
     
