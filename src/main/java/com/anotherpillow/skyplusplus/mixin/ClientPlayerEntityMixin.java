@@ -1,6 +1,5 @@
 package com.anotherpillow.skyplusplus.mixin;
 
-import com.anotherpillow.skyplusplus.features.Chatcryption;
 import com.anotherpillow.skyplusplus.features.SlotLocker;
 import com.anotherpillow.skyplusplus.util.Server;
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
@@ -21,15 +20,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
-import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import com.anotherpillow.skyplusplus.util.Chat;
-
-import java.util.Arrays;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {

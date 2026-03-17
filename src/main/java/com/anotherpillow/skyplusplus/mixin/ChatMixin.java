@@ -56,12 +56,6 @@ public abstract class ChatMixin {
         String message = text_message.getString();
         if (message.startsWith("<c>")) message = message.substring(3);
 
-        if (message.contains(Chatcryption.MESSAGE_START_SIGN)
-                && (Chatcryption.processIncomingMessage(text_message) || message.startsWith("[me ->"))) {
-            callback.cancel();
-            return;
-        }
-
         if (config.hideVisitingMessages
             && StringChecker.welcomeIslandCheck(message))
                 callback.cancel();
