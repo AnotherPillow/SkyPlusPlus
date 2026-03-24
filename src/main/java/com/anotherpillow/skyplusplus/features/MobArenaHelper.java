@@ -166,7 +166,7 @@ public class MobArenaHelper {
                     10, new Wave(10, WaveType.BOSS, EntityType.CREEPER, "§bThermo ★", "§b"), // charged creeper technically
                     // todo: colours
                     25, new Wave(25, WaveType.BOSS, EntityType.MAGMA_CUBE, "§fOb'Lazrak ★", "§f"),
-                    40, new Wave(40, WaveType.BOSS, EntityType.SKELETON, "§fNecromancer ★", "§f"),
+                    40, new Wave(40, WaveType.BOSS, EntityType.SKELETON, "§9Necromancer ★", "§9"),
                     50, new Wave(50, WaveType.BOSS, EntityType.MAGMA_CUBE, "§5Doom of the Nullvoid ★", "§5"),
                     60, new Wave(60, WaveType.BOSS, EntityType.WITHER, "§8Arbiter ★", "§8")
             ) // TODO
