@@ -40,6 +40,7 @@ public class SkyPlusPlusConfig {
 
     @ConfigEntry public int traderX = 16;
     @ConfigEntry public int traderY = 16;
+    @ConfigEntry public int traderSize = 32;
     @ConfigEntry public boolean enableTraderFinder = true;
     @ConfigEntry public boolean enableTraderTitles = true;
 
@@ -165,6 +166,20 @@ public class SkyPlusPlusConfig {
                                 *///?} else {
                                 .controller(opt -> new IntegerSliderController(opt, 0, 4000, 16))
                                  //?}
+                                .build())
+                        .option(Option.createBuilder(int.class)
+                                .name(Text.translatable("skyplusplus.config.trader-size"))
+                                //? if >1.19.2 {
+                                /*.description(OptionDescription.of(Text.translatable("skyplusplus.config.trader-size-desc")))
+                                 *///?} else {
+                                .tooltip(Text.translatable("skyplusplus.config.trader-size-desc"))
+                                //?}
+                                .binding(defaults.traderSize, () -> config.traderSize, v -> config.traderSize = v)
+                                //? if >1.19.2 {
+                                /*.controller(opt -> IntegerSliderControllerBuilder.create(opt).range(8, 128).step(4))
+                                 *///?} else {
+                                .controller(opt -> new IntegerSliderController(opt, 8, 128, 4))
+                                //?}
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()

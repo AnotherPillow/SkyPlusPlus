@@ -12,9 +12,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.WanderingTraderEntity;
 //? if >=1.20.1 {
 /*import net.minecraft.client.gui.DrawContext;
-*///?} else {
+ *///?} else {
 import net.minecraft.client.gui.DrawableHelper;
- //?}
+//?}
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -24,6 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import com.anotherpillow.skyplusplus.config.SkyPlusPlusConfig;
 
 public class TraderFinder {
+
     //Trader XYZ to location name
     //X4063, Y174, Z2026 (Warp Grass)
     //X17, Y174, Z44 (Bank)
@@ -54,38 +55,62 @@ public class TraderFinder {
         } else if (x == 4032 && y == 171 && z == 2014) {
             traderLocation = Text.translatable("skyplusplus.trader.location.campfire-walkway");
         } else {
-          traderLocation = Text.translatable("skyplusplus.trader.location.unknown", x, y, z);
+            traderLocation = Text.translatable("skyplusplus.trader.location.unknown", x, y, z);
         }
 
         return traderLocation.getString();
     }
 
-    public static void showTraderString(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/) {
+    public static void showTraderString(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/MatrixStack matrixStack /*?}*/) {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
-
 
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
         String[] traderXYZ = traderXYZString.split(",");
         int traderX = Integer.parseInt(traderXYZ[0]);
         int traderY = Integer.parseInt(traderXYZ[1]);
         int traderZ = Integer.parseInt(traderXYZ[2]);
-        //String txt = "Trader at: " + traderX + ", " + traderY + ", " + traderZ;
-        String txt = String.valueOf(Text.translatable("skyplusplus.trader.location-reveal", convertXYZToLocationName(traderX, traderY, traderZ)));
 
+        String txt = Text.translatable(
+                "skyplusplus.trader.location-reveal",
+                convertXYZToLocationName(traderX, traderY, traderZ)
+        ).getString();
+
+        // Scale text with image size (32 = original baseline scale 1.0)
+        float scale = Math.max(0.25f, config.traderSize / 32.0f);
         int textWidth = textRenderer.getWidth(txt);
-        int textOffset = textWidth / 2;
 
-        //? if >=1.20.1 {
-        /*ctx.drawCenteredTextWithShadow(textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
-        *///?} else if >1.19.2 {
-        /*DrawableHelper.drawCenteredTextWithShadow(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
+        // Position text to the right of the image, vertically centered with the image
+        float left = config.traderX + config.traderSize + 2.0f;
+        float centerY = config.traderY + (config.traderSize / 2.0f);
+
+        // Convert to coordinates in the scaled matrix space
+        int drawX = Math.round((left / scale) + (textWidth / 2.0f));
+        int drawY = Math.round((centerY / scale) - (textRenderer.fontHeight / 2.0f));
+
+        //? if >=1.21 {
+/*ctx.getMatrices().pushMatrix();
+ctx.getMatrices().scale(scale, scale);
+ctx.drawCenteredTextWithShadow(textRenderer, txt, drawX, drawY, 0xFFFFFF);
+ctx.getMatrices().popMatrix();
+         *///?} else if >=1.20.1 {
+/*ctx.getMatrices().push();
+ctx.getMatrices().scale(scale, scale, 1.0f);
+ctx.drawCenteredTextWithShadow(textRenderer, txt, drawX, drawY, 0xFFFFFF);
+ctx.getMatrices().pop();
+         *///?} else if >1.19.2 {
+/*matrixStack.push();
+matrixStack.scale(scale, scale, 1.0f);
+DrawableHelper.drawCenteredTextWithShadow(matrixStack, textRenderer, txt, drawX, drawY, 0xFFFFFF);
+matrixStack.pop();
          *///?} else {
-        DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
-         //?}
-
+        matrixStack.push();
+        matrixStack.scale(scale, scale, 1.0f);
+        DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, drawX, drawY, 0xFFFFFF);
+        matrixStack.pop();
+//?}
     }
 
-    public static void loopTraders(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/) {
+    public static void loopTraders(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/MatrixStack matrixStack /*?}*/) {
         MinecraftClient client = MinecraftClient.getInstance();
         Camera camera = MinecraftClient.getInstance().gameRenderer.getCamera();
 
@@ -98,19 +123,22 @@ public class TraderFinder {
                 int traderZ = (int) entity.getZ();
 
                 setTraderXYZString(traderX, traderY, traderZ);
-                showTraderString(/*? >=1.20.1 {*/ /*ctx *//*?} else {*/ matrixStack /*?}*/);
+                showTraderString(/*? >=1.20.1 {*/ /*ctx *//*?} else {*/matrixStack /*?}*/);
             }
         }
 
     }
-    public static void findTrader(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/) {
+
+    public static void findTrader(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/MatrixStack matrixStack /*?}*/) {
         MinecraftClient mc = MinecraftClient.getInstance();
         Entity player = mc.player;
 
-        if (player == null || mc.world == null) return;
+        if (player == null || mc.world == null) {
+            return;
+        }
 
         BlockPos playerPos = player.getBlockPos();
-        loopTraders(/*? >=1.20.1 {*/ /*ctx *//*?} else {*/ matrixStack /*?}*/);
+        loopTraders(/*? >=1.20.1 {*/ /*ctx *//*?} else {*/matrixStack /*?}*/);
 
     }
 }

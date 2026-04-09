@@ -37,6 +37,8 @@
   "skyplusplus.config.trader-notif-x-desc": "X Position",
   "skyplusplus.config.trader-notif-y": "Notification Y",
   "skyplusplus.config.trader-notif-y-desc": "Y Position",
+  "skyplusplus.config.trader-size": "Size",
+  "skyplusplus.config.trader-size-desc": "Scales the wandering trader image and the text beside it.",
 
   "skyplusplus.config.chatfilter.title": "Filter Chat",
   "skyplusplus.config.chatfilter.hidevisitmsgs": "Hide Visiting Messages",
