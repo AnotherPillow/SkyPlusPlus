@@ -70,10 +70,10 @@ public class TraderFinder {
         int traderY = Integer.parseInt(traderXYZ[1]);
         int traderZ = Integer.parseInt(traderXYZ[2]);
 
-        String txt = String.valueOf(Text.translatable(
+        String txt = Text.translatable(
                 "skyplusplus.trader.location-reveal",
                 convertXYZToLocationName(traderX, traderY, traderZ)
-        ));
+        ).getString();
 
         // Scale text with image size (32 = original baseline scale 1.0)
         float scale = Math.max(0.25f, config.traderSize / 32.0f);
