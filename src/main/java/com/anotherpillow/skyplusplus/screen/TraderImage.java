@@ -59,9 +59,9 @@ public class TraderImage {
         *///?} else {
         buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
         buffer.vertex(positionMatrix, config.traderX, config.traderY, 0).color(1f, 1f, 1f, 1f).texture(0f, 0f).next();
-        buffer.vertex(positionMatrix, config.traderX, config.traderY + 32, 0).color(1f, 1f, 1f, 1f).texture(0f, 1f).next();
-        buffer.vertex(positionMatrix, config.traderX + 32, config.traderY + 32, 0).color(1f, 1f, 1f, 1f).texture(1f, 1f).next();
-        buffer.vertex(positionMatrix, config.traderX + 32, config.traderY, 0).color(1f, 1f, 1f, 1f).texture(1f, 0f).next();
+        buffer.vertex(positionMatrix, config.traderX, config.traderY + config.traderSize, 0).color(1f, 1f, 1f, 1f).texture(0f, 1f).next();
+        buffer.vertex(positionMatrix, config.traderX + config.traderSize, config.traderY + config.traderSize, 0).color(1f, 1f, 1f, 1f).texture(1f, 1f).next();
+        buffer.vertex(positionMatrix, config.traderX + config.traderSize, config.traderY, 0).color(1f, 1f, 1f, 1f).texture(1f, 0f).next();
          //?}
 
 
