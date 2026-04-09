@@ -40,8 +40,7 @@ public class SkyPlusPlusConfig {
 
     @ConfigEntry public int traderX = 16;
     @ConfigEntry public int traderY = 16;
-    @ConfigEntry
-    public int traderSize = 32;
+    @ConfigEntry public int traderSize = 32;
     @ConfigEntry public boolean enableTraderFinder = true;
     @ConfigEntry public boolean enableTraderTitles = true;
 
