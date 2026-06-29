@@ -22,10 +22,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 //? if >1.19.2 {
-/*import net.minecraft.registry.Registries;
-*///?} else {
-import net.minecraft.util.registry.Registry;
-//?}
+import net.minecraft.registry.Registries;
+//?} else {
+/*import net.minecraft.util.registry.Registry;
+*///?}
 
 import java.io.IOException;
 import java.net.URI;
@@ -64,10 +64,10 @@ public class ShareCommand {
 
 
                 //? if >1.19.2 {
-                /*String itemId = Registries.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
-                *///?} else {
-                String itemId = Registry.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
-                //?}
+                String itemId = Registries.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
+                //?} else {
+                /*String itemId = Registry.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
+                *///?}
 
                 if (jsonNBT.equals("{}")) return;
 

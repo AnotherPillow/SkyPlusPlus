@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(ClientPlayNetworkHandler.class)
 public class ClientPlayNetworkHandlerMixin {
     //? if >=1.19.4 {
-    /*@ModifyVariable(
+    @ModifyVariable(
             method="sendChatCommand(Ljava/lang/String;)V",
             at=@At("HEAD"),
             ordinal = 0
@@ -20,8 +20,8 @@ public class ClientPlayNetworkHandlerMixin {
     // idk what the difference is
     @ModifyVariable(
             //? if >= 1.21 {
-            /^method="sendChatCommand",
-            ^///?} else {
+            /*method="sendChatCommand",
+            *///?} else {
             method= "sendCommand(Ljava/lang/String;)Z",
             //?}
             at=@At("HEAD"),
@@ -40,5 +40,5 @@ public class ClientPlayNetworkHandlerMixin {
         return MixinCommon.genericChatMixinMethod(message);
     }
 
-    *///?}
+    //?}
 }

@@ -50,10 +50,10 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 //? if >1.19.2 {
-/*import net.minecraft.registry.Registries;
-*///?} else {
-import net.minecraft.util.registry.Registry;
- //?}
+import net.minecraft.registry.Registries;
+//?} else {
+/*import net.minecraft.util.registry.Registry;
+ *///?}
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -215,10 +215,10 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
         if (ShareButton.isApplicable(handler) && config.enableShareButton) {
             addDrawableChild(
                     //? if >1.19.2 {
-                    /*new ButtonWidget.Builder(Text.of("Share"), (ButtonWidget widget) -> {
-                        *///?} else {
-                        new ButtonWidget(midX + 90, midY - 60, 60, 20, Text.of("Share"), (ButtonWidget widget) -> {
-                         //?}
+                    new ButtonWidget.Builder(Text.of("Share"), (ButtonWidget widget) -> {
+                        //?} else {
+                        /*new ButtonWidget(midX + 90, midY - 60, 60, 20, Text.of("Share"), (ButtonWidget widget) -> {
+                         *///?}
                         //? if >=1.21
                         /*Runnable placeholder = () -> {*/
                             //? if <1.21
@@ -247,10 +247,10 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                                 ItemStack stack = slot.getStack();
 
                                 //? if >1.19.2 {
-                                /*String itemId = Registries.ITEM.getKey(stack.getItem()).get().getValue().toString();
-                                *///?} else {
-                                String itemId = Registry.ITEM.getKey(stack.getItem()).get().getValue().toString();
-                                 //?}
+                                String itemId = Registries.ITEM.getKey(stack.getItem()).get().getValue().toString();
+                                //?} else {
+                                /*String itemId = Registry.ITEM.getKey(stack.getItem()).get().getValue().toString();
+                                 *///?}
 
                                 // id: MinecraftID,
                                 //        Slot: number,
@@ -328,8 +328,8 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
                         ;
                     })
                     //? if >1.19.2 {
-                            /*.position(midX + 90, midY - 60).size(60, 20).build()
-                    *///?} else {
+                            .position(midX + 90, midY - 60).size(60, 20).build()
+                    //?} else {
                     
                      //?}
             );

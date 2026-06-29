@@ -44,7 +44,7 @@ public abstract class GenericContainerScreenMixin {
             return SkyPlusPlusClient.cleanAdBackground;
         } else if ("Profile | Ads".equals(stitle) && config.cleanAdGuiEnabled) {
             return SkyPlusPlusClient.cleanAdProfileBackground;
-        } else if ("Daily Quests".equals(stitle) && config.cleanQuestGuiEnabled) {
+        } else if (stitle.endsWith("Daily Quests") && config.cleanQuestGuiEnabled) {
             return SkyPlusPlusClient.cleanQuestsMainBackground;
         } else if ("Quest Points Shop".equals(stitle) && config.cleanQuestGuiEnabled) {
             return SkyPlusPlusClient.cleanQuestsShopBackground;
@@ -74,7 +74,7 @@ public abstract class GenericContainerScreenMixin {
             RenderSystem.setShaderTexture(sampler, SkyPlusPlusClient.cleanAdBackground);
         } else if ("Profile | Ads".equals(stitle) && config.cleanAdGuiEnabled) {
             RenderSystem.setShaderTexture(sampler, SkyPlusPlusClient.cleanAdProfileBackground);
-        } else if ("Daily Quests".equals(stitle) && config.cleanQuestGuiEnabled) {
+        } else if (stitle.endsWith("Daily Quests") && config.cleanQuestGuiEnabled) {
             RenderSystem.setShaderTexture(sampler, SkyPlusPlusClient.cleanQuestsMainBackground);
         } else if ("Quest Points Shop".equals(stitle) && config.cleanQuestGuiEnabled) {
             RenderSystem.setShaderTexture(sampler, SkyPlusPlusClient.cleanQuestsShopBackground);
