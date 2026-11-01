@@ -151,8 +151,8 @@ public abstract class ChatMixin {
             ci.cancel();
         }
         //?} else {
-        /*
-        if (SkyPlusPlusClient.config.copyChatMessageButtonEnabled) {
+        
+        /*if (SkyPlusPlusClient.config.copyChatMessageButtonEnabled) {
             addMessage(TextStringifier.prefixButton(message), signature, indicator);
             ci.cancel();
         }
