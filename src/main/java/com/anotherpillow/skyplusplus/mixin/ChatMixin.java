@@ -61,7 +61,9 @@ public abstract class ChatMixin {
                 callback.cancel();
 
         if (config.hideSkyblockMessages
-            && StringChecker.skyblockMessageCheck(message))
+            && StringChecker.skyblockMessageCheck(message)
+                && !(message.contains("has been playing") || message.contains("was last seen"))
+        )
                 callback.cancel();
 
         if (config.hideUnscramblingMessages
