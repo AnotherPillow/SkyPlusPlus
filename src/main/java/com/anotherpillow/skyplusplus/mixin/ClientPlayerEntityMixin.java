@@ -70,7 +70,7 @@ public class ClientPlayerEntityMixin {
     
 
 
-    /*@ModifyArg(
+    @ModifyArg(
         method = "sendChatMessage(Ljava/lang/String;Lnet/minecraft/text/Text;)V",
         at = @At(
                 value = "INVOKE",
@@ -98,5 +98,5 @@ public class ClientPlayerEntityMixin {
     }
 
     
-    *///?}
+    //?}
 }

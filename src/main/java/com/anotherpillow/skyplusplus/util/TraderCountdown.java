@@ -20,20 +20,52 @@ import net.minecraft.text.Text;
 
 public class TraderCountdown {
 
-    public static void draw(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/, String txt, int textOffset) {
-        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
-        // not draw in f1
+    public static void draw(
+            //? if >=1.20.1 {
+            /*DrawContext context,
+             *///?} else {
+            MatrixStack context,
+            //?}
+            String txt, int textOffset
+    ) {
         if (SkyPlusPlusClient.client.options.hudHidden) return;
 
-        TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-        //? if >=1.20.1 {
-        /*ctx.drawCenteredTextWithShadow(textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
-        *///?} else if >1.19.2 {
-        DrawableHelper.drawCenteredTextWithShadow(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
-        //?} else {
-        /*DrawableHelper.drawCenteredText(matrixStack, textRenderer, txt, config.traderX + 32 + textOffset,config.traderY + 16, 0xFFFFFF);
-         *///?}
+        SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
 
+        TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+
+        int x = config.traderX + 32 + textOffset;
+        int y = config.traderY + 16;
+
+        int color = 0xFFFFFFFF; // newer ones want it explicitly opaque
+
+        //? if >=1.20.1 {
+        /*context.drawCenteredTextWithShadow(
+            textRenderer,
+            txt,
+            x,
+            y,
+            color
+        );
+        *///?} else if >1.19.2 {
+        /*DrawableHelper.drawCenteredTextWithShadow(
+            context,
+            textRenderer,
+            txt,
+            x,
+            y,
+            color
+        );
+        *///?} else {
+        DrawableHelper.drawCenteredText(
+                context,
+                textRenderer,
+                txt,
+                x,
+                y,
+                color
+        );
+        //?}
     }
 
     private static boolean hasShownTitleForThisMinute = false;

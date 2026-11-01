@@ -89,10 +89,10 @@ public class MobArenaHelper {
             //? if >=1.20.1 {
             /*drawMatrix.drawTextWithShadow(textRenderer, txt, x, y, 0xFFFFFF);
              *///?} else if >1.19.2 {
-            DrawableHelper.drawTextWithShadow(drawMatrix, textRenderer, txt, x, y, 0xFFFFFF);
-             //?} else {
             /*DrawableHelper.drawTextWithShadow(drawMatrix, textRenderer, txt, x, y, 0xFFFFFF);
-            *///?}
+             *///?} else {
+            DrawableHelper.drawTextWithShadow(drawMatrix, textRenderer, txt, x, y, 0xFFFFFF);
+            //?}
         }
     }
 
