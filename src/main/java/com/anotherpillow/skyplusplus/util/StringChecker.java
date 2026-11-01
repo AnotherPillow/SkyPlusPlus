@@ -22,6 +22,7 @@ public class StringChecker {
     public static Pattern luckyCratesMessagePattern = Pattern.compile("^Lucky Crates .+$");
     public static Pattern mailNotificationMessagePattern = Pattern.compile("^You have \\d+ messages! Type /mail read to view your mail\\.$");
     public static Pattern voteMessagePattern = Pattern.compile("\\[Vote\\] [A-Za-z0-9_\\.]+ voted at vote\\d?\\.skyblock\\.net for \\dx Grass Blocks? and \\dx Voter Keys?!");
+    public static Pattern economyVoteMessagePattern = Pattern.compile("\\[Vote\\] [A-Za-z0-9_\\.]+ voted at vote\\d?\\.skyblock\\.net for \\$\\d+x Skybucks? and \\dx Voter Keys?!");
     public static Pattern playersOnlineJoinPattern = Pattern.compile("Players online: \\(\\d+/\\d+\\) - World Time: \\d+:\\d+ [A-Z]M");
     public static Pattern raffleWinPattern = Pattern.compile("\\[SBRaffle\\] Congratulations go to [A-Z0-9_.]+ for winning (?:[0-9.]+ Grass block|\\d+\\.0\\$) with \\d tickets$");
     public static Pattern visitingTitlePattern = Pattern.compile("§6\\-=§e[A-Za-z0-9_\\.]{1,16}'s Island§6=\\-"); // even names ending with "s" still have "'s"
@@ -82,7 +83,9 @@ public class StringChecker {
 
     public static boolean mailMessageCheck(String input) { return mailNotificationMessagePattern.matcher(input).find(); }
 
-    public static boolean voteMessageCheck(String input) { return voteMessagePattern.matcher(input).find(); }
+    public static boolean voteMessageCheck(String input) {
+        return voteMessagePattern.matcher(input).find() || economyVoteMessagePattern.matcher(input).find();
+    }
 
     public static boolean playersOnlineJoinCheck(String input) { return playersOnlineJoinPattern.matcher(input).find(); }
 
