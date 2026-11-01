@@ -35,22 +35,22 @@ public abstract class ChatMixin {
     private static MinecraftClient mc = MinecraftClient.getInstance(); // Why did I need to rename this? I genuinely have no idea. Apparently there's a non-static client field in the original class but that wasn't always an issue, so I have no idea.
     private static final String username = mc.getSession().getUsername().toLowerCase();
     //? if <1.21 {
-    @Shadow protected abstract void addMessage(Text message, @Nullable MessageSignatureData signature, int ticks, @Nullable MessageIndicator indicator, boolean refresh);
+    /*@Shadow protected abstract void addMessage(Text message, @Nullable MessageSignatureData signature, int ticks, @Nullable MessageIndicator indicator, boolean refresh);
     @Inject(
             method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V",
 
-    //?} else {
-    /*@Shadow protected abstract void addMessage(Text message, @Nullable MessageSignatureData signatureData, @Nullable MessageIndicator indicator);
+    *///?} else {
+    @Shadow protected abstract void addMessage(Text message, @Nullable MessageSignatureData signatureData, @Nullable MessageIndicator indicator);
     @Inject(
             method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V",
-    *///?}
+    //?}
             at = @At("HEAD"),
             cancellable = true
     )
     //? if <1.21
-    private void skyplusplus$onChatReceived(Text text_message, MessageSignatureData signature, int ticks, MessageIndicator indicator, boolean refresh, CallbackInfo callback) throws IOException {
+    /*private void skyplusplus$onChatReceived(Text text_message, MessageSignatureData signature, int ticks, MessageIndicator indicator, boolean refresh, CallbackInfo callback) throws IOException {*/
     //? if >=1.21
-    /*private void skyplusplus$onChatReceived(Text text_message, MessageSignatureData signature, MessageIndicator indicator, CallbackInfo callback) throws IOException {*/
+    private void skyplusplus$onChatReceived(Text text_message, MessageSignatureData signature, MessageIndicator indicator, CallbackInfo callback) throws IOException {
         SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
 //        System.out.println(Text.Serializer.toJson(text_message));
         String message = text_message.getString();
@@ -146,16 +146,16 @@ public abstract class ChatMixin {
         MinecraftClient client = MinecraftClient.getInstance();
 
         //? if <1.21 {
-        if (SkyPlusPlusClient.config.copyChatMessageButtonEnabled) {
+        /*if (SkyPlusPlusClient.config.copyChatMessageButtonEnabled) {
             addMessage(TextStringifier.prefixButton(message), signature, client.inGameHud.getTicks(), indicator, false);
             ci.cancel();
         }
-        //?} else {
+        *///?} else {
         
-        /*if (SkyPlusPlusClient.config.copyChatMessageButtonEnabled) {
+        if (SkyPlusPlusClient.config.copyChatMessageButtonEnabled) {
             addMessage(TextStringifier.prefixButton(message), signature, indicator);
             ci.cancel();
         }
-        *///?}
+        //?}
     }
 }

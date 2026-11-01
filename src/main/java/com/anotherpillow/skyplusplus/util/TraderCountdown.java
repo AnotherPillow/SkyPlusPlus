@@ -4,10 +4,10 @@ import com.anotherpillow.skyplusplus.client.SkyPlusPlusClient;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 //? if >=1.20.1 {
-/*import net.minecraft.client.gui.DrawContext;
-*///?} else {
-import net.minecraft.client.gui.DrawableHelper;
- //?}
+import net.minecraft.client.gui.DrawContext;
+//?} else {
+/*import net.minecraft.client.gui.DrawableHelper;
+ *///?}
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
@@ -22,10 +22,10 @@ public class TraderCountdown {
 
     public static void draw(
             //? if >=1.20.1 {
-            /*DrawContext context,
-             *///?} else {
-            MatrixStack context,
-            //?}
+            DrawContext context,
+             //?} else {
+            /*MatrixStack context,
+            *///?}
             String txt, int textOffset
     ) {
         if (SkyPlusPlusClient.client.options.hudHidden) return;
@@ -40,14 +40,14 @@ public class TraderCountdown {
         int color = 0xFFFFFFFF; // newer ones want it explicitly opaque
 
         //? if >=1.20.1 {
-        /*context.drawCenteredTextWithShadow(
+        context.drawCenteredTextWithShadow(
             textRenderer,
             txt,
             x,
             y,
             color
         );
-        *///?} else if >1.19.2 {
+        //?} else if >1.19.2 {
         /*DrawableHelper.drawCenteredTextWithShadow(
             context,
             textRenderer,
@@ -57,7 +57,7 @@ public class TraderCountdown {
             color
         );
         *///?} else {
-        DrawableHelper.drawCenteredText(
+        /*DrawableHelper.drawCenteredText(
                 context,
                 textRenderer,
                 txt,
@@ -65,7 +65,7 @@ public class TraderCountdown {
                 y,
                 color
         );
-        //?}
+        *///?}
     }
 
     private static boolean hasShownTitleForThisMinute = false;
@@ -98,10 +98,10 @@ public class TraderCountdown {
         return "0:" + minutesString;
     }
 
-    public static void DrawCountdown(/*? >=1.20.1 {*/ /*DrawContext ctx *//*?} else {*/ MatrixStack matrixStack /*?}*/) {
+    public static void DrawCountdown(/*? >=1.20.1 {*/ DrawContext ctx /*?} else {*/ /*MatrixStack matrixStack *//*?}*/) {
         String txt = Text.translatable("skyplusplus.trader.countdown.timer").getString() + countdown();
         int textWidth = MinecraftClient.getInstance().textRenderer.getWidth(txt);
         int textOffset = textWidth / 2;
-        draw(/*? >=1.20.1 {*/ /*ctx *//*?} else {*/ matrixStack /*?}*/, txt, textOffset);
+        draw(/*? >=1.20.1 {*/ ctx /*?} else {*/ /*matrixStack *//*?}*/, txt, textOffset);
     }
 }

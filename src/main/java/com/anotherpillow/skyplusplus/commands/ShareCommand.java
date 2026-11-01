@@ -22,10 +22,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 //? if >1.19.2 {
-/*import net.minecraft.registry.Registries;
-*///?} else {
-import net.minecraft.util.registry.Registry;
-//?}
+import net.minecraft.registry.Registries;
+ //?} else {
+/*import net.minecraft.util.registry.Registry;
+*///?}
 
 import java.io.IOException;
 import java.net.URI;
@@ -45,29 +45,33 @@ public class ShareCommand {
                 return 0;
             }
 
-            //? if >=1.21 {
-            /*Runnable placeholder = () -> {
-            *///?} else {
             CompletableFuture.runAsync(() -> {
-             //?}
-
                 ItemStack mainHand = client.player.getStackInHand(Hand.MAIN_HAND);
 
                 String jsonNBT = "{}";
-                //? if >=1.21 {
+                //? if >=1.20.5 {
+                JsonElement encoded = ItemStack.CODEC
+                    .encodeStart(client.player.getRegistryManager().getOps(JsonOps.INSTANCE), mainHand)
+                    .result()
+                    .orElse(null);
+                if (encoded != null && encoded.isJsonObject()) {
+                    JsonObject stackJson = encoded.getAsJsonObject();
+                    if (stackJson.has("components")) {
+                        jsonNBT = stackJson.get("components").toString();
+                    }
+                }
                 //?} else {
-                if (mainHand.hasNbt()) {
+                /*if (mainHand.hasNbt()) {
                     NbtCompound nbt = mainHand.getNbt();
                     jsonNBT = NbtOps.INSTANCE.convertTo(JsonOps.INSTANCE, nbt).toString();
                 }
-                 //?}
-
+                *///?}
 
                 //? if >1.19.2 {
-                /*String itemId = Registries.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
-                *///?} else {
-                String itemId = Registry.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
-                //?}
+                String itemId = Registries.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
+                 //?} else {
+                /*String itemId = Registry.ITEM.getKey(mainHand.getItem()).get().getValue().toString();
+                *///?}
 
                 if (jsonNBT.equals("{}")) return;
 
@@ -86,9 +90,9 @@ public class ShareCommand {
                 String jsonString = gson.toJson(json);
 
                 HttpClient http = HttpClient.newBuilder()
-                    .followRedirects(HttpClient.Redirect.ALWAYS)
-                    .version(HttpClient.Version.HTTP_1_1)
-                    .build();
+                        .followRedirects(HttpClient.Redirect.ALWAYS)
+                        .version(HttpClient.Version.HTTP_1_1)
+                        .build();
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(config.shareApiBaseUrl + "/api/items/upload/single")) // todo: replace with prod
                         .header("Content-Type", "application/json")
@@ -110,30 +114,22 @@ public class ShareCommand {
                 JsonObject bodyJson = gson.fromJson(body, JsonObject.class);
                 if (bodyJson.has("error")) {
                     Chat.send(Chat.addLogo("Failed to share: " + bodyJson.get("error").getAsString() + " (" + status + ")"));
-                } else if (bodyJson.has("message")){
+                } else if (bodyJson.has("message")) {
                     String url = bodyJson.get("message").getAsString();
                     MutableText urlText = Text.literal(url)
-                        .setStyle(Style.EMPTY.withClickEvent(
-                                //? if >=1.21 {
-                                /*new ClickEvent.OpenUrl(URI.create(url)))
-                                *///?} else {
-                                new ClickEvent(ClickEvent.Action.OPEN_URL, url))
-                                 //?}
-
-                            .withUnderline(true));
+                            .setStyle(Style.EMPTY.withClickEvent(
+                                            //? if >=1.21.5 {
+                                            new ClickEvent.OpenUrl(URI.create(url)))
+                                             //?} else {
+                                            /*new ClickEvent(ClickEvent.Action.OPEN_URL, url))
+                                    *///?}
+                                    .withUnderline(true));
                     MutableText finalMessage = Text.literal("Shared URL: ").append(urlText);
                     Chat.send(Chat.addLogo(finalMessage));
                 } else {
                     Chat.send(Chat.addLogo("Failed to share (status: " + status + ", body: " + body + ")"));
                 }
-
-
-
-            //? if >=1.21 {
-            /*};
-            *///?} else {
             });
-             //?}
             return 1;
         }));
     }

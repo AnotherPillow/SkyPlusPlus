@@ -10,10 +10,10 @@ import com.anotherpillow.skyplusplus.util.StringChecker;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 //? if >=1.20.1 {
-/*import net.minecraft.client.gui.DrawContext;
- *///?} else {
-import net.minecraft.client.gui.DrawableHelper;
-//?}
+import net.minecraft.client.gui.DrawContext;
+ //?} else {
+/*import net.minecraft.client.gui.DrawableHelper;
+*///?}
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityType;
 import net.minecraft.text.Text;
@@ -43,7 +43,7 @@ public class MobArenaHelper {
 
     public static class WaveDisplay {
 
-        public static void render(/*? >=1.20.1 {*/ /*DrawContext drawMatrix *//*?} else {*/ MatrixStack drawMatrix /*?}*/) {
+        public static void render(/*? >=1.20.1 {*/ DrawContext drawMatrix /*?} else {*/ /*MatrixStack drawMatrix *//*?}*/) {
             SkyPlusPlusConfig config = SkyPlusPlusConfig.configInstance.getConfig();
             TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
 
@@ -85,14 +85,14 @@ public class MobArenaHelper {
 
         }
 
-        private static void drawText(/*? >=1.20.1 {*/ /*DrawContext drawMatrix *//*?} else {*/ MatrixStack drawMatrix /*?}*/, TextRenderer textRenderer, Text txt, int x, int y) {
+        private static void drawText(/*? >=1.20.1 {*/ DrawContext drawMatrix /*?} else {*/ /*MatrixStack drawMatrix *//*?}*/, TextRenderer textRenderer, Text txt, int x, int y) {
             //? if >=1.20.1 {
-            /*drawMatrix.drawTextWithShadow(textRenderer, txt, x, y, 0xFFFFFF);
-             *///?} else if >1.19.2 {
+            drawMatrix.drawTextWithShadow(textRenderer, txt, x, y, 0xFFFFFF);
+             //?} else if >1.19.2 {
             /*DrawableHelper.drawTextWithShadow(drawMatrix, textRenderer, txt, x, y, 0xFFFFFF);
              *///?} else {
-            DrawableHelper.drawTextWithShadow(drawMatrix, textRenderer, txt, x, y, 0xFFFFFF);
-            //?}
+            /*DrawableHelper.drawTextWithShadow(drawMatrix, textRenderer, txt, x, y, 0xFFFFFF);
+            *///?}
         }
     }
 

@@ -16,10 +16,10 @@ import java.util.Arrays;
 
 public class UpdateChecker {
     //? if >=1.21 {
-    /*public static URI API_URL = URI.create("https://api.modrinth.com/v2/project/sky++/version?game_version=" + SharedConstants.getGameVersion().name());
-    *///?} else {
-    public static URI API_URL = URI.create("https://api.modrinth.com/v2/project/sky++/version?game_version=" + SharedConstants.getGameVersion().getName());
-    //?}
+    public static URI API_URL = URI.create("https://api.modrinth.com/v2/project/sky++/version?game_version=" + SharedConstants.getGameVersion().name());
+    //?} else {
+    /*public static URI API_URL = URI.create("https://api.modrinth.com/v2/project/sky++/version?game_version=" + SharedConstants.getGameVersion().getName());
+    *///?}
 
     public static String latest = null;
 
